@@ -1,0 +1,39 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ItemFilterQuickPreset" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Background="{TemplateBinding Background}"
+                            Margin="10,0,10,0">
+                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                   FontSize="{DynamicResource FilterFontSmall}"
+                                   x:Name="TextContent">
+                            <Grid>
+                                <TextBlock Text="{Binding Name}" Visibility="Hidden"/>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
+                                    <Border Height="5" Background="White" Margin="0,5,0,0"
+                                               x:Name="SelectionBullet" Visibility="Hidden"/>
+                                </StackPanel>                                
+                            </Grid>
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" TargetName="TextContent" />
+                            <Setter Property="FontSize" Value="{DynamicResource FilterFontLarge}"/>
+                            <Setter Property="Visibility" Value="Visible" TargetName="SelectionBullet" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

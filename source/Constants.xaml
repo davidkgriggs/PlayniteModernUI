@@ -1,0 +1,323 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    mc:Ignorable="d">
+
+    <sys:Boolean x:Key="UseAbsoluteExtraMetadataPath">false</sys:Boolean>
+    <sys:String x:Key="ExtraMetadataPath">..\..\..\..</sys:String>
+    <!--sys:String x:Key="ExtraMetadataPath">C:\Users\david\Downloads\Playnite9Beta_OLD_LIBRARY</sys:String-->
+    
+    <!--Profile Name-->
+    <!--PN--><sys:String x:Key="ProfileName">PlayniteOS</sys:String><!--PN-->
+
+    <!--Bottom Text-->
+    <sys:Boolean x:Key="BottomTextTrueFalse">false</sys:Boolean>
+
+    <!--Right Info-->
+    <sys:Boolean x:Key="RightInfoTrueFalse">true</sys:Boolean>
+
+    <!--DynamicBackground-->
+    <sys:Boolean x:Key="DynamicBackground">false</sys:Boolean>
+    <sys:Boolean x:Key="DynamicBackground_Columns">false</sys:Boolean>
+    <sys:Boolean x:Key="DynamicBackground_Wave">false</sys:Boolean>
+
+    <!--Intro-->
+    <sys:Boolean x:Key="Intro">true</sys:Boolean>
+
+    <!--IntroTimespan-->
+    <!--IL--><sys:TimeSpan x:Key="IntroTimespan">0:0:03</sys:TimeSpan><!--IL-->
+
+    <!--IntroVideo-->
+    <sys:Boolean x:Key="IntroVideo">false</sys:Boolean>
+
+    <!--IntroVideoVolume-->
+    <!--IVV--><sys:Double x:Key="IntroVideoVolume">0</sys:Double><!--IVV-->
+
+    <!--Banners-->
+    <sys:Boolean x:Key="Banners">false</sys:Boolean>
+
+    <!--RoundedCorners-->
+    <sys:Boolean x:Key="RoundedCorners">false</sys:Boolean>
+
+    <!--GlassEffect-->
+    <sys:Boolean x:Key="GlassEffect">false</sys:Boolean>
+
+    <!--VideoCovers-->
+    <sys:Boolean x:Key="VideoCovers">false</sys:Boolean>
+
+    <!--VideoBackgrounds-->
+    <sys:Boolean x:Key="VideoBackgrounds">false</sys:Boolean>
+
+    <!--Trailers-->
+    <sys:Boolean x:Key="Trailers">true</sys:Boolean>
+
+    <!--TrailersAudioON-->
+    <sys:Boolean x:Key="TrailersAudioON">false</sys:Boolean>
+
+    <!--SideBarTransparent-->
+    <sys:Boolean x:Key="SideBarTransparent">true</sys:Boolean>
+
+    <!--SideBar-->
+    <sys:Boolean x:Key="SideBar">true</sys:Boolean>
+
+    <!--CenterSideBar-->
+    <sys:Boolean x:Key="CenterSideBar">true</sys:Boolean>
+
+    <!--SideBanners-->
+    <sys:Boolean x:Key="SideBanners">false</sys:Boolean>
+
+    <!--FFS--><sys:Double x:Key="FilterFontSmall">20</sys:Double><!--FFS-->
+    <!--FFL--><sys:Double x:Key="FilterFontLarge">22</sys:Double><!--FFL-->
+    <!--FF--><sys:Double x:Key="FilterShoulderSize">38</sys:Double><!--FF-->
+
+    <!--DFS--><sys:Double x:Key="DescriptionFont">16</sys:Double><!--DFS-->
+
+    <!--MainScreenLogo-->
+    <sys:Boolean x:Key="MainScreenLogo">false</sys:Boolean>
+
+    <Color x:Key="BlackColor">#FF000000</Color>
+    <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+    <Color x:Key="GlyphColor">#4b73ae</Color>
+    <Color x:Key="GlyphLightColor">#00BAAF</Color>
+    <Color x:Key="SelectionLightColor">#FF8D919D</Color>
+    <Color x:Key="OverlayColor">#BB000000</Color>
+    <Color x:Key="UIColour">#00BAAF</Color>
+
+    <Color x:Key="ControlBackgroundColor">#303030</Color>
+    <Color x:Key="ControlBackgroundColorDark">#202020</Color>
+    <Color x:Key="ControlButton">#404040</Color>
+
+    <Color x:Key="TextColor">#FFEBEBEB</Color>
+    <Color x:Key="TextColorDark">#FF757575</Color>
+
+    <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
+    <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource TextColorDark}" />
+    <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
+    <SolidColorBrush x:Key="GlyphLightBrush" Color="{DynamicResource GlyphLightColor}" />
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{DynamicResource ControlBackgroundColor}" />
+    <SolidColorBrush x:Key="ControlBackgroundDarkBrush" Color="{DynamicResource ControlBackgroundColorDark}" />
+    <SolidColorBrush x:Key="ControlButtonBrush" Color="{DynamicResource ControlButton}" />
+    <SolidColorBrush x:Key="SelectionLightBrush" Color="{DynamicResource SelectionLightColor}" />
+    <SolidColorBrush x:Key="OverlayBrush" Color="{DynamicResource OverlayColor}" />
+    <!--UIB--><SolidColorBrush x:Key="UIBrush" Color="{DynamicResource UIColour}" /><!--UIB-->
+
+    <sys:Double x:Key="FontSizeSmall">20</sys:Double>
+    <sys:Double x:Key="FontSize">22</sys:Double>
+
+    <sys:Double x:Key="FilterPanelWidth">300</sys:Double>
+
+    <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontFamily" Value="Metropolis" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
+    <LinearGradientBrush x:Key="MainBackgourndBrush" StartPoint="0,0" EndPoint="1,1" >
+        <GradientStop Color="#C104AC" Offset="0"/>
+        <GradientStop Color="#00BAAF" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TopBarBackgroundBrush" StartPoint="-0.5,0.5" EndPoint="1,0.5" >
+        <GradientStop Color="Transparent" Offset="0"/>
+        <GradientStop Color="Transparent" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BottomBarBackgroundBrush" StartPoint="-0.5,0.5" EndPoint="1.5,1" >
+        <GradientStop Color="Transparent" Offset="0"/>
+        <GradientStop Color="Transparent" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="OverlayMenuBackgroundBrush" StartPoint="0,0" EndPoint="1,1" >
+        <GradientStop Color="#202020" Offset="0"/>
+        <GradientStop Color="#606060" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SelectionBrush" StartPoint="0.5,-0.5" EndPoint="1,1.5" >
+        <GradientStop Color="{DynamicResource UIColour}" Offset="0"/>
+        <GradientStop Color="{DynamicResource UIColour}" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <!--LinearGradientBrush x:Key="SelectionBrush2" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#00BAAF" Offset="0"/>
+        <GradientStop Color="#4F70AE" Offset="1"/>
+    </LinearGradientBrush-->
+
+    <RadialGradientBrush x:Key="SelectionBrush2" RadiusX="0.75" RadiusY="0.75">
+        <GradientStop Color="#00BAAF" Offset="0.75"/>
+        <GradientStop Color="#00BAAF" Offset="1"/>
+    </RadialGradientBrush>
+
+    <LinearGradientBrush x:Key="GameDetailsBackgroundBrush">
+        <GradientStop Color="#66000000" Offset="0.0"/>
+        <GradientStop Color="#CC303030" Offset="1"/>
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="OverlayDynamicBackground" >
+        <GradientStop Color="#33000000" Offset="0"/>
+        <GradientStop Color="#89000000" Offset="1"/>
+    </RadialGradientBrush>
+
+    <LinearGradientBrush x:Key="OverlayTitle" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#00000000" Offset="0.75"/>
+        <GradientStop Color="#BF000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
+
+    
+    
+    <!--CornerRadiusLarge-->
+    <Style x:Key="CornerRadiusLarge" TargetType="Border">
+        <!--CR--><Setter Property="CornerRadius" Value="15"/> <!--CR-->
+    </Style>
+    <!--CornerRadiusSmall-->
+    <Style x:Key="CornerRadiusSmall" TargetType="Border">
+        <Setter Property="CornerRadius" Value="3"/>
+    </Style>
+
+    <!--GlassEffect-->
+    <Style x:Key="GlassEffectStyle" TargetType="Image">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--VideoCovers-->
+    <Style x:Key="VideoCover" TargetType="Grid">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--VideoBackgrounds-->
+    <Style x:Key="VideoBackground" TargetType="Grid">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=PART_ListGameItems, Path=IsKeyboardFocusWithin}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0" Duration="0:0:0.5"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:11.5" Duration="0:0:0.5"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="0" BeginTime="0:0:12" Duration="0:0:6"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Trailers-->
+    <Style x:Key="TrailersStyle" TargetType="StackPanel">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--SideBarTransparent-->
+    <Style x:Key="SideBarTransparentStyle" TargetType="Border">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--SideBar-->
+    <Style x:Key="SideBarStyle" TargetType="Grid">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Margin" Value="0,30,0,0"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Bottom Text-->
+    <Style x:Key="BottomText" TargetType="Grid">
+        <Setter Property="Control.Margin" Value="0,0,0,0"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=PART_ListGameItems, Path=Height}" Value="860">
+                <Setter Property="ItemsControl.Margin" Value="0,100,0,0"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Right Info-->
+    <Style x:Key="RightInfo" TargetType="StackPanel">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--MainScreenTitleStyle-->
+    <Style x:Key="MainScreenTitleStyle" TargetType="Grid">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--MainScreenLogoStyle-->
+    <Style x:Key="MainScreenLogoStyle" TargetType="Grid">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--GameDetailsTitle-->
+    <Style x:Key="GameDetailsTitleStyle" TargetType="Grid">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--GameDetailsIconStyle-->
+    <Style x:Key="GameDetailsIconStyle" TargetType="Grid">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>    
+</ResourceDictionary>

@@ -1,0 +1,48 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ButtonTopMenu" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                            x:Name="MainBorder" Opacity="0.4" CornerRadius="40">
+                            <Border.Effect>
+                                <BlurEffect Radius="60"/>
+                            </Border.Effect>
+                        </Border>
+                        <Border BorderBrush="Transparent"
+                            x:Name="MainBorderExtra" BorderThickness="4" CornerRadius="40" Margin="-4">
+                        </Border>
+                        <Border BorderBrush="Transparent"
+                            x:Name="MainBorderExtraBlur" BorderThickness="4" CornerRadius="40" Margin="-4">
+                            <Border.Effect>
+                                <BlurEffect Radius="10"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource UIBrush}" TargetName="MainBorder" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource UIBrush}" TargetName="MainBorder" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
