@@ -298,84 +298,65 @@
 
                                     <Line HorizontalAlignment="Center" Stroke="{DynamicResource SelectionLightBrush}" StrokeThickness="2" X1="400" Margin="0,20,0,20"/>
 
-                                    <StackPanel x:Name="GRIDInfoAndSuccessStory" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Focusable="False" Tag="{DynamicResource RightInfoTrueFalse}" Style="{DynamicResource RightInfo}">
-                                        <StackPanel Orientation="Vertical">
-                                            <Grid x:Name="GRIDSuccessStory" Tag="{DynamicResource Sc_EnableIntegrationInCustomTheme}">
-                                                <Grid.Style>
-                                                    <Style>
-                                                        <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
-                                                                <Setter Property="Control.Visibility" Value="Visible" />
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Grid.Style>
-                                                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{DynamicResource Sc_HasData}">
-                                                    <Grid.Style>
-                                                        <Style>
-                                                            <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
-                                                                    <Setter Property="Control.Visibility" Value="Visible" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Grid.Style>
-                                                    <Grid Width="400" Margin="20,0,20,0">
+                                    <Grid x:Name="GRIDSuccessStory" HorizontalAlignment="Center" VerticalAlignment="Top" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
+                                        <Grid.Style>
+                                            <Style>
+                                                <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                                                        <Setter Property="Control.Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <Grid Width="400">
+                                            <StackPanel Margin="0,0,0,0">
+                                                <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB" FontSize="22">
+                                                </TextBlock>
+                                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
+                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" >
+                                                    </TextBlock>
 
-                                                        <StackPanel Margin="0,0,0,0">
-                                                            <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB" FontSize="22">
-                                                            </TextBlock>
-                                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="{DynamicResource Sc_PercentageUnlockedString}" >
-                                                                </TextBlock>
+                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="%" >
+                                                    </TextBlock>
+                                                </StackPanel>
 
-                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="%" >
-                                                                </TextBlock>
-                                                            </StackPanel>
-
-                                                            <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
-                                                                <Grid.RenderTransform>
-                                                                    <ScaleTransform ScaleX="1.5" ScaleY="2"/>
-                                                                </Grid.RenderTransform>
-                                                                <Border Height="5" Width="100" Background="{DynamicResource SelectionLightBrush}" CornerRadius="2.5"/>
-                                                                <Border Height="5" Width="{DynamicResource Sc_PercentageUnlockedDouble}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
-                                                            </Grid>
-                                                        </StackPanel>
-
-                                                        <StackPanel Margin="0,0,0,0" HorizontalAlignment="Right">
-                                                            <TextBlock Style="{DynamicResource EarnedLabel}" Foreground="#FFEBEBEB" FontSize="22" HorizontalAlignment="Right">
-                                                            </TextBlock>
-                                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
-                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="{DynamicResource Sc_UnlockedString}" HorizontalAlignment="Right">
-                                                                </TextBlock>
-
-                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="/" HorizontalAlignment="Right">
-                                                                </TextBlock>
-
-                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="{DynamicResource Sc_TotalString}" HorizontalAlignment="Right">
-                                                                </TextBlock>
-                                                            </StackPanel>
-
-                                                            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,50,0">
-                                                                <Grid.RenderTransform>
-                                                                    <ScaleTransform ScaleX="1.5" ScaleY="2"/>
-                                                                </Grid.RenderTransform>
-                                                                <Border Height="5" Width="100" Background="{DynamicResource SelectionLightBrush}" CornerRadius="2.5"/>
-                                                                <Border Height="5" Width="{DynamicResource Sc_PercentageUnlockedDouble}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
-                                                            </Grid>
-                                                        </StackPanel>
-
-                                                    </Grid>
+                                                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                                    <Grid.RenderTransform>
+                                                        <ScaleTransform ScaleX="1.5" ScaleY="2"/>
+                                                    </Grid.RenderTransform>
+                                                    <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
+                                                    <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
                                                 </Grid>
-                                            </Grid>
-                                        </StackPanel>
-                                    </StackPanel>
+                                            </StackPanel>
 
+                                            <StackPanel Margin="0,0,10,0" HorizontalAlignment="Right">
+                                                <TextBlock Style="{DynamicResource EarnedLabel}" Foreground="#FFEBEBEB" FontSize="22" HorizontalAlignment="Right">
+                                                </TextBlock>
+                                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" HorizontalAlignment="Right">
+                                                    </TextBlock>
 
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" >
-                                        <StackPanel Margin="0,0,0,0" Tag="{DynamicResource Htlb_HasData}">
+                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="/" HorizontalAlignment="Right">
+                                                    </TextBlock>
+
+                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="#FFEBEBEB" FontSize="22" Text="{PluginSettings Plugin=SuccessStory, Path=Total}" HorizontalAlignment="Right">
+                                                    </TextBlock>
+                                                </StackPanel>
+
+                                                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,50,0">
+                                                    <Grid.RenderTransform>
+                                                        <ScaleTransform ScaleX="1.5" ScaleY="2"/>
+                                                    </Grid.RenderTransform>
+                                                    <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
+                                                    <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,20,0,0" >
+                                        <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
                                             <StackPanel.Style>
                                                 <Style>
                                                     <Setter Property="Control.Visibility" Value="Visible" />
@@ -398,9 +379,9 @@
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
                                                                         FontFamily="Segoe UI Light"
-                                                                        FontSize="22" Margin="0,0,0,15"/>
+                                                                        FontSize="22" Margin="0,0,0,10"/>
                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{DynamicResource Htlb_MainStoryFormat}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
                                                                        Margin="20,2,0,0" />
                                                 </StackPanel>
 
@@ -409,9 +390,9 @@
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
                                                                         FontFamily="Segoe UI Light"
-                                                                        FontSize="22" Margin="0,0,0,15"/>
+                                                                        FontSize="22" Margin="0,0,0,10"/>
                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{DynamicResource Htlb_MainExtraFormat}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
                                                                        Margin="20,2,0,0" />
                                                 </StackPanel>
 
@@ -420,9 +401,9 @@
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
                                                                         FontFamily="Segoe UI Light"
-                                                                        FontSize="22" Margin="0,0,0,15"/>
+                                                                        FontSize="22" Margin="0,0,0,10"/>
                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{DynamicResource Htlb_CompletionistFormat}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
                                                                        Margin="20,2,0,0" />
                                                 </StackPanel>
                                             </StackPanel>

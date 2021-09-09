@@ -102,6 +102,7 @@
     <SolidColorBrush x:Key="ControlButtonBrush" Color="{DynamicResource ControlButton}" />
     <SolidColorBrush x:Key="SelectionLightBrush" Color="{DynamicResource SelectionLightColor}" />
     <SolidColorBrush x:Key="OverlayBrush" Color="{DynamicResource OverlayColor}" />
+    <SolidColorBrush x:Key="CheckBoxCheckMarkBkBrush" Color="{DynamicResource ControlBackgroundColorDark}" />
     <!--UIB--><SolidColorBrush x:Key="UIBrush" Color="{DynamicResource UIColour}" /><!--UIB-->
 
     <sys:Double x:Key="FontSizeSmall">20</sys:Double>
@@ -111,7 +112,7 @@
 
     <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="Metropolis" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
     </Style>
 
