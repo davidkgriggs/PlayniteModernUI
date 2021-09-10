@@ -194,16 +194,6 @@
                                         </Style>
                                     </Button.Style>
                                 </ButtonEx>
-
-                                <!--ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" Focusable="True"
-                                          Style="{DynamicResource ButtonTopMenu}"
-                                          Margin="10,0,10,0" Height="48" MinWidth="48"
-                                          Grid.Column="7">
-                                    <Button.Content>
-                                        <Image RenderOptions.BitmapScalingMode="Fant" Margin="2"
-                                           Source="{ThemeFile 'Images/applogo_clean.png'}" />
-                                    </Button.Content>
-                                </ButtonEx-->
                             </Grid>
 
                             <Grid Grid.Row="1">
@@ -403,19 +393,6 @@
                                         </Grid>
 
                                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,10,0,20">
-                                            <!--ItemsControl Name="Platformslist" Visibility="Collapsed" ItemsSource="{Binding Platforms}" Focusable="False" />
-                                            <TextBlock Name="firstplatform" Visibility="Collapsed">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock">
-                                                        <Setter Property="Text" Value=""/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding ElementName=Platformslist, Path=HasItems}" Value="True">
-                                                                <Setter Property="Text" Value="{Binding Platforms[0]}"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock-->
                                             <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                Text="{Binding SelectedGame.Platforms[0]}" Margin="0,0,20,0"/>
                                             <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
@@ -757,10 +734,8 @@
                                                 <Style>
                                                 <Setter Property="ItemsControl.Margin" Value="0,0,0,0"/>
                                                 <Setter Property="ItemsControl.MaxHeight" Value="955"/>
-                                                <!--Setter Property="ItemsControl.ItemTemplate" Value="{DynamicResource ListGameItemTemplate}"/-->
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                        <!--Setter Property="ItemsControl.ItemTemplate" Value="{DynamicResource ListGameItemTemplateRounded}"/-->
                                                         </DataTrigger>
 
                                                         <MultiDataTrigger>
@@ -928,6 +903,160 @@
 
                         <GameStatus x:Name="PART_ElemGameStatus" Grid.RowSpan="3"
                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                        <!--AnimatedIntro-->
+                        <Grid x:Name="AnimatedIntro" Tag="{DynamicResource Intro}">
+                            <Grid.Style>
+                                <Style>
+                                    <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                            <Setter Property="ItemsControl.Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=AnimIntroCanvas1, Path=Opacity}" Value="0">
+                                            <Setter Property="ItemsControl.Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Viewbox Stretch="Fill">
+                                <Canvas x:Name="AnimIntroCanvas1" Width="1920" Height="1080" Opacity="0">
+                                    <Canvas.Resources>
+                                        <Storyboard x:Key="Wave" RepeatBehavior="3" FillBehavior="Stop">
+                                            <ThicknessAnimation Storyboard.TargetName="AnimIntroWave" Storyboard.TargetProperty="Margin" From="0,0,0,0" To="-3800,0,0,0" BeginTime="0:0:0" Duration="0:0:20"/>
+                                        </Storyboard>
+                                        <Storyboard x:Key="Logo">
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroCanvas1" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0" Duration="0:0:0.1"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroLogo" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:1" Duration="0:0:2"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroCanvas1" Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="{DynamicResource IntroTimespan}" Duration="0:0:1"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroCanvas1" Storyboard.TargetProperty="MaxHeight" From="2160" To="2161" BeginTime="{DynamicResource IntroTimespan}" Duration="0:0:0.01"/>
+                                        </Storyboard>
+                                        <Storyboard x:Key="Border1" RepeatBehavior="30" BeginTime="0:0:1" FillBehavior="Stop">
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder1" Storyboard.TargetProperty="Width" From="100" To="400" Duration="0:0:1.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder1" Storyboard.TargetProperty="Height" From="100" To="400" Duration="0:0:1.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder1" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder1" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1.5"/>
+                                        </Storyboard>
+                                        <Storyboard x:Key="Border2" RepeatBehavior="30" BeginTime="0:0:1.5" FillBehavior="Stop">
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder2" Storyboard.TargetProperty="Width" From="100" To="400" Duration="0:0:1.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder2" Storyboard.TargetProperty="Height" From="100" To="400" Duration="0:0:1.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder2" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroBorder2" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1.5"/>
+                                        </Storyboard>
+                                        <Storyboard x:Key="End">
+                                            <DoubleAnimation Storyboard.TargetName="AnimIntroCanvas1" Storyboard.TargetProperty="Height" From="2160" To="2161" BeginTime="{DynamicResource IntroTimespan}" Duration="0:0:2"/>
+                                        </Storyboard>
+                                    </Canvas.Resources>
+                                    <Border Background="{DynamicResource MainBackgourndBrush}" Width="1920" Height="1080"/>
+                                    <Border Background="{DynamicResource OverlayDynamicBackground}" Opacity="0.5" Width="1920" Height="1080"/>
+                                    <Border Background="{DynamicResource OverlayTitle}" Width="1920" Height="1080"/>
+                                    <Grid x:Name="AnimIntroWave" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0">
+                                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                            <Image Stretch="UniformToFill" Source="../Images/WAVE.png" Width="5760" Height="1080" RenderOptions.BitmapScalingMode="LowQuality"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid x:Name="AnimIntroLogo" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1920" Height="1080" Opacity="0">
+                                        <Border x:Name="AnimIntroBorder1" BorderThickness="5" BorderBrush="White" CornerRadius="250" Width="0" Height="0" Opacity="0" Margin="-380,0,0,0"/>
+                                        <Border x:Name="AnimIntroBorder2" BorderThickness="5" BorderBrush="White" CornerRadius="250" Width="0" Height="0" Opacity="0" Margin="-380,0,0,0"/>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Image Stretch="UniformToFill" Source="{ThemeFile 'Images/PlayniteLogo.png'}" Width="485" Height="110"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Canvas.Triggers>
+                                        <EventTrigger RoutedEvent="Canvas.Loaded">
+                                            <BeginStoryboard x:Name="Intro1" Storyboard="{StaticResource Wave}"/>
+                                            <BeginStoryboard x:Name="Intro2" Storyboard="{StaticResource Logo}"/>
+                                            <BeginStoryboard x:Name="Intro3" Storyboard="{StaticResource Border1}"/>
+                                            <BeginStoryboard x:Name="Intro4" Storyboard="{StaticResource Border2}"/>
+                                            <BeginStoryboard x:Name="Intro5" Storyboard="{StaticResource End}"/>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="Canvas.SizeChanged">
+                                            <StopStoryboard BeginStoryboardName="Intro1"/>
+                                            <StopStoryboard BeginStoryboardName="Intro2"/>
+                                            <StopStoryboard BeginStoryboardName="Intro3"/>
+                                            <StopStoryboard BeginStoryboardName="Intro4"/>
+                                            <StopStoryboard BeginStoryboardName="Intro5"/>
+                                        </EventTrigger>
+                                    </Canvas.Triggers>
+                                </Canvas>
+                            </Viewbox>
+                        </Grid>
+
+                        <!--VIDEO INTRO-->
+                        <Grid x:Name="VideoIntro" Tag="{DynamicResource IntroVideo}">
+                            <Grid.Style>
+                                <Style>
+                                    <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                            <Setter Property="ItemsControl.Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=IntroVideoSource,Path=Opacity}" Value="0">
+                                            <Setter Property="ItemsControl.Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Border Background="Black">
+                                <Border.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=VideoIntro,Path=Visibility}" Value="Visible">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:3" Duration="0:0:0.5"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                            <TextBlock Name="IntroVideoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text">
+                                            <Setter.Value>
+                                                <MultiBinding StringFormat="{}{0}{1}">
+                                                    <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+                                                    <Binding Source="\ExtraMetadata\Themes\Fullscreen\PlayniteModernUI\IntroVideo.mp4"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <MediaElement x:Name="IntroVideoSource" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+                                <MediaElement.Style>
+                                    <Style TargetType="MediaElement">
+                                        <Setter Property="MediaElement.Volume" Value="{DynamicResource IntroVideoVolume}"/>
+                                        <Setter Property="MediaElement.Source" Value="{Binding ElementName=IntroVideoPath, Path=Text}"/>
+                                        <Setter Property="ItemsControl.Opacity" Value="1"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=VideoIntro,Path=Visibility}" Value="Collapsed">
+                                                <Setter Property="MediaElement.Source" Value="" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=IsActive}" Value="False">
+                                                <Setter Property="MediaElement.Source" Value="" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=MAINContent,Path=MinHeight}" Value="0">
+                                                <Setter Property="MediaElement.Source" Value="" />
+                                            </DataTrigger>
+                                            <EventTrigger RoutedEvent="MediaElement.MediaEnded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.5" FillBehavior="HoldEnd"/>
+                                                        <DoubleAnimation Storyboard.TargetProperty="MaxHeight" From="2160" To="2161" Duration="0:0:0.01"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </MediaElement.Style>
+                            </MediaElement>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

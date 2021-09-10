@@ -25,7 +25,7 @@
     <sys:Boolean x:Key="DynamicBackground_Wave">false</sys:Boolean>
 
     <!--Intro-->
-    <sys:Boolean x:Key="Intro">true</sys:Boolean>
+    <sys:Boolean x:Key="Intro">false</sys:Boolean>
 
     <!--IntroTimespan-->
     <!--IL--><sys:TimeSpan x:Key="IntroTimespan">0:0:03</sys:TimeSpan><!--IL-->
@@ -172,7 +172,7 @@
     
     <!--CornerRadiusLarge-->
     <Style x:Key="CornerRadiusLarge" TargetType="Border">
-        <!--CR--><Setter Property="CornerRadius" Value="15"/> <!--CR-->
+        <!--CR--><Setter Property="CornerRadius" Value="15"/><!--CR-->
     </Style>
     <!--CornerRadiusSmall-->
     <Style x:Key="CornerRadiusSmall" TargetType="Border">
