@@ -1,60 +1,41 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <Style x:Key="ToggleButton" TargetType="ToggleButton">
+
+    <Style TargetType="ToggleButton">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Padding" Value="5,5,12,5" />
+        <Setter Property="Padding" Value="12,5,12,5" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SelectionLightBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
-                    <Grid>
+                    <Grid Background="Transparent">
                         <Border Background="{TemplateBinding Background}" CornerRadius="20" Margin="-4"/>
-                        <Grid Margin="{TemplateBinding Padding}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border x:Name="CheckBox" Background="{DynamicResource UIBrush}" CornerRadius="30"
-                                    VerticalAlignment="Center"
-                                    Grid.Column="0" Margin="0,0,10,0" Width="30" Height="30">
-                                <Viewbox x:Name="CheckIcon" Visibility="Collapsed">
-                                    <TextBlock Text="b" FontFamily="Marlett" Foreground="White"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Viewbox>
-                            </Border>
-                            <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                        FontFamily="{DynamicResource FontTitilliumWeb}"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Grid.Column="1" TextTrimming="WordEllipsis">
-                                <ContentPresenter RecognizesAccessKey="True" />
-                            </TextBlock>
-                        </Grid>
-                        <Border x:Name="BorderFocus" Margin="-4" CornerRadius="20"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                BorderBrush="{DynamicResource UIBrush}"
-                                BorderThickness="4" Visibility="Hidden" />
+                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}">                            
+                                <ContentPresenter />
+                        </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="CheckIcon" />
-                        </Trigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Background" Value="{DynamicResource UIBrush}" />
-                            <Setter TargetName="CheckBox" Property="Background" Value="{DynamicResource GlyphBrush}" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{DynamicResource UIBrush}" />
-                            <Setter TargetName="CheckBox" Property="Background" Value="{DynamicResource GlyphBrush}" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource SelectionBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

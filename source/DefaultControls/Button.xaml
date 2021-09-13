@@ -50,6 +50,52 @@
     <Style TargetType="ButtonEx" BasedOn="{StaticResource {x:Type Button}}">
     </Style>
 
+    <Style x:Key="ButtonGameDetails" TargetType="Button">
+        <Setter Property="Margin" Value="0,5,0,5" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="12,10,12,10" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent">
+                        <Border x:Name="BorderFocus" CornerRadius="20"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Background="{DynamicResource ControlBackgroundBrush}" Visibility="Visible"/>
+
+                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}">                            
+                                <ContentPresenter />
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" TargetName="BorderFocus" Value="{DynamicResource UIBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="BorderFocus" Value="{DynamicResource UIBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ChangeViewButton" TargetType="ToggleButton">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />

@@ -11,11 +11,58 @@
         <Setter Property="Margin" Value="0,0,20,0" />
     </Style>
 
-    <Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
+    <!--Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
         <Setter Property="Margin" Value="0,5,0,5" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
+    </Style-->
+
+    <Style x:Key="SettingsMenuButton" TargetType="Button">
+        <Setter Property="Margin" Value="0,5,0,5" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="12,10,12,10" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent">
+                        <Border x:Name="BorderFocus" CornerRadius="20"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Background="{DynamicResource UIBrush}" Visibility="Hidden"/>
+
+                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Margin="{TemplateBinding Padding}">                            
+                                <ContentPresenter />
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+
 
     <Style x:Key="SettingsMenuHeaderText" BasedOn="{StaticResource TextBlockBaseStyle}" TargetType="TextBlock" >
         <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebBold}" />
@@ -48,6 +95,10 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+                            <Border x:Name="BorderFocus"
+                                    Grid.Column="1" Width="35" Height="35" CornerRadius="35"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    Background="{DynamicResource UIBrush}" Visibility="Hidden" />
                             <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                         FontFamily="{DynamicResource FontTitilliumWeb}"
                                         Foreground="{TemplateBinding Foreground}"
@@ -59,17 +110,12 @@
                             <Border Background="{DynamicResource ControlBackgroundDarkBrush}"
                                     VerticalAlignment="Center"
                                     BorderThickness="2" BorderBrush="{DynamicResource ControlBackgroundBrush}"
-                                    Grid.Column="1" Width="26" Height="26">
+                                    Grid.Column="1" Width="26" Height="26" CornerRadius="26">
                                 <Viewbox x:Name="CheckIcon" Visibility="Collapsed">
                                     <TextBlock Text="b" FontFamily="Marlett" Foreground="White"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Viewbox>
                             </Border>
-                            <Border x:Name="BorderFocus"
-                                    Grid.Column="1" Width="26" Height="26"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                    BorderBrush="{DynamicResource SelectionBrush}"
-                                    BorderThickness="3" Visibility="Hidden" />
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
