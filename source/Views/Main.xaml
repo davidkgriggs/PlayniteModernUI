@@ -336,7 +336,7 @@
                                         </Grid>
 
                                         <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
                                                 <!--Extra Metadata Tools Logo-->
                                                 <StackPanel Name="Icon" Orientation="Vertical">
                                                     <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
@@ -367,22 +367,7 @@
                                                                         </DataTrigger>
                                                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
                                                                             <Setter Property="Visibility" Value="Collapsed"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </FadeImage.Style>
-                                                        </FadeImage>
-                                                    </StackPanel>
-                                                    <!--Original Icon-->
-                                                    <StackPanel HorizontalAlignment="Left">
-                                                        <FadeImage Source="{Binding SelectedGame.Icon}" Width="500" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
-                                                            <FadeImage.Style>
-                                                                <Style TargetType="FadeImage">
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                                        </DataTrigger>
+                                                                        </DataTrigger>                                                                        
                                                                     </Style.Triggers>
                                                                 </Style>
                                                             </FadeImage.Style>
@@ -508,7 +493,7 @@
 
 
 
-                                                <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle}" DockPanel.Dock="Top">
+                                                <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle1}" DockPanel.Dock="Top">
                                                     <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
                                                            Text="{Binding SelectedGame.DisplayName}"
                                                            FontWeight="Bold"
@@ -518,7 +503,7 @@
                                                 </Grid>
 
                                                 <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
-                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
                                                         <!--Extra Metadata Tools Logo-->
                                                         <StackPanel Name="Icon1" Orientation="Vertical">
                                                             <TextBlock Name="LogoPath1" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
@@ -539,7 +524,7 @@
                                                             </TextBlock>
                                                             <StackPanel HorizontalAlignment="Left">
                                                                 <FadeImage Name="LogoImage1" Grid.ZIndex="1" Width="350" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+                                                                           VerticalAlignment="Top" HorizontalAlignment="Stretch" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
                                                                     <FadeImage.Style>
                                                                         <Style TargetType="FadeImage">
                                                                             <Setter Property="Source" Value="{Binding ElementName=LogoPath1, Path=Text}"/>
@@ -555,21 +540,6 @@
                                                                     </FadeImage.Style>
                                                                 </FadeImage>
                                                             </StackPanel>
-                                                            <!--Original Icon-->
-                                                            <StackPanel HorizontalAlignment="Left">
-                                                                <FadeImage Source="{Binding SelectedGame.Icon}" Width="350" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
-                                                                    <FadeImage.Style>
-                                                                        <Style TargetType="FadeImage">
-                                                                            <Style.Triggers>
-                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                </DataTrigger>
-                                                                            </Style.Triggers>
-                                                                        </Style>
-                                                                    </FadeImage.Style>
-                                                                </FadeImage>
-                                                            </StackPanel>
                                                         </StackPanel>
                                                     </StackPanel>
                                                 </Grid>
@@ -578,7 +548,7 @@
                                                     <StackPanel Orientation="Horizontal">
                                                         <Grid Margin="0,0,0,0" Width="350">
                                                             <StackPanel>
-                                                                <Line HorizontalAlignment="Center" Stroke="#FFEBEBEB" StrokeThickness="2" X1="350" Margin="0,5,0,5"/>
+                                                                <Line HorizontalAlignment="Center" Stroke="#FFEBEBEB" StrokeThickness="2" X1="350" Margin="0,10,0,5"/>
 
                                                                 <Grid x:Name="GRIDSuccessStory" HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
                                                                     <Grid.Style>
