@@ -39,7 +39,7 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -88,7 +88,7 @@
                             <Setter Property="Background" TargetName="BorderFocus" Value="{DynamicResource UIBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -174,14 +174,14 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="ItemsControl.Visibility" TargetName="ON" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ON" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="ItemsControl.Visibility" TargetName="OFF" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -231,14 +231,14 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="Background" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="ItemsControl.Visibility" TargetName="ON" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ON" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="ItemsControl.Visibility" TargetName="OFF" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed"/>
                         </Trigger>
 
                         <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
@@ -292,14 +292,14 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="Background" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="ItemsControl.Visibility" TargetName="OFF" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="ItemsControl.Visibility" TargetName="ON" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ON" Value="Collapsed"/>
                         </Trigger>
 
                         <!--DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
@@ -353,14 +353,14 @@
                             <Setter Property="Visibility" Value="Visible" TargetName="Background" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="ItemsControl.Visibility" TargetName="ON" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="ON" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="ItemsControl.Visibility" TargetName="OFF" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

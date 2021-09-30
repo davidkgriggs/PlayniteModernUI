@@ -4,18 +4,12 @@
     <Style x:Key="SettingsMenuBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource OverlayMenuBackgroundBrush}" />
     </Style>
-    
+
     <Style x:Key="SettingsSectionBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource OverlayMenuBackgroundBrush}" />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="Margin" Value="0,0,20,0" />
     </Style>
-
-    <!--Style x:Key="SettingsMenuButton" BasedOn="{StaticResource {x:Type ButtonEx}}" TargetType="ButtonEx">
-        <Setter Property="Margin" Value="0,5,0,5" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Right" />
-    </Style-->
 
     <Style x:Key="SettingsMenuButton" TargetType="Button">
         <Setter Property="Margin" Value="0,5,0,5" />
@@ -63,16 +57,14 @@
         </Setter>
     </Style>
 
-
-    <Style x:Key="SettingsMenuHeaderText" BasedOn="{StaticResource TextBlockBaseStyle}" TargetType="TextBlock" >
-        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebBold}" />
-        <Setter Property="FontSize" Value="36" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="Margin" Value="30,30,60,30" />
-    </Style>
+    <DataTemplate x:Key="SettingsMenuHeaderTemplate">
+        <TextBlock Text="{DynamicResource LOCSettingsLabel}"
+                   FontSize="36" Style="{DynamicResource TextBlockBaseStyle}"
+                   Margin="20,30,40,30" />
+    </DataTemplate>
 
     <Thickness x:Key="SettingsSectionItemSpacing">0,10,10,10</Thickness>
-    
+
     <Style x:Key="SettingsSectionSlider" TargetType="SliderEx" BasedOn="{StaticResource {x:Type SliderEx}}">
         <Setter Property="Width" Value="300" />
         <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
@@ -137,11 +129,59 @@
     </Style>
 
     <Style x:Key="SettingsSectionCombobox" TargetType="ComboBoxEx" BasedOn="{StaticResource {x:Type ComboBoxEx}}">
-        <Setter Property="MinWidth" Value="200" />        
+        <Setter Property="MinWidth" Value="200" />
         <Setter Property="Margin" Value="{DynamicResource SettingsSectionItemSpacing}" />
     </Style>
 
     <Style x:Key="SettingsSectionText" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
+    <DataTemplate x:Key="SettingsMenuGeneralButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="&#xefb0;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionGeneral}" VerticalAlignment="Center" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SettingsMenuVisualsButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="&#xeef2;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionVisuals}" VerticalAlignment="Center" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SettingsMenuAudioButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="&#xeea8;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionAudio}" VerticalAlignment="Center" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SettingsMenuLayoutButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="&#xef5d;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionLayout}" VerticalAlignment="Center" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SettingsMenuMenusButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="&#xefa2;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSectionMenus}" VerticalAlignment="Center" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SettingsMenuInputButtonTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="&#xea30;" FontFamily="{DynamicResource FontIcoFont}" FontSize="24"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="{DynamicResource LOCSettingsFSSection}" VerticalAlignment="Center" />
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

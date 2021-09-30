@@ -112,18 +112,6 @@
                                     <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
 
-
-                                <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
-                                    <!--ContentControl ContentTemplate="{DynamicResource ButtonPromptLB}" Foreground="#FFEBEBEB" Focusable="False"
-                                                    Height="{DynamicResource FilterShoulderSize}" VerticalAlignment="Center" Margin="0,0,10,15"/-->
-
-                                    <FilterPresetSelector x:Name="PART_FilterPresetSelector" Grid.Column="1" Margin="0,0,0,0" />
-
-                                    <!--ContentControl ContentTemplate="{DynamicResource ButtonPromptRB}" Foreground="#FFEBEBEB" Focusable="False"
-                                                    Height="{DynamicResource FilterShoulderSize}" VerticalAlignment="Center" Margin="10,0,0,15"/-->
-                                </StackPanel>
-                                
-
                                 <ContentControl x:Name="PART_ElemBatteryStatus" Focusable="False" FontSize="42"
                                             VerticalAlignment="Center" Margin="10,0,10,0"
                                             Grid.Column="2">
@@ -203,7 +191,7 @@
                                 </Grid.ColumnDefinitions>
                                 <!--SIDE BAR-->
                                 <DockPanel>
-                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" DockPanel.Dock="Left">
+                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0,0" DockPanel.Dock="Left" Margin="0,0,0,350">
                                         <Grid.Style>
                                             <Style>
                                                 <Setter Property="ItemsControl.Width" Value="80"/>
@@ -234,6 +222,9 @@
                                             </Style>
                                         </Grid.Style>
                                         <StackPanel Grid.Column="0" Margin="20,10,10,0">
+
+                                            <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" />
+
                                             <Grid x:Name="GridView" Margin="0,0,0,0">
                                                 <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
                                                 <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
@@ -250,9 +241,9 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Border.Style>
-                                                    <Border.Effect>
+                                                    <!--Border.Effect>
                                                         <DropShadowEffect BlurRadius="30"/>
-                                                    </Border.Effect>
+                                                    </Border.Effect-->
                                                 </Border>
                                                 <TextBlock Text="{DynamicResource LOCGridViewLabel}" VerticalAlignment="Center"
                                                            Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
@@ -281,9 +272,9 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Border.Style>
-                                                    <Border.Effect>
+                                                    <!--Border.Effect>
                                                         <DropShadowEffect BlurRadius="30"/>
-                                                    </Border.Effect>
+                                                    </Border.Effect-->
                                                 </Border>
                                                 <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"
                                                            Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
@@ -300,6 +291,7 @@
                                                     </Button.Content>
                                                 </ButtonEx>
                                             </Grid>
+
                                         </StackPanel>
                                     </Grid>
                                 </DockPanel>

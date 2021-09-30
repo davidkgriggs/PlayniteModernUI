@@ -32,6 +32,7 @@
                         </ToggleButton>
 
                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                   IsHitTestVisible="False"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                    x:Name="TextContent" Margin="{TemplateBinding Padding}">
@@ -77,6 +78,9 @@
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
                             <Setter Property="Visibility" Value="Hidden" TargetName="BorderStandard" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -32,7 +32,7 @@
                             <Setter Property="Background" Value="{DynamicResource UIBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
+                            <Setter Property="Opacity" Value="0.5" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource SelectionBrush}" />

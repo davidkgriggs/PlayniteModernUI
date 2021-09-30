@@ -62,6 +62,16 @@
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
                             </Trigger.EnterActions>
                         </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Canvas.ZIndex" Value="90" />
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
+                            </Trigger.EnterActions>
+                        </Trigger>
 
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
                             <Setter Property="Style" Value="{DynamicResource CornerRadiusLarge}" TargetName="WhiteOutline"/>
