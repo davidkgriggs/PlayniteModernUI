@@ -14,3 +14,9 @@ Packages:
       - Fixed logo issue on side bar
       - If there is no logo it now falls back to showing the game title
       - Fixed an overlap issue when changing to game details view.
+  - Version: 1.0.1
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-10-01
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.0-beta.2/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_1.pthm
+    Changelog:
+      - Updated for Playnite 9 stable release
