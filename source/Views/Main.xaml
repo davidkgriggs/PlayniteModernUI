@@ -191,7 +191,7 @@
                                 </Grid.ColumnDefinitions>
                                 <!--SIDE BAR-->
                                 <DockPanel>
-                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0,0" DockPanel.Dock="Left" Margin="0,0,0,350">
+                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0,0" DockPanel.Dock="Left" Margin="0,0,0,250">
                                         <Grid.Style>
                                             <Style>
                                                 <Setter Property="ItemsControl.Width" Value="80"/>
@@ -668,112 +668,101 @@
                                         </Grid>
                                     </Grid>
 
-                                    <StackPanel VerticalAlignment="Bottom" DockPanel.Dock="Right">
-                                        <StackPanel>
-                                            <StackPanel.Style>
-                                                <Style>
-                                                    <Setter Property="ItemsControl.Width" Value="10"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
-                                                            <Setter Property="ItemsControl.Width" Value="0"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </StackPanel.Style>
-                                        </StackPanel>
-                                        
-                                        
-                                    </StackPanel>
-                                    
                                     <ListBoxEx x:Name="PART_ListGameItems" VerticalAlignment="Bottom" DockPanel.Dock="Right"
                                                    Background="Transparent" BorderThickness="0"
                                                    KeyboardNavigation.DirectionalNavigation="Once"
                                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                                   ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                   Tag="{DynamicResource RoundedCorners}"
-                                                   >
-                                            <ListBox.Style>
-                                                <Style>
+                                                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                        <ListBox.Style>
+                                            <Style>
                                                 <Setter Property="ItemsControl.Margin" Value="0,0,0,0"/>
                                                 <Setter Property="ItemsControl.MaxHeight" Value="955"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                        </DataTrigger>
-
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="1"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="1"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="650"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="2"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="2"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="700"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="3"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="3"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="650"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="4"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="4"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="650"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="5"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="5"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="600"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="6"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="6"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="500"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="7"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="7"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="450"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="8"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="8"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="400"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="9"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="9"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="400"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="10"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="10"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="ItemsControl.MaxHeight" Value="350"/>
+                                                        <Setter Property="ItemsControl.Margin" Value="85,0,0,0"/>
                                                     </MultiDataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ListBox.Style>
-                                        </ListBoxEx>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ListBox.Style>
+                                    </ListBoxEx>
+
                                 </DockPanel>
                             </Grid>
 

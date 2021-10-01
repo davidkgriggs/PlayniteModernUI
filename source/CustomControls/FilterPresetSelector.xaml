@@ -133,7 +133,7 @@
 
     <Style TargetType="{x:Type FilterPresetSelector}">
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="MaxHeight" Value="455"/>
+        <Setter Property="MaxHeight" Value="520"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="Template">
             <Setter.Value>
