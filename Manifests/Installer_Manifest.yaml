@@ -26,3 +26,11 @@ Packages:
     PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.2/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_2.pthm
     Changelog:
       - Fix for overlapping covers with the side bar
+  - Version: 1.0.3
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-10-02
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.3/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_3.pthm
+    Changelog:
+      - Side Bar has been reworked
+      - Added new Filter Icons
+      - Other Visual fixes

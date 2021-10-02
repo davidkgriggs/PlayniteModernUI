@@ -191,7 +191,7 @@
                                 </Grid.ColumnDefinitions>
                                 <!--SIDE BAR-->
                                 <DockPanel>
-                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0,0" DockPanel.Dock="Left" Margin="0,0,0,250">
+                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" DockPanel.Dock="Left" Margin="0,-80,0,0">
                                         <Grid.Style>
                                             <Style>
                                                 <Setter Property="ItemsControl.Width" Value="80"/>
@@ -282,7 +282,7 @@
                                                            Margin="60,0,10,0"/>
 
                                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                          Style="{DynamicResource ButtonTopMenu}"
+                                          Style="{DynamicResource ButtonMainMenu}"
                                           Margin="0,0,0,0" Height="38" Width="38"
                                           Grid.Column="10">
                                                     <Button.Content>
@@ -784,7 +784,7 @@
                             <Grid Grid.Row="2" Background="{DynamicResource TopBarBackgroundBrush}"
                               Height="35">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="90" />
+                                    <ColumnDefinition Width="0" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
