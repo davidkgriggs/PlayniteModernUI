@@ -90,7 +90,7 @@
                                                             </Style.Triggers>
                                                         </Style>
                                     </Grid.Style>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>  
+                                <TextBlock x:Name="FilterName" Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>  
                                     </Grid>
                                     
                                     </StackPanel>

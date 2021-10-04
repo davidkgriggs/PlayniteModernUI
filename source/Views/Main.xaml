@@ -296,6 +296,53 @@
                                     </Grid>
                                 </DockPanel>
 
+                                <!--CURRENT FILTER PRESET NAME-->
+                                <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,-80,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid>
+                                            <TextBlock Name="FilterIconPath" Tag="{Binding ActiveFilterPreset.Name}" Visibility="Collapsed">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text">
+                                                            <Setter.Value>
+                                                                <MultiBinding StringFormat="{}{0}{1}{2}">
+                                                                    <Binding Source="../FilterIcons/"/>
+                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+                                                                    <Binding Source=".png"/>
+                                                                </MultiBinding>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <Image Name="FilterIconImage" MaxWidth="50" MaxHeight="50" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,20,0"
+                                               VerticalAlignment="Center" HorizontalAlignment="Left" Source="{Binding ElementName=FilterIconPath, Path=Text}"/>
+
+
+
+                                            <TextBlock Text="&#59633;" FontFamily="Segoe MDL2 Assets" FontSize="42" Foreground="White" Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=FilterIconImage, Path=ActualHeight}" Value="0">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <!--Image Name="LogoImage" MaxWidth="50" MaxHeight="50" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
+                                               VerticalAlignment="Bottom" HorizontalAlignment="Left" Source="{ThemeFileBinding Name, PathFormat='FilterIcons/{0}.png'}"/-->
+                                        </Grid>
+
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ActiveFilterPreset.Name}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="46"/>
+                                            <Border BorderBrush="White" BorderThickness="2" HorizontalAlignment="Stretch" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+
                                 <!--HORIZONTAL INFO-->
                                 <DockPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <StackPanel>

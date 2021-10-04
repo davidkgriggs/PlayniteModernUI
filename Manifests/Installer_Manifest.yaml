@@ -34,3 +34,11 @@ Packages:
       - Side Bar has been reworked
       - Added new Filter Icons
       - Other Visual fixes
+  - Version: 1.0.4
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-10-04
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.4/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_4.pthm
+    Changelog:
+      - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME. 
+      - Visual fixes
+      - New Filter Title
