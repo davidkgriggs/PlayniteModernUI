@@ -255,7 +255,7 @@
                                             Style="{DynamicResource ChangeViewButton}"/>
                                                 </StackPanel>
                                             </Grid>
-
+                                           
                                             <Grid x:Name="MainMenu" Margin="0,25,0,0">
                                                 <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
                                                 <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
@@ -276,10 +276,16 @@
                                                         <DropShadowEffect BlurRadius="30"/>
                                                     </Border.Effect-->
                                                 </Border>
-                                                <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Playnite " VerticalAlignment="Center"
                                                            Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
                                                            Foreground="White"
-                                                           Margin="60,0,10,0"/>
+                                                           Margin="60,0,0,0"/>
+                                                    <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"
+                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
+                                                           Foreground="White"
+                                                           Margin="0,0,10,0"/>
+                                                </StackPanel>
 
                                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" HorizontalAlignment="Left"
                                           Style="{DynamicResource ButtonMainMenu}"
