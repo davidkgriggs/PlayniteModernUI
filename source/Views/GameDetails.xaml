@@ -62,15 +62,39 @@
                           d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
                           KeyboardNavigation.DirectionalNavigation="Contained"
                           KeyboardNavigation.TabNavigation="Contained">
-                        
-                        <FadeImage Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Top"                                  
-                                   x:Name="PART_ImageBackground"/>
+
+                        <FadeImage Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top"                                  
+                                   x:Name="PART_ImageBackground">
+                            <Style TargetType="FadeImage">
+                                <Setter Property="Width" Value="{StaticResource DesignWidth}"/>
+                                <Setter Property="Height" Value="{StaticResource DesignHeight}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Value="620">
+                                        <Setter Property="Height" Value="1920"/>
+                                        <Setter Property="Height" Value="620"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </FadeImage>
                         <Border Background="{DynamicResource GameDetailsBackgroundBrush}" Opacity="0.75">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding DisplayBackgroundImage}" Value="{x:Null}">
                                             <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+
+                        <Border Background="{DynamicResource GameDetailsGreyOverlay}" Height="600" Width="1920" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Value="620">
+                                            <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -327,7 +351,7 @@
                                             </Grid>
                                         </Grid>
 
-                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,20,0,0" >
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,20,0,0" >
                                             <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
                                                 <StackPanel.Style>
                                                     <Style>
@@ -345,12 +369,11 @@
 
                                                 <TextBlock Margin="0,0,0,0" Text="{DynamicResource LOCHowLongToBeatTitle}" 
                                                                    Style="{DynamicResource TextBlockBaseStyle}" FontSize="22"/>
-                                                <StackPanel Orientation="Vertical" Margin="0,10,20,0" VerticalAlignment="Top">
+                                                <StackPanel Orientation="Vertical" Margin="0,10,20,0" VerticalAlignment="Top" >
                                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                                         <ContentControl Width="150" Content="{DynamicResource LOCHowLongToBeatMainStory}"
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
-                                                                        FontFamily="Segoe UI Light"
                                                                         FontSize="22" Margin="0,0,0,10"/>
                                                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
@@ -361,7 +384,6 @@
                                                         <ContentControl Width="150" Content="{DynamicResource LOCHowLongToBeatMainExtra}"
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
-                                                                        FontFamily="Segoe UI Light"
                                                                         FontSize="22" Margin="0,0,0,10"/>
                                                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
@@ -372,7 +394,6 @@
                                                         <ContentControl Width="150" Content="{DynamicResource LOCHowLongToBeatCompletionist}"
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
-                                                                        FontFamily="Segoe UI Light"
                                                                         FontSize="22" Margin="0,0,0,10"/>
                                                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"

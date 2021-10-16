@@ -52,6 +52,9 @@
     <!--MainScreenLogo-->
     <sys:Boolean x:Key="MainScreenLogo">false</sys:Boolean>
 
+    <!--DescriptionOnOff-->
+    <sys:Boolean x:Key="DescriptionOnOff">true</sys:Boolean>
+
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
     <Color x:Key="GlyphColor">#4b73ae</Color>
@@ -139,6 +142,11 @@
         <GradientStop Color="#00000000" Offset="0.75"/>
         <GradientStop Color="#BF000000" Offset="1"/>
     </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="GameDetailsGreyOverlay" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#00000000" Offset="0"/>
+        <GradientStop Color="#202020" Offset="0.2"/>
+    </LinearGradientBrush>
 
     <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
 
@@ -153,8 +161,8 @@
         <Setter Property="CornerRadius" Value="3"/>
     </Style>
 
-    <!--GlassEffect-->
-    <Style x:Key="GlassEffectStyle" TargetType="Image">
+    <!--DscriptionOnOff-->
+    <Style x:Key="DscriptionOnOffStyle" TargetType="Grid">
         <Setter Property="Visibility" Value="Visible"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">

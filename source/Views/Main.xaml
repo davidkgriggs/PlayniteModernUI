@@ -429,7 +429,7 @@
                                                Text="{Binding SelectedGame.ReleaseYear}" Margin="0,0,20,0"/>
                                         </StackPanel>
 
-                                        <Grid HorizontalAlignment="Left" Width="800" Height="220">
+                                        <Grid HorizontalAlignment="Left" Width="800" Height="220" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
                                             <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
                                             <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource DescriptionFont}"
                                                   HtmlForeground="{DynamicResource TextColor}"/>
@@ -653,7 +653,7 @@
                                                                 </Grid>
 
 
-                                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" >
+                                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" >
                                                                     <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
                                                                         <StackPanel.Style>
                                                                             <Style>
@@ -676,7 +676,6 @@
                                                                                 <ContentControl Width="150" Content="{DynamicResource LOCHowLongToBeatMainStory}"
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
-                                                                        FontFamily="Segoe UI Light"
                                                                         FontSize="22" Margin="0,0,0,10"/>
                                                                                 <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
@@ -687,7 +686,6 @@
                                                                                 <ContentControl Width="150" Content="{DynamicResource LOCHowLongToBeatMainExtra}"
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
-                                                                        FontFamily="Segoe UI Light"
                                                                         FontSize="22" Margin="0,0,0,10"/>
                                                                                 <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
@@ -698,7 +696,6 @@
                                                                                 <ContentControl Width="150" Content="{DynamicResource LOCHowLongToBeatCompletionist}"
                                                                         ContentStringFormat="{}{0}:" Focusable="False"
                                                                         Foreground="{DynamicResource TextBrush}"
-                                                                        FontFamily="Segoe UI Light"
                                                                         FontSize="22" Margin="0,0,0,10"/>
                                                                                 <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                        Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
@@ -708,7 +705,7 @@
                                                                     </StackPanel>
                                                                 </StackPanel>
 
-                                                                <Grid HorizontalAlignment="Left" Width="350" MaxHeight="600">
+                                                                <Grid HorizontalAlignment="Left" Width="350" MaxHeight="600" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
                                                                     <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
                                                                     <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource DescriptionFont}"
                                                   HtmlForeground="{DynamicResource TextColor}"/>

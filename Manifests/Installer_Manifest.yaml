@@ -48,4 +48,14 @@ Packages:
     PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.5/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_5.pthm
     Changelog:
       - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
-      - Bug fixes     
+      - Bug fixes    
+  - Version: 1.0.6
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-10-14
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.6/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_6.pthm
+    Changelog:
+      - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - Fix for "Hero Banner" backgrounds (1920x620)
+      - Fix for How Long To Beat alignment
+      - Fix for Buttons
+      - Support for turning Description on and off
