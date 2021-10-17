@@ -14,7 +14,6 @@
                     <Border Background="{TemplateBinding Background}"
                             Margin="10,10,10,0">
                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                   FontSize="{DynamicResource FilterFontSmall}"
                                    x:Name="TextContent">
                             <Grid>
                                 <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
@@ -41,7 +40,7 @@
                                 <BlurEffect Radius="10"/>
                             </Border.Effect>
                         </Border>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Height="40">
                                     <Grid>
 							<TextBlock Name="LogoPath" Tag="{Binding Name}" Visibility="Collapsed">
                                             <TextBlock.Style>
@@ -79,7 +78,7 @@
                                                VerticalAlignment="Bottom" HorizontalAlignment="Left" Source="{ThemeFileBinding Name, PathFormat='FilterIcons/{0}.png'}"/-->
                                         </Grid>
                                         
-                                <Grid Margin="25,0,10,0">
+                                <Grid Margin="25,0,10,0" VerticalAlignment="Center" MaxWidth="200">
                                     <Grid.Style>
                                         <Style TargetType="Grid">
                                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -90,7 +89,7 @@
                                                             </Style.Triggers>
                                                         </Style>
                                     </Grid.Style>
-                                <TextBlock x:Name="FilterName" Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>  
+                                <TextBlock x:Name="FilterName" Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>  
                                     </Grid>
                                     
                                     </StackPanel>

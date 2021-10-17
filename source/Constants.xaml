@@ -312,5 +312,23 @@
                 <Setter Property="Visibility" Value="Visible"/>
             </DataTrigger>
         </Style.Triggers>
-    </Style>    
+    </Style>
+
+
+    <!--Label Changes-->
+    <!--Progress Label-->
+    <Style x:Key="ProgressLabel" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <!--PL--><Setter Property="Text" Value="{DynamicResource LOCSuccessStoryProgress}" /><!--PL-->
+    </Style>
+
+    <!--Earned Label-->
+    <Style x:Key="EarnedLabel" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <!--EL--><Setter Property="Text" Value="{DynamicResource LOCSuccessStoryEarned}" /><!--EL-->
+    </Style>
 </ResourceDictionary>

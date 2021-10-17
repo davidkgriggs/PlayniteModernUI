@@ -59,3 +59,10 @@ Packages:
       - Fix for How Long To Beat alignment
       - Fix for Buttons
       - Support for turning Description on and off
+  - Version: 1.0.7
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-10-17
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.0.7/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_0_7.pthm
+    Changelog:
+      - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - Fonts configured throughout to change with Font Size in the settings menu
