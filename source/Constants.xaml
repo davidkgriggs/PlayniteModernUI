@@ -55,6 +55,9 @@
     <!--DescriptionOnOff-->
     <sys:Boolean x:Key="DescriptionOnOff">true</sys:Boolean>
 
+    <!--FilterPresetVertical-->
+    <sys:Boolean x:Key="FilterPresetVertical">true</sys:Boolean>
+
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
     <Color x:Key="GlyphColor">#4b73ae</Color>
@@ -225,7 +228,7 @@
     <!--SideBar-->
     <Style x:Key="SideBarStyle" TargetType="Grid">
         <Setter Property="Visibility" Value="Visible"/>
-        <Setter Property="Margin" Value="0,30,0,0"/>
+        <Setter Property="Margin" Value="55,30,0,0"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -233,6 +236,13 @@
             <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
                 <Setter Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
+                    <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Margin" Value="265,30,0,0"/>
+            </MultiDataTrigger>
         </Style.Triggers>
     </Style>
 

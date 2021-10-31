@@ -8,6 +8,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="65"/>
+        <Setter Property="Tag" Value="{DynamicResource FilterPresetVertical}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBoxEx">
@@ -83,7 +84,7 @@
                                         <Style TargetType="Grid">
                                                             <Setter Property="Visibility" Value="Collapsed"/>
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True">
+                                                                <DataTrigger Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True">
                                                                     <Setter Property="Visibility" Value="Visible"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
@@ -112,8 +113,39 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
                             <Setter Property="Visibility" TargetName="BorderFocus" Value="Visible"/>
-                            <Setter Property="Width" TargetName="BorderFocus" Value="280"/>
+                            <!--Setter Property="Width" TargetName="BorderFocus" Value="280"/-->
+                            <!--Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="60" To="280"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="280" To="60"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions-->
                         </Trigger>
+
+                        <DataTrigger Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="60" To="280"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="280" To="60"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="FontWeight" Value="Bold" TargetName="TextContent" />
@@ -128,10 +160,15 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
                                 <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Focusable" Value="True"/>
                         </MultiDataTrigger>
+
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                            <Setter Property="Focusable" Value="True"/>
+                        </DataTrigger>
 
                         <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
                             <Setter Property="Focusable" Value="True"/>
@@ -153,17 +190,40 @@
 
     <Style TargetType="{x:Type FilterPresetSelector}">
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Height" Value="845"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type FilterPresetSelector}">
                     <ItemsControlEx x:Name="PART_ItemsFilterPresets" Focusable="False"
                                     KeyboardNavigation.DirectionalNavigation="Once"
-                                    HorizontalLayout="False">
+                                    Tag="{DynamicResource FilterPresetVertical}">
+                        <ItemsControlEx.Style>
+                            <Style TargetType="ItemsControlEx">
+                                <Setter Property="HorizontalLayout" Value="False"/>
+                                <Setter Property="Height" Value="845"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                                        <Setter Property="HorizontalLayout" Value="True"/>
+                                        <Setter Property="Margin" Value="0,5,300,0"/>
+                                        <Setter Property="Height" Value="65"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControlEx.Style>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" />
+                                <StackPanel Tag="{DynamicResource FilterPresetVertical}">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Orientation" Value="Vertical"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                                                    <Setter Property="Orientation" Value="Horizontal"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                </StackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.Template>

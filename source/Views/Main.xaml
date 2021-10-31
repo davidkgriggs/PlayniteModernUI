@@ -38,27 +38,17 @@
                             </StackPanel>
 
                             <!--VIDEO BACKGROUND-->
-                            <Grid Grid.Row="0" Grid.RowSpan="4" Opacity="1">
+                            <Grid Grid.Row="0" Grid.RowSpan="4" Opacity="1" Tag="{DynamicResource VideoBackgrounds}">
                                 <Grid.Style>
-                                    <Style>
-                                        <Setter Property="ItemsControl.Opacity" Value="1"/>
+                                    <Style TargetType="Grid">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=PART_ListGameItems, Path=IsKeyboardFocusWithin}" Value="True">
-                                                <DataTrigger.EnterActions>
-                                                    <RemoveStoryboard BeginStoryboardName="BackgroundVideoFade"/>
-                                                </DataTrigger.EnterActions>
-                                                <DataTrigger.ExitActions>
-                                                    <BeginStoryboard x:Name="BackgroundVideoFade">
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.5"/>
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.ExitActions>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Grid.Style>
-
+                                
                                 <Grid x:Name="VideoBackgrounds" Tag="{DynamicResource VideoBackgrounds}" Style="{DynamicResource VideoBackground}">
                                     <TextBlock Name="VideoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
                                         <TextBlock.Style>
@@ -93,9 +83,9 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </MediaElement.Style>
-                                    </MediaElement>
-                                    <Border Background="{DynamicResource OverlayBrush}" Opacity="0.3"/>
+                                    </MediaElement>                                    
                                 </Grid>
+                                <Border Background="{DynamicResource OverlayBrush}" Opacity="0.3"/>
                             </Grid>
                             
                             <Grid Grid.Row="0" Background="{DynamicResource TopBarBackgroundBrush}"
@@ -184,124 +174,205 @@
                                 </ButtonEx>
                             </Grid>
 
+                            <!--FILTER PRESETS/SIDE BAR-->
+                            <Grid x:Name="FilterPresetsSideBar" Grid.Row="1">
+                                <Grid x:Name="FilterPresets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,-80,10,0" Background="Transparent">
+                                    <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" VerticalAlignment="Top" />
+                                </Grid>
+
+                                <Grid x:Name="SideBar" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" MinHeight="200" Background="Transparent">
+                                    <Grid.Style>
+                                        <Style>
+                                            <Setter Property="ItemsControl.Width" Value="80"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="80" To="300"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.EnterActions>
+                                                    <MultiDataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="300" To="80"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.ExitActions>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <StackPanel Grid.Column="0" Margin="20,10,10,20" VerticalAlignment="Bottom">
+                                        <Grid x:Name="GridView" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom">
+                                            <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
+                                            <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
+                                                <Border.Style>
+                                                    <Style>
+                                                        <Setter Property="ItemsControl.Opacity" Value="0"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=GridView, Path=IsKeyboardFocusWithin}" Value="True">
+                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding ElementName=GridView, Path=IsMouseOver}" Value="True">
+                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <!--Border.Effect>
+                                                        <DropShadowEffect BlurRadius="30"/>
+                                                    </Border.Effect-->
+                                            </Border>
+                                            <TextBlock Text="{DynamicResource LOCGridViewLabel}" VerticalAlignment="Center" MaxWidth="200"
+                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
+                                                           Foreground="White"
+                                                           Margin="60,0,10,0"/>
+
+                                            <StackPanel Margin="0,0,0,0" HorizontalAlignment="Left">
+                                                <CheckBoxEx x:Name="ChangeViewButton" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"
+                                            Style="{DynamicResource ChangeViewButton}"/>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid x:Name="MainMenu" Margin="0,25,0,0" VerticalAlignment="Bottom">
+                                            <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
+                                            <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
+                                                <Border.Style>
+                                                    <Style>
+                                                        <Setter Property="ItemsControl.Opacity" Value="0"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=MainMenu, Path=IsKeyboardFocusWithin}" Value="True">
+                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding ElementName=MainMenu, Path=IsMouseOver}" Value="True">
+                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <!--Border.Effect>
+                                                        <DropShadowEffect BlurRadius="30"/>
+                                                    </Border.Effect-->
+                                            </Border>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="60,0,10,0" Width="200" Height="40">
+                                                <TextBlock Text="Playnite " VerticalAlignment="Center"
+                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
+                                                           Foreground="White" />
+                                                <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"
+                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
+                                                           Foreground="White" />
+                                            </StackPanel>
+
+                                            <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                          Style="{DynamicResource ButtonMainMenu}"
+                                          Margin="0,0,0,0" Height="38" Width="38"
+                                          Grid.Column="10">
+                                                <Button.Content>
+                                                    <Image RenderOptions.BitmapScalingMode="Fant" Margin="2"
+                                           Source="{ThemeFile 'Images/applogo_clean.png'}" />
+                                                </Button.Content>
+                                            </ButtonEx>
+                                        </Grid>
+
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!--SIDE BAR-->
-                                <DockPanel>
-                                    <Grid x:Name="SideBar" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" DockPanel.Dock="Left" Margin="0,-80,0,0">
-                                        <Grid.Style>
-                                            <Style>
-                                                <Setter Property="ItemsControl.Width" Value="80"/>
-                                                <Style.Triggers>
-                                                    <MultiDataTrigger>
-                                                        <MultiDataTrigger.Conditions>
-                                                            <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
-                                                            <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
-                                                            <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
-                                                            <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        </MultiDataTrigger.Conditions>
-                                                        <MultiDataTrigger.EnterActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.1" From="80" To="300"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </MultiDataTrigger.EnterActions>
-                                                        <MultiDataTrigger.ExitActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.1" From="300" To="80"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </MultiDataTrigger.ExitActions>
-                                                    </MultiDataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Grid.Style>
-                                        <StackPanel Grid.Column="0" Margin="20,10,10,0">
-
-                                            <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" />
-
-                                            <Grid x:Name="GridView" Margin="0,0,0,0" Height="40">
-                                                <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
-                                                <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
-                                                    <Border.Style>
-                                                        <Style>
-                                                            <Setter Property="ItemsControl.Opacity" Value="0"/>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding ElementName=GridView, Path=IsKeyboardFocusWithin}" Value="True">
-                                                                    <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding ElementName=GridView, Path=IsMouseOver}" Value="True">
-                                                                    <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Border.Style>
-                                                    <!--Border.Effect>
-                                                        <DropShadowEffect BlurRadius="30"/>
-                                                    </Border.Effect-->
-                                                </Border>
-                                                <TextBlock Text="{DynamicResource LOCGridViewLabel}" VerticalAlignment="Center" MaxWidth="200"
-                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
-                                                           Foreground="White"
-                                                           Margin="60,0,10,0"/>
-
-                                                <StackPanel Margin="0,0,0,0" HorizontalAlignment="Left">
-                                                    <CheckBoxEx x:Name="ChangeViewButton" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"
-                                            Style="{DynamicResource ChangeViewButton}"/>
-                                                </StackPanel>
-                                            </Grid>
-                                           
-                                            <Grid x:Name="MainMenu" Margin="0,25,0,0">
-                                                <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
-                                                <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
-                                                    <Border.Style>
-                                                        <Style>
-                                                            <Setter Property="ItemsControl.Opacity" Value="0"/>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding ElementName=MainMenu, Path=IsKeyboardFocusWithin}" Value="True">
-                                                                    <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding ElementName=MainMenu, Path=IsMouseOver}" Value="True">
-                                                                    <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Border.Style>
-                                                    <!--Border.Effect>
-                                                        <DropShadowEffect BlurRadius="30"/>
-                                                    </Border.Effect-->
-                                                </Border>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="60,0,10,0" Width="200" Height="40">
-                                                    <TextBlock Text="Playnite " VerticalAlignment="Center"
-                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
-                                                           Foreground="White" />
-                                                    <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"
-                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
-                                                           Foreground="White" />
-                                                </StackPanel>
-
-                                                <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                          Style="{DynamicResource ButtonMainMenu}"
-                                          Margin="0,0,0,0" Height="38" Width="38"
-                                          Grid.Column="10">
-                                                    <Button.Content>
-                                                        <Image RenderOptions.BitmapScalingMode="Fant" Margin="2"
-                                           Source="{ThemeFile 'Images/applogo_clean.png'}" />
-                                                    </Button.Content>
-                                                </ButtonEx>
-                                            </Grid>
-
-                                        </StackPanel>
-                                    </Grid>
-                                </DockPanel>
+                                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Tag="{DynamicResource FilterPresetVertical}">
+                                    <Grid.Style>
+                                        <Style>
+                                            <Setter Property="ItemsControl.Width" Value="80"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="80" To="300"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.EnterActions>
+                                                    <MultiDataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Width" BeginTime="0:0:0.1" Duration="0:0:0.3" From="300" To="80"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.ExitActions>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
+                                                        <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="80" To="300"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.EnterActions>
+                                                    <MultiDataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="Width" BeginTime="0:0:0.1" Duration="0:0:0.3" From="300" To="80"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </MultiDataTrigger.ExitActions>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                </Grid>
 
                                 <!--CURRENT FILTER PRESET NAME-->
-                                <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,-80,0,0">
+                                <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource FilterPresetVertical}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Margin" Value="65,-80,0,0"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                                                    <Setter Property="Margin" Value="65,-20,0,0"/>
+                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Margin" Value="65,-20,0,0"/>
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Margin" Value="65,-80,0,0"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
                                     <StackPanel Orientation="Horizontal">
                                         <Grid>
                                             <TextBlock Name="FilterIconPath" Tag="{Binding ActiveFilterPreset.Name}" Visibility="Collapsed">
@@ -351,20 +422,20 @@
                                 <DockPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <StackPanel>
                                         <StackPanel.Style>
-                                            <Style>
-                                                <Setter Property="ItemsControl.Margin" Value="35,65,0,0"/>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Margin" Value="65,65,0,0"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Settings Fullscreen.HorizontalLayout}" Value="False">
-                                                        <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Visible">
-                                                        <Setter Property="ItemsControl.Margin" Value="345,65,0,0"/>
+                                                        <Setter Property="Margin" Value="345,65,0,0"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Visible">
-                                                        <Setter Property="ItemsControl.Margin" Value="345,65,0,0"/>
+                                                        <Setter Property="Margin" Value="345,65,0,0"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Visible">
-                                                        <Setter Property="ItemsControl.Margin" Value="345,65,0,0"/>
+                                                        <Setter Property="Margin" Value="345,65,0,0"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -448,7 +519,7 @@
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                        <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                        <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="ItemsControl.Margin" Value="0,0,0,0"/>
                                                 </MultiDataTrigger>
@@ -486,11 +557,15 @@
                                             DockPanel.Dock="Left" Focusable="False" />
 
                                     <Grid Style="{DynamicResource SideBarStyle}" Tag="{DynamicResource SideBar}">
-                                        <Grid x:Name="GameDetails" DockPanel.Dock="Left">
+                                        <Grid x:Name="GameDetails" DockPanel.Dock="Left" Tag="{DynamicResource FilterPresetVertical}">
                                             <Grid.Style>
-                                                <Style>
-                                                    <Setter Property="ItemsControl.Width" Value="410"/>
+                                                <Style TargetType="Grid">
+                                                    <Setter Property="Width" Value="380"/>
                                                     <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                            <Setter Property="Margin" Value="-80,0,0,0"/>
+                                                        </DataTrigger>
+                                                        
                                                         <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
                                                             <DataTrigger.EnterActions>
                                                                 <BeginStoryboard>
@@ -513,7 +588,7 @@
                                                 </Style>
                                             </Grid.Style>
 
-                                            <StackPanel Margin="35,25,0,0">
+                                            <StackPanel Margin="10,25,0,0">
                                                 <Grid x:Name="Banners" Tag="{DynamicResource SideBanners}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="58" Margin="0,0,0,5">
                                                     <Grid.Style>
                                                         <Style>
@@ -726,36 +801,82 @@
                                     </Grid>
 
                                     <ListBoxEx x:Name="PART_ListGameItems" VerticalAlignment="Bottom" DockPanel.Dock="Right"
-                                                   Background="Transparent" BorderThickness="0"
+                                                   Background="Transparent" BorderThickness="0" FocusVisualStyle="{x:Null}"
                                                    KeyboardNavigation.DirectionalNavigation="Once"
                                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                                   ScrollViewer.VerticalScrollBarVisibility="Disabled" Tag="{DynamicResource FilterPresetVertical}">
                                         <ListBox.Style>
                                             <Style TargetType="ListBoxEx">
                                                 <Setter Property="Margin" Value="85,0,0,0"/>
                                                 <Setter Property="MaxHeight" Value="955"/>
                                                 <Style.Triggers>
-                                                    <MultiDataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
+                                                        <Setter Property="Margin" Value="10,0,0,0"/>
+                                                    </DataTrigger>
+                                                    <!--MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
                                                             <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                            <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                            <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <MultiDataTrigger.EnterActions>
-                                                            <BeginStoryboard>
+                                                            <BeginStoryboard x:Name="IsFocusWithinSideBar">
                                                                 <Storyboard>
-                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="85,0,0,0" To="0,0,-300,0"/>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="85,0,0,0" To="85,0,-300,0"/>
                                                                 </Storyboard>
                                                             </BeginStoryboard>
                                                         </MultiDataTrigger.EnterActions>
                                                         <MultiDataTrigger.ExitActions>
                                                             <BeginStoryboard>
                                                                 <Storyboard>
-                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="0,0,-300,0" To="85,0,0,0"/>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" BeginTime="0:0:0.3" Duration="0:0:0.1" From="85,0,-300,0" To="85,0,0,0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.ExitActions>
+                                                    </MultiDataTrigger-->
+
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <MultiDataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="85,0,0,0" To="85,0,-300,0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.EnterActions>
+                                                        <MultiDataTrigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" BeginTime="0:0:0.1" Duration="0:0:0.1" From="85,0,-300,0" To="85,0,0,0"/>
                                                                 </Storyboard>
                                                             </BeginStoryboard>
                                                         </MultiDataTrigger.ExitActions>
                                                     </MultiDataTrigger>
-                                                    
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                            <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <MultiDataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="85,0,0,0" To="85,0,-300,0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.EnterActions>
+                                                        <MultiDataTrigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" BeginTime="0:0:0.1" Duration="0:0:0.1" From="85,0,-300,0" To="85,0,0,0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.ExitActions>
+                                                    </MultiDataTrigger>
+
                                                     <MultiDataTrigger>                                                        
                                                         <MultiDataTrigger.Conditions>
                                                             <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
