@@ -84,3 +84,12 @@ Packages:
       - Animation changes
       - Fix for Background Video brightness when no video is present
       - Bug fixes
+  - Version: 1.2.0
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-11-08
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.2.0/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_2_0.pthm
+    Changelog:
+      - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - Fix for Success Story Percentage
+      - Fix for Video Intro fade and volume
+      - Changed Game Details page

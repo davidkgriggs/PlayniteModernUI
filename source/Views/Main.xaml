@@ -684,7 +684,7 @@
                                                                             <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB">
                                                                             </TextBlock>
                                                                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" >
+                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Percent}" >
                                                                                 </TextBlock>
 
                                                                                 <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="%" >
@@ -696,7 +696,7 @@
                                                                                     <ScaleTransform ScaleX="1.5" ScaleY="2"/>
                                                                                 </Grid.RenderTransform>
                                                                                 <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
-                                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
                                                                             </Grid>
                                                                         </StackPanel>
 
@@ -1033,7 +1033,7 @@
                                            Margin="0,0,15,0" FontSize="20" VerticalAlignment="Center"
                                            Style="{DynamicResource TextBlockBaseStyle}"/>
                                     <ContentControl Style="{DynamicResource ProgressIndicator}" Focusable="False"
-                                                Height="38" Width="38" VerticalAlignment="Center" />
+                                                Height="25" Width="25" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -1188,10 +1188,13 @@
                                                 <BeginStoryboard>
                                                     <Storyboard>
                                                         <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.5" FillBehavior="HoldEnd"/>
-                                                        <DoubleAnimation Storyboard.TargetProperty="MaxHeight" From="2160" To="2161" Duration="0:0:0.01"/>
+                                                        <DoubleAnimation Storyboard.TargetProperty="MaxHeight" From="2160" To="2161" Duration="0:0:0.5"/>
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=IntroVideoSource,Path=MaxHeight}" Value="2161">
+                                                <Setter Property="MediaElement.Source" Value="Stop" />
+                                            </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </MediaElement.Style>
