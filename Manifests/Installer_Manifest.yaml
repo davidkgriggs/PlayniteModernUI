@@ -93,3 +93,10 @@ Packages:
       - Fix for Success Story Percentage
       - Fix for Video Intro fade and volume
       - Changed Game Details page
+  - Version: 1.2.1
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-11-10
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.2.1/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_2_1.pthm
+    Changelog:
+      - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - Fixed Theme Intro animation fade
