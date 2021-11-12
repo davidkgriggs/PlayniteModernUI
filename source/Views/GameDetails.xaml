@@ -8,61 +8,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GameDetails}">
-                    <ControlTemplate.Resources>
-                        <Style x:Key="Buttons" TargetType="Button">
-                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="SnapsToDevicePixels" Value="True" />
-                            <Setter Property="Padding" Value="12,5,12,5" />
-                            <Setter Property="HorizontalContentAlignment" Value="Left" />
-                            <Setter Property="VerticalContentAlignment" Value="Center" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource SelectionLightBrush}" />
-                            <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="FontSize" Value="22"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Grid Background="Transparent">
-                                            <Border BorderThickness="2" BorderBrush="{DynamicResource TextBrush}" CornerRadius="30" />
-                                            <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Margin="{TemplateBinding Padding}">                            
-                                <ContentPresenter />
-                                            </TextBlock>
-
-                                            <Border x:Name="BorderFocus" Margin="0"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                BorderBrush="{DynamicResource UIBrush}"
-                                BorderThickness="2" Visibility="Hidden" CornerRadius="30" />
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsFocused" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" TargetName="BorderFocus" />
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Foreground" Value="{DynamicResource TextBrushDark}" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ControlTemplate.Resources>
-                    <Grid Background="{DynamicResource MainBackgourndBrush}"
-                          x:Name="PART_ViewHost"
-                          d:DesignWidth="{StaticResource DesignWidth}"
-                          d:DesignHeight="{StaticResource DesignHeight}"
-                          d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
-                          KeyboardNavigation.DirectionalNavigation="Contained"
-                          KeyboardNavigation.TabNavigation="Contained">
-
+                    <Grid>
                         <FadeImage Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top"                                  
                                    x:Name="PART_ImageBackground">
                             <Style TargetType="FadeImage">
@@ -100,330 +46,366 @@
                                 </Style>
                             </Border.Style>
                         </Border>
+                        
+                        <!--MAIN CONTENT-->
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard x:Name="Enter">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" From="0" To="1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=DescriptionMedia, Path=IsKeyboardFocusWithin }" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard x:Name="Scroll">
+                                                    <Storyboard>
+                                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-900,0,0" Duration="0:0:0.5"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-900,0,0" To="0,0,0,0" Duration="0:0:0.5"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Grid Background="Transparent"
+                          x:Name="PART_ViewHost"
+                          d:DesignWidth="{StaticResource DesignWidth}"
+                          d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
+                          KeyboardNavigation.DirectionalNavigation="Contained"
+                          KeyboardNavigation.TabNavigation="Contained">
 
-                        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Focusable="False" CanContentScroll="True">
-                            <ItemsControl>
-                                <Grid FocusVisualStyle="{x:Null}" Width="{StaticResource DesignWidth}">
-                                    <Grid>
-                                        <Grid.Style>
-                                            <Style TargetType="Grid">
-                                                <Setter Property="Focusable" Value="True"/>
-                                                <Setter Property="Height" Value="900"/>
-                                                <Setter Property="Margin" Value="0,0,0,0"/>
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
-                                                        <Setter Property="Focusable" Value="False"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
-                                                        <DataTrigger.EnterActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.4" From="0,1100,0,0" To="0,0,0,0"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </DataTrigger.EnterActions>
-                                                        <DataTrigger.ExitActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.4" From="0,0,0,0" To="0,1100,0,0"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </DataTrigger.ExitActions>
-                                                    </DataTrigger>
-
-                                                    <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
-                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                        <Setter Property="Height" Value="0"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Grid.Style>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="450" />
-                                            <ColumnDefinition Width="75" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="4*" />
-                                            <RowDefinition Height="5*" />
-                                        </Grid.RowDefinitions>
-
-                                        <DockPanel Grid.Column="1" Grid.Row="1" Margin="20" HorizontalAlignment="Left">
-                                            <DockPanel.Style>
-                                                <Style>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
-                                                            <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </DockPanel.Style>
-
-                                            <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding Platforms[0]}" DockPanel.Dock="Top" Margin="0,0,0,10"/>
-
-                                            <Grid Tag="{DynamicResource MainScreenLogo}" DockPanel.Dock="Top">
-                                                <Grid.Style>
-                                                    <Style TargetType="Grid">
-                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding ElementName=LogoImage, Path=ActualHeight}" Value="0">
-                                                                <Setter Property="Visibility" Value="Visible"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Grid.Style>
-                                                <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
-                                       Text="{Binding DisplayName}"
-                                       TextWrapping="WrapWithOverflow" 
-                                       FontSize="62" Margin="0,0,5,50">
-                                                </TextBlock>
-                                            </Grid>
-
-                                            <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource GameDetailsIconStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
-                                                    <!--Extra Metadata Tools Logo-->
-                                                    <StackPanel Name="Icon" Orientation="Vertical">
-                                                        <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="TextBlock">
-                                                                    <Setter Property="Text">
-                                                                        <Setter.Value>
-                                                                            <MultiBinding StringFormat="{}{0}{1}{2}{3}">
-                                                                                <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
-                                                                                <Binding Source="\ExtraMetadata\games\"/>
-                                                                                <Binding Path="Id"/>
-                                                                                <Binding Source="\logo.png" />
-                                                                            </MultiBinding>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </TextBlock.Style>
-                                                        </TextBlock>
-                                                        <StackPanel HorizontalAlignment="Left">
-                                                            <FadeImage Name="LogoImage" Grid.ZIndex="1" Width="500" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
-                                                                <FadeImage.Style>
-                                                                    <Style TargetType="FadeImage">
-                                                                        <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text}"/>
-                                                                        <Style.Triggers>
-                                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
-                                                                                <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text, Converter={StaticResource ImageStringToImageConverter}}"/>
-                                                                            </DataTrigger>
-                                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
-                                                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                                            </DataTrigger>
-                                                                        </Style.Triggers>
-                                                                    </Style>
-                                                                </FadeImage.Style>
-                                                            </FadeImage>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </Grid>
-
-                                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,20,0,20">
-                                                <ButtonEx x:Name="PART_ButtonContext" Style="{DynamicResource ButtonGameDetails}"
-                                          Margin="0,0,0,0" BorderThickness="2" MinWidth="220" Height="60" HorizontalContentAlignment="Center" Background="{DynamicResource ControlButtonBrush}">
-                                                    <!--Button.Effect>
-                                                        <DropShadowEffect BlurRadius="30"/>
-                                                    </Button.Effect-->
-                                                </ButtonEx>
-                                                <ButtonEx x:Name="PART_ButtonOptions" Style="{DynamicResource ButtonGameDetails}"
-                                          Content="{DynamicResource LOCGameOptions}"
-                                          Margin="20,0,0,0" BorderThickness="2" MinWidth="220" Height="60" HorizontalContentAlignment="Center" Background="{DynamicResource ControlButtonBrush}">
-                                                    <!--Button.Effect>
-                                                        <DropShadowEffect BlurRadius="30"/>
-                                                    </-->
-                                                </ButtonEx>
-                                            </StackPanel>
-
-                                            
-                                        </DockPanel>
-
-
-                                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
-                                            <Grid Margin="0,20,0,0" Width="450">
-                                                <StackPanel VerticalAlignment="Center">
-
-                                                    <Grid  Margin="20,20,20,20">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <StackPanel>
-                                                                <StackPanel Margin="0,0,0,20">
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{DynamicResource LOCTimePlayed}"
-                                               Margin="0,0,0,5" />
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
-                                               Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}" />
-                                                                </StackPanel>
-
-                                                                <StackPanel Margin="0,0,0,0" >
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{DynamicResource LOCGamePublishersTitle}"
-                                               Margin="0,0,0,5" />
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
-                                               Text="{Binding Publishers, Converter={StaticResource ListToStringConverter}}" TextWrapping="WrapWithOverflow" Width="200" />
-                                                                </StackPanel>
-                                                            </StackPanel>
-                                                        </StackPanel>
-
-                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                                                            <StackPanel>
-                                                                <StackPanel Margin="0,0,0,20" HorizontalAlignment="Right">
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{DynamicResource LOCGameLastActivityTitle}"
-                                               Margin="0,0,0,5" HorizontalAlignment="Right"/>
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
-                                               Text="{Binding LastActivity, Converter={StaticResource DateTimeToLastPlayedConverter}}" HorizontalAlignment="Right" />
-                                                                </StackPanel>
-
-                                                                <StackPanel Margin="0,0,0,0" HorizontalAlignment="Right">
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{DynamicResource LOCGameReleaseDateTitle}"
-                                               Margin="0,0,0,5" HorizontalAlignment="Right"/>
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
-                                               Text="{Binding ReleaseDate}" HorizontalAlignment="Right" />
-                                                                </StackPanel>
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </Grid>
-
-                                                    <Line HorizontalAlignment="Center" Stroke="{DynamicResource SelectionLightBrush}" StrokeThickness="2" X1="400" Margin="0,10,0,10"/>
-
-                                                    <Grid x:Name="GRIDSuccessStory" HorizontalAlignment="Center" VerticalAlignment="Top" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
-                                                        <Grid.Style>
-                                                            <Style>
-                                                                <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
-                                                                        <Setter Property="Control.Visibility" Value="Visible" />
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Grid.Style>
-                                                        <Grid Width="400">
-                                                            <StackPanel Margin="0,0,0,0">
-                                                                <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB">
-                                                                </TextBlock>
-                                                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Percent}" >
-                                                                    </TextBlock>
-
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="%" >
-                                                                    </TextBlock>
-                                                                </StackPanel>
-
-                                                                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
-                                                                    <Grid.RenderTransform>
-                                                                        <ScaleTransform ScaleX="1.5" ScaleY="2"/>
-                                                                    </Grid.RenderTransform>
-                                                                    <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
-                                                                    <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
-                                                                </Grid>
-                                                            </StackPanel>
-
-                                                            <StackPanel Margin="0,0,10,0" HorizontalAlignment="Right">
-                                                                <TextBlock Style="{DynamicResource EarnedLabel}" Foreground="#FFEBEBEB" HorizontalAlignment="Right">
-                                                                </TextBlock>
-                                                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" HorizontalAlignment="Right">
-                                                                    </TextBlock>
-
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="/" HorizontalAlignment="Right">
-                                                                    </TextBlock>
-
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Total}" HorizontalAlignment="Right">
-                                                                    </TextBlock>
-                                                                </StackPanel>
-
-                                                                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,50,0">
-                                                                    <Grid.RenderTransform>
-                                                                        <ScaleTransform ScaleX="1.5" ScaleY="2"/>
-                                                                    </Grid.RenderTransform>
-                                                                    <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
-                                                                    <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
-                                                                </Grid>
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </Grid>
-
-                                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,20,0,0" >
-                                                        <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
-                                                            <StackPanel.Style>
-                                                                <Style>
-                                                                    <Setter Property="Control.Visibility" Value="Visible" />
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Null}">
-                                                                            <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
-                                                                            <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </StackPanel.Style>
-
-                                                            <TextBlock Margin="0,0,0,0" Text="{DynamicResource LOCHowLongToBeatTitle}" 
-                                                                   Style="{DynamicResource TextBlockBaseStyle}"/>
-                                                            <StackPanel Orientation="Vertical" Margin="0,10,20,0" VerticalAlignment="Top">
-                                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
-                                                                                           Margin="0,0,0,10"/>
-                                                                    </StackPanel>
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
-                                                                       Margin="20,2,0,0" />
-                                                                </StackPanel>
-
-                                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
-                                                                                           Margin="0,0,0,10"/>
-                                                                    </StackPanel>
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
-                                                                       Margin="20,2,0,0" />
-                                                                </StackPanel>
-
-                                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                    <StackPanel Orientation="Horizontal">
-                                                                        <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
-                                                                        <TextBlock Text=":"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
-                                                                                           Margin="0,0,0,10"/>
-                                                                    </StackPanel>
-                                                                    <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
-                                                                       Margin="20,2,0,0" />
-                                                                </StackPanel>
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </Grid>
-                                        </StackPanel>
-
-                                        
-                                    </Grid>
-                                </Grid>
-
-                                <Grid FocusVisualStyle="{x:Null}" Width="{StaticResource DesignWidth}" Height="600">
+                                <Grid>
                                     <Grid.Style>
                                         <Style TargetType="Grid">
                                             <Setter Property="Focusable" Value="True"/>
+                                            <Setter Property="Height" Value="900"/>
+                                            <Setter Property="Margin" Value="0,0,0,0"/>
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
                                                     <Setter Property="Focusable" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Setter Property="Height" Value="0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="450" />
+                                        <ColumnDefinition Width="75" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="4*" />
+                                        <RowDefinition Height="5*" />
+                                    </Grid.RowDefinitions>
+
+                                    <DockPanel Grid.Column="1" Grid.Row="1" Margin="20" HorizontalAlignment="Left">
+                                        <DockPanel.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
+                                                        <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DockPanel.Style>
+
+                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{Binding Platforms[0]}" DockPanel.Dock="Top" Margin="0,0,0,10"/>
+
+                                        <Grid Tag="{DynamicResource MainScreenLogo}" DockPanel.Dock="Top">
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=LogoImage, Path=ActualHeight}" Value="0">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Grid.Style>
+                                            <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
+                                       Text="{Binding DisplayName}"
+                                       TextWrapping="WrapWithOverflow" 
+                                       FontSize="62" Margin="0,0,5,50">
+                                            </TextBlock>
+                                        </Grid>
+
+                                        <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource GameDetailsIconStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
+                                                <!--Extra Metadata Tools Logo-->
+                                                <StackPanel Name="Icon" Orientation="Vertical">
+                                                    <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Setter Property="Text">
+                                                                    <Setter.Value>
+                                                                        <MultiBinding StringFormat="{}{0}{1}{2}{3}">
+                                                                            <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+                                                                            <Binding Source="\ExtraMetadata\games\"/>
+                                                                            <Binding Path="Id"/>
+                                                                            <Binding Source="\logo.png" />
+                                                                        </MultiBinding>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                    <StackPanel HorizontalAlignment="Left">
+                                                        <FadeImage Name="LogoImage" Grid.ZIndex="1" Width="500" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
+                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+                                                            <FadeImage.Style>
+                                                                <Style TargetType="FadeImage">
+                                                                    <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text}"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
+                                                                            <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text, Converter={StaticResource ImageStringToImageConverter}}"/>
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </FadeImage.Style>
+                                                        </FadeImage>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,20,0,20">
+                                            <ButtonEx x:Name="PART_ButtonContext" Style="{DynamicResource ButtonGameDetails}"
+                                          Margin="0,0,0,0" BorderThickness="2" MinWidth="220" Height="60" HorizontalContentAlignment="Center" Background="{DynamicResource ControlButtonBrush}">
+                                                <!--Button.Effect>
+                                                        <DropShadowEffect BlurRadius="30"/>
+                                                    </Button.Effect-->
+                                            </ButtonEx>
+                                            <ButtonEx x:Name="PART_ButtonOptions" Style="{DynamicResource ButtonGameDetails}"
+                                          Content="{DynamicResource LOCGameOptions}"
+                                          Margin="20,0,0,0" BorderThickness="2" MinWidth="220" Height="60" HorizontalContentAlignment="Center" Background="{DynamicResource ControlButtonBrush}">
+                                                <!--Button.Effect>
+                                                        <DropShadowEffect BlurRadius="30"/>
+                                                    </-->
+                                            </ButtonEx>
+                                        </StackPanel>
+
+
+                                    </DockPanel>
+
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
+                                        <Grid Margin="0,20,0,0" Width="450">
+                                            <StackPanel VerticalAlignment="Center">
+
+                                                <Grid  Margin="20,20,20,20">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <StackPanel>
+                                                            <StackPanel Margin="0,0,0,20">
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{DynamicResource LOCTimePlayed}"
+                                               Margin="0,0,0,5" />
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
+                                               Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Margin="0,0,0,0" >
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{DynamicResource LOCGamePublishersTitle}"
+                                               Margin="0,0,0,5" />
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
+                                               Text="{Binding Publishers, Converter={StaticResource ListToStringConverter}}" TextWrapping="WrapWithOverflow" Width="200" />
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                                                        <StackPanel>
+                                                            <StackPanel Margin="0,0,0,20" HorizontalAlignment="Right">
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{DynamicResource LOCGameLastActivityTitle}"
+                                               Margin="0,0,0,5" HorizontalAlignment="Right"/>
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
+                                               Text="{Binding LastActivity, Converter={StaticResource DateTimeToLastPlayedConverter}}" HorizontalAlignment="Right" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Margin="0,0,0,0" HorizontalAlignment="Right">
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{DynamicResource LOCGameReleaseDateTitle}"
+                                               Margin="0,0,0,5" HorizontalAlignment="Right"/>
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" FontSize="20"
+                                               Text="{Binding ReleaseDate}" HorizontalAlignment="Right" />
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <Line HorizontalAlignment="Center" Stroke="{DynamicResource SelectionLightBrush}" StrokeThickness="2" X1="400" Margin="0,10,0,10"/>
+
+                                                <Grid x:Name="GRIDSuccessStory" HorizontalAlignment="Center" VerticalAlignment="Top" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
+                                                    <Grid.Style>
+                                                        <Style>
+                                                            <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                                                                    <Setter Property="Control.Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Grid.Style>
+                                                    <Grid Width="400">
+                                                        <StackPanel Margin="0,0,0,0">
+                                                            <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB">
+                                                            </TextBlock>
+                                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Percent}" >
+                                                                </TextBlock>
+
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="%" >
+                                                                </TextBlock>
+                                                            </StackPanel>
+
+                                                            <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                                                <Grid.RenderTransform>
+                                                                    <ScaleTransform ScaleX="1.5" ScaleY="2"/>
+                                                                </Grid.RenderTransform>
+                                                                <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
+                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                            </Grid>
+                                                        </StackPanel>
+
+                                                        <StackPanel Margin="0,0,10,0" HorizontalAlignment="Right">
+                                                            <TextBlock Style="{DynamicResource EarnedLabel}" Foreground="#FFEBEBEB" HorizontalAlignment="Right">
+                                                            </TextBlock>
+                                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" HorizontalAlignment="Right">
+                                                                </TextBlock>
+
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="/" HorizontalAlignment="Right">
+                                                                </TextBlock>
+
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Total}" HorizontalAlignment="Right">
+                                                                </TextBlock>
+                                                            </StackPanel>
+
+                                                            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,50,0">
+                                                                <Grid.RenderTransform>
+                                                                    <ScaleTransform ScaleX="1.5" ScaleY="2"/>
+                                                                </Grid.RenderTransform>
+                                                                <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
+                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                            </Grid>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Grid>
+
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,20,0,0" >
+                                                    <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
+                                                        <StackPanel.Style>
+                                                            <Style>
+                                                                <Setter Property="Control.Visibility" Value="Visible" />
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Null}">
+                                                                        <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                                                                        <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </StackPanel.Style>
+
+                                                        <TextBlock Margin="0,0,0,0" Text="{DynamicResource LOCHowLongToBeatTitle}" 
+                                                                   Style="{DynamicResource TextBlockBaseStyle}"/>
+                                                        <StackPanel Orientation="Vertical" Margin="0,10,20,0" VerticalAlignment="Top">
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
+                                                                    <TextBlock Text=":"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
+                                                                                           Margin="0,0,0,10"/>
+                                                                </StackPanel>
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                                                       Margin="20,2,0,0" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
+                                                                    <TextBlock Text=":"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
+                                                                                           Margin="0,0,0,10"/>
+                                                                </StackPanel>
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                                                       Margin="20,2,0,0" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
+                                                                    <TextBlock Text=":"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
+                                                                                           Margin="0,0,0,10"/>
+                                                                </StackPanel>
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                                                       Margin="20,2,0,0" />
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!--DESCRIPTION and MEDIA-->
+                                <Grid x:Name="DescriptionMedia" FocusVisualStyle="{x:Null}" Width="{StaticResource DesignWidth}" Height="600" VerticalAlignment="Bottom">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Focusable" Value="False"/>
+                                            <Setter Property="Margin" Value="0,0,0,-450"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Focusable" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=DescriptionMedia, Path=IsKeyboardFocusWithin }" Value="True">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,-450" To="0,100,0,0" Duration="0:0:0.5"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                    <DataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,100,0,0" To="0,0,0,-450" Duration="0:0:0.5"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.ExitActions>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -455,7 +437,7 @@
                                         </Grid>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <Border Margin="100,100,20,20" >
+                                        <Border Margin="100,100,20,0" >
                                             <Border.Style>
                                                 <Style TargetType="Border">
                                                     <Setter Property="BorderBrush" Value="Transparent" />
@@ -510,7 +492,7 @@
                                                                             <Storyboard>
                                                                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="4" Duration="0:0:0.2"/>
                                                                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="4" Duration="0:0:0.2"/>
-                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="20,580,0,0" To="0,480,0,0" Duration="0:0:0.2"/>
+                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="20,580,0,0" To="0,0,0,0" Duration="0:0:0.2"/>
                                                                             </Storyboard>
                                                                         </BeginStoryboard>
                                                                     </DataTrigger.EnterActions>
@@ -519,7 +501,7 @@
                                                                             <Storyboard>
                                                                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="4" To="1" Duration="0:0:0.2"/>
                                                                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="4" To="1" Duration="0:0:0.2"/>
-                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,480,0,0" To="20,580,0,0" Duration="0:0:0.2"/>
+                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="20,580,0,0" Duration="0:0:0.2"/>
                                                                             </Storyboard>
                                                                         </BeginStoryboard>
                                                                     </DataTrigger.ExitActions>
@@ -621,14 +603,14 @@
                                                                     <DataTrigger.EnterActions>
                                                                         <BeginStoryboard>
                                                                             <Storyboard>
-                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="10,580,0,0" To="-480,480,0,0" Duration="0:0:0.2"/>
+                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="10,580,0,0" To="-480,0,0,0" Duration="0:0:0.2"/>
                                                                             </Storyboard>
                                                                         </BeginStoryboard>
                                                                     </DataTrigger.EnterActions>
                                                                     <DataTrigger.ExitActions>
                                                                         <BeginStoryboard>
                                                                             <Storyboard>
-                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-480,480,0,0" To="10,580,0,0" Duration="0:0:0.2"/>
+                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-480,0,0,0" To="10,580,0,0" Duration="0:0:0.2"/>
                                                                             </Storyboard>
                                                                         </BeginStoryboard>
                                                                     </DataTrigger.ExitActions>
@@ -650,8 +632,8 @@
                                         </Grid>
                                     </StackPanel>
                                 </Grid>
-                            </ItemsControl>
-                        </ScrollViewer>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
