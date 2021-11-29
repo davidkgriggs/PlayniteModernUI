@@ -39,6 +39,21 @@
                         <Grid.RenderTransform>
                             <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
                         </Grid.RenderTransform>
+                        <Border Background="#000000" Opacity="0.3" Margin="10,10,-10,-10" Tag="{DynamicResource DropShadows}">
+                            <Border.Effect>
+                                <BlurEffect Radius="10"/>
+                            </Border.Effect>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
                         <ContentPresenter />
                         <Border x:Name="WhiteOutline" BorderThickness="2" BorderBrush="White" Opacity="0.75" Style="{DynamicResource CornerRadiusSmall}"
                                 Margin="-1"/>

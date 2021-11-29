@@ -9,19 +9,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GameDetails}">
                     <Grid>
-                        <FadeImage Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top"                                  
-                                   x:Name="PART_ImageBackground">
-                            <Style TargetType="FadeImage">
-                                <Setter Property="Width" Value="{StaticResource DesignWidth}"/>
-                                <Setter Property="Height" Value="{StaticResource DesignHeight}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Value="620">
-                                        <Setter Property="Height" Value="1920"/>
-                                        <Setter Property="Height" Value="620"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </FadeImage>
+                        <FadeImage Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top"                                  
+                                   x:Name="PART_ImageBackground"/>
                         <Border Background="{DynamicResource GameDetailsBackgroundBrush}" Opacity="0.75">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -34,19 +23,47 @@
                             </Border.Style>
                         </Border>
 
-                        <Border Background="{DynamicResource GameDetailsGreyOverlay}" Height="600" Width="1920" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
+
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Visible"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Value="620">
-                                            <Setter Property="Visibility" Value="Visible"/>
+                                        <DataTrigger Binding="{Binding ElementName=SteamBanner, Path=Opacity}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </Border.Style>
-                        </Border>
-                        
+                            </Grid.Style>
+                            <Image x:Name="SteamBanner" Source="{Binding BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Opacity" Value="0"/>
+                                        <Setter Property="Width" Value="{StaticResource DesignWidth}"/>
+                                        <Setter Property="Height" Value="{StaticResource DesignHeight}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=SteamBanner, Path=ActualHeight}" Value="620">
+                                                <Setter Property="Opacity" Value="1"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock Text="{Binding ElementName=SteamBanner, Path=ActualHeight}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="32"/>
+                            <Border Background="{DynamicResource GameDetailsGreyOverlay}" Height="600" Width="{StaticResource DesignWidth}" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=SteamBanner, Path=Opacity}" Value="1">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </Grid>
+
                         <!--MAIN CONTENT-->
                         <Grid>
                             <Grid.Style>
@@ -90,7 +107,7 @@
                                 <Grid>
                                     <Grid.Style>
                                         <Style TargetType="Grid">
-                                            <Setter Property="Focusable" Value="True"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                             <Setter Property="Height" Value="900"/>
                                             <Setter Property="Margin" Value="0,0,0,0"/>
                                             <Setter Property="Visibility" Value="Visible"/>
@@ -128,7 +145,7 @@
                                             </Style>
                                         </DockPanel.Style>
 
-                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"  Tag="{DynamicResource DropShadows}"
                                                Text="{Binding Platforms[0]}" DockPanel.Dock="Top" Margin="0,0,0,10"/>
 
                                         <Grid Tag="{DynamicResource MainScreenLogo}" DockPanel.Dock="Top">
@@ -142,7 +159,7 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </Grid.Style>
-                                            <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
+                                            <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}" Tag="{DynamicResource DropShadows}"
                                        Text="{Binding DisplayName}"
                                        TextWrapping="WrapWithOverflow" 
                                        FontSize="62" Margin="0,0,5,50">
@@ -211,7 +228,20 @@
                                     </DockPanel>
 
 
-                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Tag="{DynamicResource DropShadows}">
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect BlurRadius="5" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
                                         <Grid Margin="0,20,0,0" Width="450">
                                             <StackPanel VerticalAlignment="Center">
 
@@ -310,7 +340,7 @@
                                                                     <ScaleTransform ScaleX="1.5" ScaleY="2"/>
                                                                 </Grid.RenderTransform>
                                                                 <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
-                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
                                                             </Grid>
                                                         </StackPanel>
                                                     </Grid>
@@ -382,12 +412,19 @@
                                 </Grid>
 
                                 <!--DESCRIPTION and MEDIA-->
-                                <Grid x:Name="DescriptionMedia" FocusVisualStyle="{x:Null}" Width="{StaticResource DesignWidth}" Height="600" VerticalAlignment="Bottom">
+                                <Grid x:Name="DescriptionMedia" FocusVisualStyle="{x:Null}" Width="{StaticResource DesignWidth}" Height="600" VerticalAlignment="Bottom" Tag="{DynamicResource DropShadows}">
                                     <Grid.Style>
                                         <Style TargetType="Grid">
                                             <Setter Property="Focusable" Value="False"/>
                                             <Setter Property="Margin" Value="0,0,0,-450"/>
                                             <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect BlurRadius="5" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
                                                 <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
                                                     <Setter Property="Focusable" Value="False"/>
                                                 </DataTrigger>
@@ -460,7 +497,7 @@
                                             <ScrollViewerEx Margin="5">
                                                 <HtmlTextView x:Name="PART_HtmlDescription" 
                                                               Margin="10"
-                                                  HtmlFontSize="{DynamicResource DescriptionFont}"
+                                                  HtmlFontSize="{DynamicResource FontSizeSmall}"
                                                   HtmlForeground="{DynamicResource TextColor}"
                                                   LinkForeground="{DynamicResource GlyphColor}"
                                                   FocusVisualStyle="{x:Null}" />

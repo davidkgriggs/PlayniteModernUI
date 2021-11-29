@@ -58,6 +58,8 @@
     <!--FilterPresetVertical-->
     <sys:Boolean x:Key="FilterPresetVertical">true</sys:Boolean>
 
+    <sys:Boolean x:Key="DropShadows">false</sys:Boolean>
+
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
     <Color x:Key="GlyphColor">#4b73ae</Color>
@@ -94,6 +96,15 @@
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="5" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <LinearGradientBrush x:Key="MainBackgourndBrush" StartPoint="0,0" EndPoint="1,1" >
