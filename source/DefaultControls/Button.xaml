@@ -107,34 +107,31 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="IsChecked" Value="False"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
         <Setter Property="Opacity" Value="1"/>
-        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Focusable" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="Transparent" HorizontalAlignment="Center" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <Border BorderBrush="White" Height="40" Width="40" VerticalAlignment="Bottom"
-                            x:Name="Unfocused" BorderThickness="1" CornerRadius="40">
-                        </Border>
-                        <Border Background="{TemplateBinding Background}" Height="40" Width="40" VerticalAlignment="Bottom"
-                            x:Name="MainBorder" Opacity="0.4" CornerRadius="40">
+                        <Border Background="{TemplateBinding Background}" Height="50" Width="50" VerticalAlignment="Center"
+                            x:Name="MainBorder" Opacity="0.4" CornerRadius="50">
                             <Border.Effect>
                                 <BlurEffect Radius="40"/>
                             </Border.Effect>
                         </Border>
-                        <Border BorderBrush="Transparent" Height="40" Width="40" VerticalAlignment="Bottom"
-                            x:Name="MainBorderExtra" BorderThickness="4" CornerRadius="40">
+                        <Border BorderBrush="Transparent" Height="50" Width="50" VerticalAlignment="Center"
+                            x:Name="MainBorderExtra" BorderThickness="4" CornerRadius="50">
                         </Border>
-                        <Border BorderBrush="Transparent" Height="40" Width="40" VerticalAlignment="Bottom"
-                            x:Name="MainBorderExtraBlur" BorderThickness="4" CornerRadius="40">
+                        <Border BorderBrush="Transparent" Height="50" Width="50" VerticalAlignment="Center"
+                            x:Name="MainBorderExtraBlur" BorderThickness="4" CornerRadius="50">
                             <Border.Effect>
                                 <BlurEffect Radius="10"/>
                             </Border.Effect>
                         </Border>
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel x:Name="OFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10">
+                            <StackPanel x:Name="OFF" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0">
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                     <TextBlock Text="&#xE73B;" FontFamily="Segoe MDL2 Assets" FontSize="4" Foreground="{TemplateBinding Foreground}" Margin="0,0,4,0"/>
                                     <TextBlock Text="&#xE73B;" FontFamily="Segoe MDL2 Assets" FontSize="4" Foreground="{TemplateBinding Foreground}" Margin="0,0,4,0"/>
@@ -152,7 +149,7 @@
                                 </StackPanel>
                             </StackPanel>
 
-                            <StackPanel x:Name="ON" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
+                            <StackPanel x:Name="ON" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0">
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                     <TextBlock Text="&#xE73B;" FontFamily="Segoe MDL2 Assets" FontSize="4" Foreground="{TemplateBinding Foreground}" Margin="0,0,4,0"/>
                                     <TextBlock Text="&#xE73B;" FontFamily="Segoe MDL2 Assets" FontSize="4" Foreground="{TemplateBinding Foreground}" Margin="0,0,4,0"/>
@@ -163,13 +160,11 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="Transparent" TargetName="Unfocused" />
                             <Setter Property="Background" Value="{DynamicResource UIBrush}" TargetName="MainBorder" />
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Transparent" TargetName="Unfocused" />
                             <Setter Property="Background" Value="{DynamicResource UIBrush}" TargetName="MainBorder" />
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
@@ -185,13 +180,13 @@
                             <Setter Property="Visibility" TargetName="OFF" Value="Collapsed"/>
                         </Trigger>
 
-                        <MultiDataTrigger>
+                        <!--MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
                                 <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Focusable" Value="True"/>
-                        </MultiDataTrigger>
+                        </>
 
                         <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
                             <Setter Property="Focusable" Value="True"/>
@@ -204,7 +199,7 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Visible">
                             <Setter Property="Focusable" Value="True"/>
-                        </DataTrigger>
+                        </DataTrigger-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -216,24 +211,24 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Focusable" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Border Background="{TemplateBinding Background}"
-                            x:Name="MainBorder" Opacity="0.4" CornerRadius="40">
+                        <Border Background="{TemplateBinding Background}" Height="50" Width="50" VerticalAlignment="Center"
+                            x:Name="MainBorder" Opacity="0.4" CornerRadius="50">
                             <Border.Effect>
-                                <BlurEffect Radius="60"/>
+                                <BlurEffect Radius="40"/>
                             </Border.Effect>
                         </Border>
-                        <Border BorderBrush="Transparent"
-                            x:Name="MainBorderExtra" BorderThickness="4" CornerRadius="40" Margin="-4">
+                        <Border BorderBrush="Transparent" Height="50" Width="50" VerticalAlignment="Center"
+                            x:Name="MainBorderExtra" BorderThickness="4" CornerRadius="50">
                         </Border>
-                        <Border BorderBrush="Transparent"
-                            x:Name="MainBorderExtraBlur" BorderThickness="4" CornerRadius="40" Margin="-4">
+                        <Border BorderBrush="Transparent" Height="50" Width="50" VerticalAlignment="Center"
+                            x:Name="MainBorderExtraBlur" BorderThickness="4" CornerRadius="50">
                             <Border.Effect>
                                 <BlurEffect Radius="10"/>
                             </Border.Effect>
@@ -251,27 +246,6 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
                             <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
                         </Trigger>
-
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Focusable" Value="True"/>
-                        </MultiDataTrigger>
-
-                        <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
-                            <Setter Property="Focusable" Value="True"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Visible">
-                            <Setter Property="Focusable" Value="True"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Visible">
-                            <Setter Property="Focusable" Value="True"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Visible">
-                            <Setter Property="Focusable" Value="True"/>
-                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -296,6 +270,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="Transparent">
+                        <Border Background="{DynamicResource ControlBackgroundBrush}" CornerRadius="75"/>
                         <Border x:Name="Background" Background="{DynamicResource UIBrush}" CornerRadius="75" Visibility="Hidden"/>
                         <Border x:Name="BorderFocus" BorderThickness="3" BorderBrush="{DynamicResource UIBrush}" Margin="0" CornerRadius="80" Visibility="Hidden"/>
                         <StackPanel x:Name="ON" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -357,6 +332,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="Transparent">
+                        <Border Background="{DynamicResource ControlBackgroundBrush}" CornerRadius="75"/>
                         <Border x:Name="Background" Background="{DynamicResource UIBrush}" CornerRadius="75" Visibility="Hidden"/>
                         <Border x:Name="BorderFocus" BorderThickness="3" BorderBrush="{DynamicResource UIBrush}" Margin="0" CornerRadius="80" Visibility="Hidden"/>
                         <StackPanel x:Name="ON" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -410,7 +386,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource SelectionLightBrush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="22"/>
-        <Setter Property="IsChecked" Value="True"/>
+        <Setter Property="IsChecked" Value="False"/>
         <Setter Property="Width" Value="75"/>
         <Setter Property="Height" Value="75"/>
         <Setter Property="Opacity" Value="1"/>
@@ -418,6 +394,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="Transparent">
+                        <Border Background="{DynamicResource ControlBackgroundBrush}" CornerRadius="75"/>
                         <Border x:Name="Background" Background="{DynamicResource UIBrush}" CornerRadius="75" Visibility="Hidden"/>
                         <Border x:Name="BorderFocus" BorderThickness="3" BorderBrush="{DynamicResource UIBrush}" Margin="0" CornerRadius="80" Visibility="Hidden"/>
                         <StackPanel x:Name="ON" HorizontalAlignment="Center" VerticalAlignment="Center">

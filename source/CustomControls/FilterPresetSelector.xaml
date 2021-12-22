@@ -9,6 +9,7 @@
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="65"/>
         <Setter Property="Tag" Value="{DynamicResource FilterPresetVertical}"/>
+        <Setter Property="Opacity" Value="0.5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBoxEx">
@@ -17,67 +18,125 @@
                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                    x:Name="TextContent">
                             <Grid>
-                                <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" Width="60" HorizontalAlignment="Left" Margin="-10,-10,0,-10" Opacity="0.5"/>
                                 <Border Background="{DynamicResource ControlButtonBrush}" x:Name="BorderFocus" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed">
                                     <!--Border.Effect>
                                         <DropShadowEffect BlurRadius="30"/>
                                     </Border.Effect-->
                                 </Border>
-                                <Border BorderBrush="White" Height="40" Width="40" VerticalAlignment="Center" HorizontalAlignment="Left"
-                            x:Name="Unfocused" BorderThickness="1" CornerRadius="40">
-                        </Border>                                
-                        <Border Background="{TemplateBinding Background}" Height="40" Width="40" VerticalAlignment="Center" HorizontalAlignment="Left"
-                            x:Name="MainBorder" Opacity="0.4" CornerRadius="40">
-                            <Border.Effect>
-                                <BlurEffect Radius="40"/>
-                            </Border.Effect>
-                        </Border>
-                        <Border BorderBrush="Transparent" Height="40" Width="40" VerticalAlignment="Center" HorizontalAlignment="Left"
-                            x:Name="MainBorderExtra" BorderThickness="4" CornerRadius="40">
-                        </Border>
-                        <Border BorderBrush="Transparent" Height="40" Width="40" VerticalAlignment="Center" HorizontalAlignment="Left"
-                            x:Name="MainBorderExtraBlur" BorderThickness="4" CornerRadius="40">
-                            <Border.Effect>
-                                <BlurEffect Radius="10"/>
-                            </Border.Effect>
-                        </Border>
                                 <StackPanel Orientation="Horizontal" Height="40">
                                     <Grid>
-							<TextBlock Name="LogoPath" Tag="{Binding Name}" Visibility="Collapsed">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Text">
-                                                        <Setter.Value>
-                                                            <MultiBinding StringFormat="{}{0}{1}{2}">
-                                                                <Binding Source="../FilterIcons/"/>
-                                                                <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
-                                                                <Binding Source=".png"/>
-                                                            </MultiBinding>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </TextBlock.Style>
-                                    </TextBlock>
-                                <Image Name="LogoImage" MaxWidth="30" MaxHeight="30" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0"
-                                               VerticalAlignment="Center" HorizontalAlignment="Left" Source="{Binding ElementName=LogoPath, Path=Text}"/>
-							
-                                
-                                    
-                                    <TextBlock Text="&#59633;" FontFamily="Segoe MDL2 Assets" FontSize="25" Foreground="White" Margin="7.5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=LogoImage, Path=ActualHeight}" Value="0">
-                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                    </TextBlock>
-                                <!--Image Name="LogoImage" MaxWidth="50" MaxHeight="50" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                               VerticalAlignment="Bottom" HorizontalAlignment="Left" Source="{ThemeFileBinding Name, PathFormat='FilterIcons/{0}.png'}"/-->
+                                        <Grid Tag="{DynamicResource DKGThemeModifierPath}">
+                                            <Grid.Style>
+                                               <Style TargetType="Grid">
+                                                   <Setter Property="Visibility" Value="Collapsed"/>
+                                                   <Style.Triggers>
+                                                       <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value=".">
+                                                           <Setter Property="Visibility" Value="Visible"/>
+                                                       </DataTrigger>
+                                                   </Style.Triggers>
+                                               </Style>
+                                            </Grid.Style>
+							                <TextBlock Name="LogoPath" Tag="{Binding Name}" Visibility="Collapsed">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text">
+                                                            <Setter.Value>
+                                                                <MultiBinding StringFormat="{}{0}{1}{2}">
+                                                                    <Binding Source="../FilterIcons/"/>
+                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+                                                                    <Binding Source=".png"/>
+                                                                </MultiBinding>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <Image Name="LogoImage" MaxWidth="30" MaxHeight="30" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0"
+                                                   VerticalAlignment="Center" HorizontalAlignment="Left" Source="{Binding ElementName=LogoPath, Path=Text}"/>
                                         </Grid>
+							            <Grid x:Name="ThemeModifierPath" Tag="{DynamicResource DKGThemeModifierPath}">
+                                            <Grid.Style>
+                                               <Style TargetType="Grid">
+                                                   <Setter Property="Visibility" Value="Visible"/>
+                                                   <Style.Triggers>
+                                                       <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value=".">
+                                                           <Setter Property="Visibility" Value="Collapsed"/>
+                                                       </DataTrigger>
+                                                   </Style.Triggers>
+                                               </Style>
+                                            </Grid.Style>
+							                <TextBlock Name="LogoPathModifier" Tag="{Binding Name}" Visibility="Collapsed">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text">
+                                                            <Setter.Value>
+                                                                <MultiBinding StringFormat="{}{0}{1}{2}{3}">
+                                                                    <Binding ElementName="ThemeModifierPath" Path="Tag" />
+                                                                    <Binding Source="/FilterPresets/Icons/"/>
+                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+                                                                    <Binding Source=".png"/>
+                                                                </MultiBinding>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <Image Name="LogoImageModifier" MaxWidth="30" MaxHeight="30" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0"
+                                                   VerticalAlignment="Center" HorizontalAlignment="Left" Source="{Binding ElementName=LogoPathModifier, Path=Text}"/>
+                                        </Grid>
+                                                                    
+                                        <Grid Tag="{DynamicResource DKGThemeModifierPath}">
+                                            <Grid.Style>
+                                               <Style TargetType="Grid">
+                                                   <Setter Property="Visibility" Value="Collapsed"/>
+                                                   <Style.Triggers>
+                                                       <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value=".">
+                                                           <Setter Property="Visibility" Value="Visible"/>
+                                                       </DataTrigger>
+                                                   </Style.Triggers>
+                                               </Style>
+                                            </Grid.Style>
+                                            <TextBlock Text="&#59633;" FontFamily="Segoe MDL2 Assets" FontSize="25" Foreground="White" Margin="7.5,0,0,0" 
+                                                       HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=LogoImage, Path=ActualHeight}" Value="0">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Grid>
+                                        
+                                        <Grid Tag="{DynamicResource DKGThemeModifierPath}">
+                                            <Grid.Style>
+                                               <Style TargetType="Grid">
+                                                   <Setter Property="Visibility" Value="Visible"/>
+                                                   <Style.Triggers>
+                                                       <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value=".">
+                                                           <Setter Property="Visibility" Value="Collapsed"/>
+                                                       </DataTrigger>
+                                                   </Style.Triggers>
+                                               </Style>
+                                            </Grid.Style>
+                                            <TextBlock Text="&#59633;" FontFamily="Segoe MDL2 Assets" FontSize="25" Foreground="White" Margin="7.5,0,0,0" 
+                                                       HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=LogoImageModifier, Path=ActualHeight}" Value="0">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Grid>
+                                    </Grid>
                                         
                                 <Grid Margin="25,0,10,0" VerticalAlignment="Center" MaxWidth="200">
                                     <Grid.Style>
@@ -98,36 +157,25 @@
                         </TextBlock>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="ListBox.AlternationIndex" Value="0">
+                            <Setter Property="Focusable" Value="True"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True">
+                            <Setter Property="Focusable" Value="True"/>
+                        </DataTrigger>
+
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="FontWeight" Value="Bold" TargetName="TextContent" />
                             <Setter Property="FontSize" Value="{DynamicResource FilterFontLarge}"/>
-                            <Setter Property="Background" Value="Transparent" TargetName="Unfocused" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
+                            <Setter Property="Opacity" Value="1"/>
                         </Trigger>
 
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="FontWeight" Value="Bold" TargetName="TextContent" />
                             <Setter Property="FontSize" Value="{DynamicResource FilterFontLarge}"/>
-                            <Setter Property="Background" Value="Transparent" TargetName="Unfocused" />
-                            <Setter Property="Background" Value="{DynamicResource UIBrush}" TargetName="MainBorder" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
                             <Setter Property="Visibility" TargetName="BorderFocus" Value="Visible"/>
-                            <!--Setter Property="Width" TargetName="BorderFocus" Value="280"/-->
-                            <!--Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="60" To="280"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="280" To="60"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions-->
+                            <Setter Property="Opacity" Value="1"/>
                         </Trigger>
 
                         <DataTrigger Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True">
@@ -150,21 +198,17 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="FontWeight" Value="Bold" TargetName="TextContent" />
                             <Setter Property="FontSize" Value="{DynamicResource FilterFontLarge}"/>
-                            <Setter Property="Background" Value="Transparent" TargetName="Unfocused" />
-                            <Setter Property="Background" Value="{DynamicResource UIBrush}" TargetName="MainBorder" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtra" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource UIBrush}" TargetName="MainBorderExtraBlur" />
                             <Setter Property="Visibility" TargetName="BorderFocus" Value="Visible"/>
                         </Trigger>
 
-                        <MultiDataTrigger>
+                        <!--MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
                                 <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Focusable" Value="True"/>
-                        </MultiDataTrigger>
+                        </>
 
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
                             <Setter Property="Focusable" Value="True"/>
@@ -181,7 +225,7 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Visible">
                             <Setter Property="Focusable" Value="True"/>
-                        </DataTrigger>
+                        </DataTrigger-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -194,18 +238,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type FilterPresetSelector}">
-                    <ItemsControlEx x:Name="PART_ItemsFilterPresets" Focusable="False"
+                    <ItemsControlEx x:Name="PART_ItemsFilterPresets" Focusable="False" AlternationCount="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
                                     KeyboardNavigation.DirectionalNavigation="Once"
                                     Tag="{DynamicResource FilterPresetVertical}">
                         <ItemsControlEx.Style>
                             <Style TargetType="ItemsControlEx">
                                 <Setter Property="HorizontalLayout" Value="False"/>
-                                <Setter Property="Height" Value="845"/>
+                                <Setter Property="MaxHeight" Value="1035"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
                                         <Setter Property="HorizontalLayout" Value="True"/>
                                         <Setter Property="Margin" Value="0,5,300,0"/>
-                                        <Setter Property="Height" Value="65"/>
+                                        <Setter Property="MaxHeight" Value="65"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

@@ -9,6 +9,8 @@
     <sys:Boolean x:Key="UseAbsoluteExtraMetadataPath">false</sys:Boolean>
     <sys:String x:Key="ExtraMetadataPath">..\..\..\..</sys:String>
     <!--sys:String x:Key="ExtraMetadataPath">C:\Users\david\AppData\Roaming\Playnite</sys:String-->
+	<sys:String x:Key="DKGThemeModifierPath">.</sys:String>
+	<!--sys:String x:Key="DKGThemeModifierPath">C:\Users\david\AppData\Roaming\Playnite\DKGThemeModifier</sys:String-->
 
     <!--Intro-->
     <sys:Boolean x:Key="Intro">false</sys:Boolean>
@@ -62,7 +64,7 @@
 
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
-    <Color x:Key="GlyphColor">#4b73ae</Color>
+    <Color x:Key="GlyphColor">#00887F</Color>
     <Color x:Key="GlyphLightColor">#00BAAF</Color>
     <Color x:Key="SelectionLightColor">#FF8D919D</Color>
     <Color x:Key="OverlayColor">#BB000000</Color>
@@ -94,7 +96,7 @@
 
     <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
@@ -153,7 +155,7 @@
     </RadialGradientBrush>
 
     <LinearGradientBrush x:Key="OverlayTitle" StartPoint="0.5,0" EndPoint="0.5,1" >
-        <GradientStop Color="#00000000" Offset="0.75"/>
+        <GradientStop Color="#00000000" Offset="0.5"/>
         <GradientStop Color="#BF000000" Offset="1"/>
     </LinearGradientBrush>
     
@@ -161,6 +163,15 @@
         <GradientStop Color="#00000000" Offset="0"/>
         <GradientStop Color="#202020" Offset="0.2"/>
     </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="MainBackgroundOverlay" GradientOrigin="0.9,0.3" Center="0.5,0.5"
+                        RadiusX="0.6" RadiusY="0.6">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="#1d000000" Offset="0"/>
+            <GradientStop Color="#1d000000" Offset="0.1"/>
+            <GradientStop Color="#99000000" Offset="1"/>
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
 
     <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
 
@@ -247,13 +258,6 @@
             <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
                 <Setter Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
-                    <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
-                </MultiDataTrigger.Conditions>
-                <Setter Property="Margin" Value="265,30,0,0"/>
-            </MultiDataTrigger>
         </Style.Triggers>
     </Style>
 
@@ -340,7 +344,7 @@
     <!--Progress Label-->
     <Style x:Key="ProgressLabel" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <!--PL--><Setter Property="Text" Value="{DynamicResource LOCSuccessStoryProgress}" /><!--PL-->
     </Style>
@@ -348,7 +352,7 @@
     <!--Earned Label-->
     <Style x:Key="EarnedLabel" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontTitilliumWebLight}" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <!--EL--><Setter Property="Text" Value="{DynamicResource LOCSuccessStoryEarned}" /><!--EL-->
     </Style>

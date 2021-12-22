@@ -10,8 +10,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Tag" Value="{DynamicResource RoundedCorners}"/>
-        <Setter Property="MaxHeight" Value="400"/>
-        <Setter Property="MaxWidth" Value="400"/>
+        <!--Setter Property="MaxHeight" Value="500"/-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -31,6 +30,10 @@
                             <DoubleAnimation Storyboard.TargetName="ScaleTransform"
                                              Storyboard.TargetProperty="ScaleY"
                                              From="1.06" To="1" Duration="0:0:0.2"/>
+                        </Storyboard>
+
+                        <Storyboard x:Key="TitleAnim">
+                            <DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="Title" From="0" To="120" Duration="0:0:0.2" FillBehavior="Stop"/>
                         </Storyboard>
                     </ControlTemplate.Resources>
                     <Grid Margin="{Settings FullscreenItemSpacingMargin}"
@@ -54,7 +57,29 @@
                                 </Style>
                             </Border.Style>
                         </Border>
+                        
                         <ContentPresenter />
+
+                        <StackPanel Visibility="{Settings Fullscreen.ShowGameTitles}" VerticalAlignment="Bottom">
+                            <Grid x:Name="Title" Visibility="Collapsed" Height="120" HorizontalAlignment="Stretch">
+                                <Border Background="{DynamicResource OverlayTitle}" CornerRadius="5"/>
+                                <StackPanel VerticalAlignment="Bottom">
+                                    <StackPanel Margin="20,0,0,0">
+                                        <Image VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Left"
+                                               Source="{Binding LibraryPlugin.LibraryIcon}"
+                                               Height="35" RenderOptions.BitmapScalingMode="Fant">
+                                        </Image>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
+                                   Style="{DynamicResource TextBlockBaseStyle}" FontSize="18"
+                                   HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                   TextAlignment="Center" Padding="20,10,10,20"                                  
+                                   Foreground="#FFEBEBEB"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
                         <Border x:Name="WhiteOutline" BorderThickness="2" BorderBrush="White" Opacity="0.75" Style="{DynamicResource CornerRadiusSmall}"
                                 Margin="-1"/>
                         <Border x:Name="MainBorder" BorderThickness="4" BorderBrush="{DynamicResource UIBrush}"
@@ -69,22 +94,26 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Title"/>
                             <Setter Property="Canvas.ZIndex" Value="90" />
                             <Trigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
                             </Trigger.ExitActions>
                             <Trigger.EnterActions>
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
+                                <BeginStoryboard Storyboard="{StaticResource TitleAnim}"/>
                             </Trigger.EnterActions>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Title"/>
                             <Setter Property="Canvas.ZIndex" Value="90" />
                             <Trigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
                             </Trigger.ExitActions>
                             <Trigger.EnterActions>
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOn}" />
+                                <BeginStoryboard Storyboard="{StaticResource TitleAnim}"/>
                             </Trigger.EnterActions>
                         </Trigger>
 

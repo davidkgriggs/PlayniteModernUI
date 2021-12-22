@@ -5,8 +5,7 @@
                     mc:Ignorable="d">
 
     <Style x:Key="ListGameItemTemplate" TargetType="{x:Type GameListItem}">
-        <Setter Property="MaxHeight" Value="400"/>
-        <Setter Property="MaxWidth" Value="400"/>
+        <!--Setter Property="MaxHeight" Value="500"/-->
         <Setter Property="Tag" Value="{DynamicResource RoundedCorners}"/>
         <Setter Property="Template">
             <Setter.Value>

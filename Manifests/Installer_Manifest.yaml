@@ -118,3 +118,21 @@ Packages:
       - Drop Shadow effect option added, enable via DKG Theme Modifier
       - Description font size now linked to Font Size Small in settings
       - General improvements
+  - Version: 1.2.4
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-11-29
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.2.4/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_2_4.pthm
+    Changelog:
+      - PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - General improvements
+  - Version: 1.3.0
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-12-22
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.3.0/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_3_0.pthm
+    Changelog:
+      - IF YOU ARE NOT USING THE DKG THEME MODIFIER TO STORE FILTER ICONS PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - You can now store your Filter Icons using the DKG Theme Modifier so they will not be deleted upon updating!!! Please update the DKG Theme Modifier to v2.3.0
+      - Changed the Game Details screen
+      - Changed the Side Bar
+      - Changed the position of the Grid View and Main Menu buttons
+      - Lots of improvements
