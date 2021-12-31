@@ -169,7 +169,7 @@
                                                     <DropShadowEffect BlurRadius="5"/>
                                                 </ScrollViewerEx.Effect>
                                                 <HtmlTextView x:Name="PART_HtmlDescription"  Margin="10"
-                                                HtmlFontSize="20" HtmlFontFamily="Segoe UI Light"
+                                                HtmlFontSize="{DynamicResource FontSizeSmall}" HtmlFontFamily="Segoe UI Light"
                                                 HtmlForeground="{DynamicResource TextColor}"
                                                 LinkForeground="{DynamicResource GlyphColor}"
                                                 FocusVisualStyle="{x:Null}" />
@@ -341,39 +341,41 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </Grid.Style>
-                                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
-                                            <StackPanel.Style>
-                                                <Style TargetType="StackPanel">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                    <Setter Property="Margin" Value="600,510,20,0"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
-                                                            <DataTrigger.EnterActions>
-                                                                <BeginStoryboard>
-                                                                    <Storyboard>
-                                                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="600,510,20,0" To="0,1000,20,0" Duration="0:0:0.2"/>
-                                                                    </Storyboard>
-                                                                </BeginStoryboard>
-                                                            </DataTrigger.EnterActions>
-                                                            <DataTrigger.ExitActions>
-                                                                <BeginStoryboard>
-                                                                    <Storyboard>
-                                                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,1000,20,0" To="600,510,20,0" Duration="0:0:0.2"/>
-                                                                    </Storyboard>
-                                                                </BeginStoryboard>
-                                                            </DataTrigger.ExitActions>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </StackPanel.Style>
-                                            <StackPanel Margin="0,0,10,0">
-                                                <CheckBoxEx x:Name="StopPlayButton" Style="{DynamicResource StopPlayButton}"/>
-                                            </StackPanel>
-                                            <StackPanel Margin="0,0,10,0">
-                                                <CheckBoxEx x:Name="MuteButton" Style="{DynamicResource MuteButton}"/>
-                                            </StackPanel>
-                                            <StackPanel Margin="0,0,10,0">
-                                                <CheckBoxEx x:Name="ZoomButton" Style="{DynamicResource ZoomButton}"/>
+                                        <StackPanel Tag="{DynamicResource Trailers}" Style="{DynamicResource TrailersStyle}">
+                                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+                                                <StackPanel.Style>
+                                                    <Style TargetType="StackPanel">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                        <Setter Property="Margin" Value="600,510,20,0"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
+                                                                <DataTrigger.EnterActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="600,510,20,0" To="0,1000,20,0" Duration="0:0:0.2"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </DataTrigger.EnterActions>
+                                                                <DataTrigger.ExitActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,1000,20,0" To="600,510,20,0" Duration="0:0:0.2"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </DataTrigger.ExitActions>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </StackPanel.Style>
+                                                <StackPanel Margin="0,0,10,0">
+                                                    <CheckBoxEx x:Name="StopPlayButton" Style="{DynamicResource StopPlayButton}"/>
+                                                </StackPanel>
+                                                <StackPanel Margin="0,0,10,0">
+                                                    <CheckBoxEx x:Name="MuteButton" Style="{DynamicResource MuteButton}"/>
+                                                </StackPanel>
+                                                <StackPanel Margin="0,0,10,0">
+                                                    <CheckBoxEx x:Name="ZoomButton" Style="{DynamicResource ZoomButton}"/>
+                                                </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
                                     </Grid>

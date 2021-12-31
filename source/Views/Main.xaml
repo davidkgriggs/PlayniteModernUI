@@ -22,21 +22,6 @@
                             <FadeImage x:Name="PART_ImageBackground" Grid.RowSpan="3"
                                        HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-                            <!--Overlay-->
-                            <StackPanel HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Stretch">
-                                <StackPanel.Style>
-                                    <Style>
-                                        <Setter Property="Control.Visibility" Value="Visible" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Settings Fullscreen.MainBackgroundImageDarkAmount}" Value="0.0">
-                                                <Setter Property="Control.Visibility" Value="Collapsed" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <Border Background="{DynamicResource MainBackgroundOverlay}" Opacity="1" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}"/>
-                            </StackPanel>
-
                             <!--VIDEO BACKGROUND-->
                             <Grid Grid.Row="0" Grid.RowSpan="4" Opacity="1" Tag="{DynamicResource VideoBackgrounds}">
                                 <Grid.Style>
@@ -87,7 +72,22 @@
                                 </Grid>
                                 <Border Background="{DynamicResource OverlayBrush}" Opacity="0.3"/>
                             </Grid>
-                            
+
+                            <!--Overlay-->
+                            <StackPanel HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Stretch">
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="Control.Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Settings Fullscreen.MainBackgroundImageDarkAmount}" Value="0.0">
+                                                <Setter Property="Control.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Border Background="{DynamicResource MainBackgroundOverlay}" Opacity="1" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}"/>
+                            </StackPanel>
+
                             <Grid Grid.Row="0" Background="{DynamicResource TopBarBackgroundBrush}"
                                   Height="90">
                                 <Grid.ColumnDefinitions>
@@ -821,7 +821,7 @@
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
                                                                 <Setter Property="Margin" Value="5,0,0,0"/>
-                                                                <Setter Property="MaxHeight" Value="600"/>
+                                                                <Setter Property="Height" Value="{DynamicResource ListGamesHeight}"/>
                                                                 <Setter Property="VerticalAlignment" Value="Bottom"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">

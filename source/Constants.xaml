@@ -62,6 +62,8 @@
 
     <sys:Boolean x:Key="DropShadows">false</sys:Boolean>
 
+    <!--LGH--><sys:Double x:Key="ListGamesHeight">600</sys:Double><!--LGH-->
+
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
     <Color x:Key="GlyphColor">#00887F</Color>

@@ -136,3 +136,12 @@ Packages:
       - Changed the Side Bar
       - Changed the position of the Grid View and Main Menu buttons
       - Lots of improvements
+  - Version: 1.3.1
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2021-12-31
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.3.1/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_3_1.pthm
+    Changelog:
+      - IF YOU ARE NOT USING THE DKG THEME MODIFIER TO STORE FILTER ICONS PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - Bug fix for media controls showing when trailer is de-activated
+      - Bug fix for Description font size
+      - You can now set the List Games height for the horizontal layout in the DKG Theme Modifier, this lets you set it to single row if you want
