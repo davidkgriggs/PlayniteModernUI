@@ -6,7 +6,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="MinWidth" Value="40"/>
+        <Setter Property="MinWidth" Value="60"/>
         <Setter Property="MinHeight" Value="65"/>
         <Setter Property="Tag" Value="{DynamicResource FilterPresetVertical}"/>
         <Setter Property="Opacity" Value="0.5"/>
@@ -18,12 +18,8 @@
                         <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                    x:Name="TextContent">
                             <Grid>
-                                <Border Background="{DynamicResource ControlButtonBrush}" x:Name="BorderFocus" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed">
-                                    <!--Border.Effect>
-                                        <DropShadowEffect BlurRadius="30"/>
-                                    </Border.Effect-->
-                                </Border>
-                                <StackPanel Orientation="Horizontal" Height="40">
+                                <Border Background="{DynamicResource UIBrush}" x:Name="BorderIsChecked" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed" Opacity="0.5"/>
+                                <Border Background="{DynamicResource ControlButtonBrush}" x:Name="BorderFocus" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed" Opacity="0.75"/>                                <StackPanel Orientation="Horizontal" Height="40">
                                     <Grid>
                                         <Grid Tag="{DynamicResource DKGThemeModifierPath}">
                                             <Grid.Style>
@@ -169,6 +165,7 @@
                             <Setter Property="FontWeight" Value="Bold" TargetName="TextContent" />
                             <Setter Property="FontSize" Value="{DynamicResource FilterFontLarge}"/>
                             <Setter Property="Opacity" Value="1"/>
+                            <Setter Property="Visibility" TargetName="BorderIsChecked" Value="Visible"/>
                         </Trigger>
 
                         <Trigger Property="IsFocused" Value="True">
@@ -176,6 +173,7 @@
                             <Setter Property="FontSize" Value="{DynamicResource FilterFontLarge}"/>
                             <Setter Property="Visibility" TargetName="BorderFocus" Value="Visible"/>
                             <Setter Property="Opacity" Value="1"/>
+                            <Setter Property="Visibility" TargetName="BorderIsChecked" Value="Collapsed"/>
                         </Trigger>
 
                         <DataTrigger Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True">
@@ -183,6 +181,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="60" To="280"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderIsChecked" Duration="0:0:0.3" From="60" To="280"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -190,6 +189,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="280" To="60"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderIsChecked" Duration="0:0:0.3" From="280" To="60"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>

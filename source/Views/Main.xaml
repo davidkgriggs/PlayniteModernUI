@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:markup="clr-namespace:Playnite.Extensions.Markup;assembly=Playnite"
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type Main}">
@@ -61,9 +61,12 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding ElementName=VideoBackgrounds, Path=Visibility}" Value="Collapsed">
                                                         <Setter Property="MediaElement.Source" Value=""/>
-                                                    </DataTrigger>
+                                                    </DataTrigger>                                                    
                                                     <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
                                                         <Setter Property="MediaElement.Source" Value="" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=PART_ElemGameStatus, Path=Visibility}" Value="Visible">
+                                                        <Setter Property="MediaElement.Source" Value=""/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -86,6 +89,27 @@
                                     </Style>
                                 </StackPanel.Style>
                                 <Border Background="{DynamicResource MainBackgroundOverlay}" Opacity="1" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}"/>
+                            </StackPanel>
+
+                            <!--Overlay2-->
+                            <StackPanel HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Stretch">
+                                <StackPanel.Style>
+                                    <Style>
+                                        <Setter Property="Control.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
+                                                    <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
+                                                    <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
+                                                    <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Control.Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Border Background="#000000" Opacity="0.4" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}"/>
                             </StackPanel>
 
                             <Grid Grid.Row="0" Background="{DynamicResource TopBarBackgroundBrush}"
@@ -187,443 +211,293 @@
                                 </ButtonEx>
                             </Grid>
 
-                            <!--FILTER PRESETS/SIDE BAR-->
-                            <Grid x:Name="FilterPresetsSideBar" Grid.Row="1">
-                                <Grid x:Name="FilterPresets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,-80,10,0" Background="Transparent">
-                                    <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" VerticalAlignment="Top" />
-                                </Grid>
-
-                                <!--Grid x:Name="SideBar" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,20" MinHeight="200" Background="Transparent">
-                                    <Grid.Style>
-                                        <Style>
-                                            <Setter Property="ItemsControl.Width" Value="80"/>
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <MultiDataTrigger.EnterActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="80" To="300"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </MultiDataTrigger.EnterActions>
-                                                    <MultiDataTrigger.ExitActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="300" To="80"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </MultiDataTrigger.ExitActions>
-                                                </MultiDataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Grid.Style>
-                                    <StackPanel Grid.Column="0" Margin="20,10,10,20" VerticalAlignment="Bottom">
-                                        <Grid x:Name="GridView" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom">
-                                            <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
-                                                <Border.Style>
-                                                    <Style>
-                                                        <Setter Property="ItemsControl.Opacity" Value="0"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding ElementName=GridView, Path=IsKeyboardFocusWithin}" Value="True">
-                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding ElementName=GridView, Path=IsMouseOver}" Value="True">
-                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
-                                            </Border>
-                                            <TextBlock Text="{DynamicResource LOCGridViewLabel}" VerticalAlignment="Center" MaxWidth="200"
-                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
-                                                           Foreground="White"
-                                                           Margin="60,0,10,0"/>
-
-                                            <StackPanel Margin="0,0,0,0" HorizontalAlignment="Left">
-                                                <CheckBoxEx x:Name="ChangeViewButton" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}"
-                                            Style="{DynamicResource ChangeViewButton}"/>
-                                            </StackPanel>
-                                        </Grid>
-
-                                        <Grid x:Name="MainMenu" Margin="0,25,0,0" VerticalAlignment="Bottom">
-                                            <Border Background="{DynamicResource ControlButtonBrush}" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10">
-                                                <Border.Style>
-                                                    <Style>
-                                                        <Setter Property="ItemsControl.Opacity" Value="0"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding ElementName=MainMenu, Path=IsKeyboardFocusWithin}" Value="True">
-                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding ElementName=MainMenu, Path=IsMouseOver}" Value="True">
-                                                                <Setter Property="ItemsControl.Opacity" Value="1"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
-                                            </Border>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="60,0,10,0" Width="200" Height="40">
-                                                <TextBlock Text="Playnite " VerticalAlignment="Center"
-                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
-                                                           Foreground="White" />
-                                                <TextBlock Text="{DynamicResource LOCSettingsLabel}" VerticalAlignment="Center"
-                                                           Style="{DynamicResource TextBlockBaseStyle}" TextTrimming="CharacterEllipsis"
-                                                           Foreground="White" />
-                                            </StackPanel>
-
-                                            <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                          Style="{DynamicResource ButtonMainMenu}"
-                                          Margin="0,0,0,0" Height="38" Width="38"
-                                          Grid.Column="10">
-                                                <Button.Content>
-                                                    <Image RenderOptions.BitmapScalingMode="Fant" Margin="2"
-                                           Source="{ThemeFile 'Images/applogo_clean.png'}" />
-                                                </Button.Content>
-                                            </ButtonEx>
-                                        </Grid>
-
-                                    </StackPanel>
-                                </Grid-->
-                            </Grid>
-
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Tag="{DynamicResource FilterPresetVertical}">
-                                    <Grid.Style>
-                                        <Style>
-                                            <Setter Property="ItemsControl.Width" Value="80"/>
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <MultiDataTrigger.EnterActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="80" To="300"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </MultiDataTrigger.EnterActions>
-                                                    <MultiDataTrigger.ExitActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Width" BeginTime="0:0:0.1" Duration="0:0:0.3" From="300" To="80"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </MultiDataTrigger.ExitActions>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
-                                                        <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <MultiDataTrigger.EnterActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="80" To="300"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </MultiDataTrigger.EnterActions>
-                                                    <MultiDataTrigger.ExitActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Width" BeginTime="0:0:0.1" Duration="0:0:0.3" From="300" To="80"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </MultiDataTrigger.ExitActions>
-                                                </MultiDataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Grid.Style>
-                                </Grid>
-
-                                <!--CURRENT FILTER PRESET NAME-->
-                                <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource FilterPresetVertical}">
+                            <DockPanel Grid.Row="1">
+                                <!--FullscreenTools-->
+                                <Grid HorizontalAlignment="Left"
+                                      Visibility="{markup:PluginStatus Plugin=Fullscreen_Tools_9780e87c-9a3c-4169-bed6-cfb60978ea87, Status=Installed}">
                                     <Grid.Style>
                                         <Style TargetType="Grid">
+                                            <Setter Property="DockPanel.Dock" Value="Right"/>
+                                            <Setter Property="Margin" Value="0,0,0,0"/>
+                                            <Setter Property="VerticalAlignment" Value="Top"/>
                                             <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="50,-90,0,0"/>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="50,-20,0,0"/>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                        <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="50,-20,0,0"/>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                        <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="50,-90,0,0"/>
-                                                </MultiDataTrigger>
-
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="65,-90,0,0"/>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="65,-20,0,0"/>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
-                                                        <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="65,-20,0,0"/>
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
-                                                        <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Margin" Value="65,-90,0,0"/>
-                                                </MultiDataTrigger>
+                                                <DataTrigger Binding="{Settings Fullscreen.HorizontalLayout}" Value="True">
+                                                    <Setter Property="DockPanel.Dock" Value="Left"/>
+                                                    <Setter Property="Margin" Value="0,0,0,-35"/>
+                                                    <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Grid.Style>
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel Tag="{DynamicResource DropShadows}">
-                                            <StackPanel.Style>
-                                                <Style TargetType="StackPanel">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                            <Setter Property="Effect">
-                                                                <Setter.Value>
-                                                                    <DropShadowEffect BlurRadius="5" />
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </StackPanel.Style>
-                                            <TextBlock Text="{Binding ActiveFilterPreset.Name}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="46"/>
-                                            <Border BorderBrush="White" BorderThickness="1.5" HorizontalAlignment="Stretch" />
+                                    <Grid x:Name="FullscreenToolsIcon"  HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Margin" Value="10,10,10,10"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=FullscreenTools, Path=IsKeyboardFocusWithin}" Value="False"/>
+                                                            <Condition  Binding="{Settings Fullscreen.HorizontalLayout}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Margin" Value="10,10,-50,10"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="&#xf013;" FontSize="20" FontFamily="{DynamicResource FontIcoFont}" Foreground="White"/>
                                         </StackPanel>
-                                    </StackPanel>
+                                    </Grid>
+                                    <Grid x:Name="FullscreenTools">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Width" Value="0"/>
+                                                <Setter Property="MaxHeight" Value="0"/>
+                                                <Setter Property="Opacity" Value="0"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=FullscreenTools, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <MultiDataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="0" To="500"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="MaxHeight" Duration="0:0:0.3" From="0" To="800"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" From="0" To="1"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.EnterActions>
+                                                        <MultiDataTrigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="500" To="0"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="MaxHeight" Duration="0:0:0.3" From="800" To="0"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" From="1" To="0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.ExitActions>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <StackPanel>
+                                            <ContentControl x:Name="Fullscreen_Tools_FullscreenTools" DockPanel.Dock="Right"/>
+                                        </StackPanel>
+                                    </Grid>
                                 </Grid>
+                                
+                                <Grid Grid.Row="1" DockPanel.Dock="Left">
+                                    <!--FILTER PRESETS/SIDE BAR-->
+                                    <Grid x:Name="FilterPresetsSideBar" Grid.Row="1" Tag="{DynamicResource FilterPresetVertical}">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Margin" Value="0,0,0,0"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
+                                                            <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
+                                                            <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
+                                                            <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <MultiDataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.3" From="0,0,0,0" To="30,0,0,0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.EnterActions>
+                                                        <MultiDataTrigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" BeginTime="0:0:0.1" Duration="0:0:0.3" From="30,0,0,0" To="0,0,0,0"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </MultiDataTrigger.ExitActions>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <Grid x:Name="FilterPresets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,-80,10,0" Background="Transparent">
+                                            <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" VerticalAlignment="Top" />
+                                        </Grid>
+                                    </Grid>
 
-                                <!--MAIN DOCK-->
-                                <DockPanel Grid.Column="1" HorizontalAlignment="Left">
-                                    <Filters x:Name="PART_ElemFilters"
-                                         DockPanel.Dock="Left" Focusable="False"/>
 
-                                    <FiltersAdditional x:Name="PART_ElemFiltersAdditional"
-                                                   DockPanel.Dock="Left" Focusable="False"/>
-
-                                    <ContentControl x:Name="PART_ContentFilterItems"
-                                            DockPanel.Dock="Left" Focusable="False"/>
-
-                                    
-
-                                    <Grid DockPanel.Dock="Right">
+                                    <Grid Grid.Row="1">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-
-                                        <!--HORIZONTAL INFO-->
-                                        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{DynamicResource DropShadows}">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Tag="{DynamicResource FilterPresetVertical}">
                                             <Grid.Style>
-                                                <Style TargetType="Grid">
-                                                    <Setter Property="Margin" Value="50,50,0,0"/>
+                                                <Style>
+                                                    <Setter Property="ItemsControl.Width" Value="0"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Settings Fullscreen.HorizontalLayout}" Value="False">
-                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                            <Setter Property="Effect">
-                                                                <Setter.Value>
-                                                                    <DropShadowEffect BlurRadius="5" />
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
+                                                                <Condition Binding="{Binding ElementName=PART_ElemFiltersAdditional, Path=Visibility}" Value="Collapsed"/>
+                                                                <Condition Binding="{Binding ElementName=PART_ContentFilterItems, Path=Visibility}" Value="Collapsed"/>
+                                                                <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <MultiDataTrigger.EnterActions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.3" From="0" To="300"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </MultiDataTrigger.EnterActions>
+                                                            <MultiDataTrigger.ExitActions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Storyboard.TargetProperty="Width" BeginTime="0:0:0.1" Duration="0:0:0.3" From="300" To="0"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </MultiDataTrigger.ExitActions>
+                                                        </MultiDataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </Grid.Style>
-                                            <StackPanel>
-                                                <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle}">
-                                                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
-                                                           Text="{Binding SelectedGame.DisplayName}"
-                                                           FontWeight="Bold"
-                                                           TextWrapping="WrapWithOverflow" 
-                                                           FontSize="42" Margin="0,0,0,10">
-                                                    </TextBlock>
-                                                </Grid>
+                                        </Grid>
 
-                                                <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
-                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
-                                                        <!--Extra Metadata Tools Logo-->
-                                                        <StackPanel Name="Icon" Orientation="Vertical">
-                                                            <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
-                                                                <TextBlock.Style>
-                                                                    <Style TargetType="TextBlock">
-                                                                        <Setter Property="Text">
-                                                                            <Setter.Value>
-                                                                                <MultiBinding StringFormat="{}{0}{1}{2}{3}">
-                                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
-                                                                                    <Binding Source="\ExtraMetadata\games\"/>
-                                                                                    <Binding Path="SelectedGame.Id"/>
-                                                                                    <Binding Source="\logo.png" />
-                                                                                </MultiBinding>
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                    </Style>
-                                                                </TextBlock.Style>
-                                                            </TextBlock>
-                                                            <StackPanel HorizontalAlignment="Left">
-                                                                <FadeImage Name="LogoImage" Grid.ZIndex="1" Width="500" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
-                                                                    <FadeImage.Style>
-                                                                        <Style TargetType="FadeImage">
-                                                                            <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text}"/>
-                                                                            <Style.Triggers>
-                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
-                                                                                    <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text, Converter={StaticResource ImageStringToImageConverter}}"/>
-                                                                                </DataTrigger>
-                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
-                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                </DataTrigger>
-                                                                            </Style.Triggers>
-                                                                        </Style>
-                                                                    </FadeImage.Style>
-                                                                </FadeImage>
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Grid>
+                                        <!--CURRENT FILTER PRESET NAME-->
+                                        <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource FilterPresetVertical}">
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="100,-80,0,0"/>
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="100,-10,0,0"/>
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="100,-10,0,0"/>
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="100,-80,0,0"/>
+                                                        </MultiDataTrigger>
 
-                                                <Grid  Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
-                                                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,10,0,20">
-                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding SelectedGame.Platforms[0]}" Margin="0,0,20,0"/>
-                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                               Text="{Binding SelectedGame.ReleaseYear}" Margin="0,0,20,0"/>                                                        
-                                                    </StackPanel>
-                                                </Grid>
-
-                                                <Grid HorizontalAlignment="Left" Width="800" MaxHeight="150" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
-                                                    <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
-                                                    <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource FontSizeSmall}"
-                                                  HtmlForeground="{DynamicResource TextColor}"/>
-                                                </Grid>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="115,-80,0,0"/>
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="115,-10,0,0"/>
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
+                                                                <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="115,-10,0,0"/>
+                                                        </MultiDataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False"/>
+                                                                <Condition Binding="{Binding ElementName=FilterPresets, Path=IsKeyboardFocusWithin}" Value="True"/>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Margin" Value="115,-80,0,0"/>
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Grid.Style>
+                                            <StackPanel Orientation="Horizontal">
+                                                <StackPanel Tag="{DynamicResource DropShadows}">
+                                                    <StackPanel.Style>
+                                                        <Style TargetType="StackPanel">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                                    <Setter Property="Effect">
+                                                                        <Setter.Value>
+                                                                            <DropShadowEffect BlurRadius="5" />
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </StackPanel.Style>
+                                                    <TextBlock Text="{Binding ActiveFilterPreset.Name}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="32"/>
+                                                    <Border BorderBrush="{DynamicResource UIBrush}" BorderThickness="1" HorizontalAlignment="Stretch" />
+                                                </StackPanel>
                                             </StackPanel>
                                         </Grid>
 
-                                        <DockPanel Grid.Column="0" Grid.Row="1">
-                                            <!--SIDE BAR VERTICAL-->
-                                            <Grid Style="{DynamicResource SideBarStyle}" Tag="{DynamicResource SideBar}" DockPanel.Dock="Left">
-                                                <Grid x:Name="GameDetails" Tag="{DynamicResource FilterPresetVertical}">
+                                        <!--MAIN DOCK-->
+                                        <DockPanel Grid.Column="1" HorizontalAlignment="Left">
+                                            <Filters x:Name="PART_ElemFilters"
+                                         DockPanel.Dock="Left" Focusable="False"/>
+
+                                            <FiltersAdditional x:Name="PART_ElemFiltersAdditional"
+                                                   DockPanel.Dock="Left" Focusable="False"/>
+
+                                            <ContentControl x:Name="PART_ContentFilterItems"
+                                            DockPanel.Dock="Left" Focusable="False"/>
+
+
+
+                                            <Grid DockPanel.Dock="Right">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <!--HORIZONTAL INFO-->
+                                                <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{DynamicResource DropShadows}" Background="Transparent">
                                                     <Grid.Style>
                                                         <Style TargetType="Grid">
-                                                            <Setter Property="Width" Value="380"/>
+                                                            <Setter Property="Margin" Value="100,0,0,0"/>
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
-                                                                    <Setter Property="Margin" Value="-80,0,0,0"/>
+                                                                <DataTrigger Binding="{Settings Fullscreen.HorizontalLayout}" Value="False">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
                                                                 </DataTrigger>
-
-                                                                <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
-                                                                    <DataTrigger.EnterActions>
-                                                                        <BeginStoryboard>
-                                                                            <Storyboard>
-                                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="-410,0,0,0" Duration="0:0:0.2"/>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </DataTrigger.EnterActions>
-                                                                    <DataTrigger.ExitActions>
-                                                                        <BeginStoryboard>
-                                                                            <Storyboard>
-                                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2"/>
-                                                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-410,0,0,0" To="0,0,0,0" Duration="0:0:0.2"/>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </DataTrigger.ExitActions>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                                    <Setter Property="Effect">
+                                                                        <Setter.Value>
+                                                                            <DropShadowEffect BlurRadius="5" />
+                                                                        </Setter.Value>
+                                                                    </Setter>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Grid.Style>
-
-                                                    <StackPanel Margin="10,25,0,0" Tag="{DynamicResource DropShadows}">
-                                                        <StackPanel.Style>
-                                                            <Style TargetType="StackPanel">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                                        <Setter Property="Effect">
-                                                                            <Setter.Value>
-                                                                                <DropShadowEffect BlurRadius="5" />
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </StackPanel.Style>
-                                                        <Grid x:Name="Banners" Tag="{DynamicResource SideBanners}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="58" Margin="0,0,0,5">
-                                                            <Grid.Style>
-                                                                <Style>
-                                                                    <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                                            <Setter Property="ItemsControl.Visibility" Value="Visible"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </Grid.Style>
-                                                            <Border x:Name="SideBannerMask" Background="Black" Style="{DynamicResource CornerRadiusLarge}" VerticalAlignment="Top" Height="100" Width="348"/>
-                                                            <Grid>
-                                                                <Grid.OpacityMask>
-                                                                    <VisualBrush Visual="{Binding ElementName=SideBannerMask}" RenderOptions.BitmapScalingMode="LowQuality" Stretch="None"/>
-                                                                </Grid.OpacityMask>
-                                                                <Image Source="{Binding SelectedGame.Platforms[0].Icon, Converter={StaticResource ImageStringToImageConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="Fant"/>
-                                                            </Grid>
-                                                        </Grid>
-
-
-
-                                                        <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle1}" DockPanel.Dock="Top">
-                                                            <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
+                                                    <StackPanel>
+                                                        <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle}" Height="120">
+                                                            <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}" VerticalAlignment="Bottom"
                                                            Text="{Binding SelectedGame.DisplayName}"
                                                            FontWeight="Bold"
                                                            TextWrapping="WrapWithOverflow" 
@@ -632,10 +506,10 @@
                                                         </Grid>
 
                                                         <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
-                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="120">
                                                                 <!--Extra Metadata Tools Logo-->
-                                                                <StackPanel Name="Icon1" Orientation="Vertical">
-                                                                    <TextBlock Name="LogoPath1" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
+                                                                <StackPanel Name="Icon" Orientation="Vertical">
+                                                                    <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
                                                                         <TextBlock.Style>
                                                                             <Style TargetType="TextBlock">
                                                                                 <Setter Property="Text">
@@ -652,14 +526,14 @@
                                                                         </TextBlock.Style>
                                                                     </TextBlock>
                                                                     <StackPanel HorizontalAlignment="Left">
-                                                                        <FadeImage Name="LogoImage1" Grid.ZIndex="1" Width="350" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
-                                                                           VerticalAlignment="Top" HorizontalAlignment="Stretch" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+                                                                        <FadeImage Name="LogoImage" Grid.ZIndex="1" Width="500" MaxHeight="120" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
+                                                                           VerticalAlignment="Top" HorizontalAlignment="Left" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
                                                                             <FadeImage.Style>
                                                                                 <Style TargetType="FadeImage">
-                                                                                    <Setter Property="Source" Value="{Binding ElementName=LogoPath1, Path=Text}"/>
+                                                                                    <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text}"/>
                                                                                     <Style.Triggers>
                                                                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
-                                                                                            <Setter Property="Source" Value="{Binding ElementName=LogoPath1, Path=Text, Converter={StaticResource ImageStringToImageConverter}}"/>
+                                                                                            <Setter Property="Source" Value="{Binding ElementName=LogoPath, Path=Text, Converter={StaticResource ImageStringToImageConverter}}"/>
                                                                                         </DataTrigger>
                                                                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
                                                                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -673,284 +547,667 @@
                                                             </StackPanel>
                                                         </Grid>
 
-                                                        <Grid>
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <Grid Margin="0,0,0,0" Width="350">
-                                                                    <StackPanel>
-                                                                        <Line HorizontalAlignment="Center" Stroke="#FFEBEBEB" StrokeThickness="2" X1="350" Margin="0,10,0,5"/>
+                                                        <Grid  Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
+                                                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,10,0,15">
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{Binding SelectedGame.Platforms[0]}" Margin="0,0,20,0"/>
+                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                               Text="{Binding SelectedGame.ReleaseYear}" Margin="0,0,20,0"/>
+                                                            </StackPanel>
+                                                        </Grid>
 
-                                                                        <Grid x:Name="GRIDSuccessStory" HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
-                                                                            <Grid.Style>
-                                                                                <Style>
-                                                                                    <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                                                    <Style.Triggers>
-                                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
-                                                                                            <Setter Property="Control.Visibility" Value="Visible" />
-                                                                                        </DataTrigger>
-                                                                                    </Style.Triggers>
-                                                                                </Style>
-                                                                            </Grid.Style>
-                                                                            <Grid Width="350">
-                                                                                <StackPanel Margin="0,0,0,0">
-                                                                                    <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB">
-                                                                                    </TextBlock>
-                                                                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Percent}" >
-                                                                                        </TextBlock>
+                                                        <Grid HorizontalAlignment="Left" Width="800" MaxHeight="100" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
+                                                            <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
+                                                            <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource FontSizeSmall}" HtmlForeground="{DynamicResource TextColor}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </Grid>
 
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="%" >
-                                                                                        </TextBlock>
-                                                                                    </StackPanel>
+                                                <DockPanel Grid.Column="0" Grid.Row="1">
+                                                    <!--SIDE BAR VERTICAL-->
+                                                    <Grid Style="{DynamicResource SideBarStyle}" Tag="{DynamicResource SideBar}" DockPanel.Dock="Left">
+                                                        <Grid x:Name="GameDetails" Tag="{DynamicResource FilterPresetVertical}" Width="380" Margin="50,0,0,0">
 
-                                                                                    <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
-                                                                                        <Grid.RenderTransform>
-                                                                                            <ScaleTransform ScaleX="1.5" ScaleY="2"/>
-                                                                                        </Grid.RenderTransform>
-                                                                                        <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
-                                                                                        <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
-                                                                                    </Grid>
-                                                                                </StackPanel>
-
-                                                                                <StackPanel Margin="0,0,10,0" HorizontalAlignment="Right">
-                                                                                    <TextBlock Style="{DynamicResource EarnedLabel}" Foreground="#FFEBEBEB" HorizontalAlignment="Right">
-                                                                                    </TextBlock>
-                                                                                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" HorizontalAlignment="Right">
-                                                                                        </TextBlock>
-
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="/" HorizontalAlignment="Right">
-                                                                                        </TextBlock>
-
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Total}" HorizontalAlignment="Right">
-                                                                                        </TextBlock>
-                                                                                    </StackPanel>
-
-                                                                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,50,0">
-                                                                                        <Grid.RenderTransform>
-                                                                                            <ScaleTransform ScaleX="1.5" ScaleY="2"/>
-                                                                                        </Grid.RenderTransform>
-                                                                                        <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
-                                                                                        <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
-                                                                                    </Grid>
-                                                                                </StackPanel>
-                                                                            </Grid>
-                                                                        </Grid>
+                                                            <StackPanel Margin="10,25,0,0" Tag="{DynamicResource DropShadows}">
+                                                                <StackPanel.Style>
+                                                                    <Style TargetType="StackPanel">
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                                                <Setter Property="Effect">
+                                                                                    <Setter.Value>
+                                                                                        <DropShadowEffect BlurRadius="5" />
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </StackPanel.Style>
+                                                                <Grid x:Name="Banners" Tag="{DynamicResource SideBanners}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="58" Margin="0,0,0,5">
+                                                                    <Grid.Style>
+                                                                        <Style>
+                                                                            <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                                                    <Setter Property="ItemsControl.Visibility" Value="Visible"/>
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Border x:Name="SideBannerMask" Background="Black" Style="{DynamicResource CornerRadiusLarge}" VerticalAlignment="Top" Height="100" Width="348"/>
+                                                                    <Grid>
+                                                                        <Grid.OpacityMask>
+                                                                            <VisualBrush Visual="{Binding ElementName=SideBannerMask}" RenderOptions.BitmapScalingMode="LowQuality" Stretch="None"/>
+                                                                        </Grid.OpacityMask>
+                                                                        <Image Source="{Binding SelectedGame.Platforms[0].Icon, Converter={StaticResource ImageStringToImageConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="Fant"/>
+                                                                    </Grid>
+                                                                </Grid>
 
 
-                                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" >
-                                                                            <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
-                                                                                <StackPanel.Style>
-                                                                                    <Style>
-                                                                                        <Setter Property="Control.Visibility" Value="Visible" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Null}">
-                                                                                                <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                                                            </DataTrigger>
-                                                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
-                                                                                                <Setter Property="Control.Visibility" Value="Collapsed" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
+
+                                                                <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle1}" DockPanel.Dock="Top">
+                                                                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}"
+                                                           Text="{Binding SelectedGame.DisplayName}"
+                                                           FontWeight="Bold"
+                                                           TextWrapping="WrapWithOverflow" 
+                                                           FontSize="42" Margin="0,0,0,10">
+                                                                    </TextBlock>
+                                                                </Grid>
+
+                                                                <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="150">
+                                                                        <!--Extra Metadata Tools Logo-->
+                                                                        <StackPanel Name="Icon1" Orientation="Vertical">
+                                                                            <TextBlock Name="LogoPath1" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
+                                                                                <TextBlock.Style>
+                                                                                    <Style TargetType="TextBlock">
+                                                                                        <Setter Property="Text">
+                                                                                            <Setter.Value>
+                                                                                                <MultiBinding StringFormat="{}{0}{1}{2}{3}">
+                                                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+                                                                                                    <Binding Source="\ExtraMetadata\games\"/>
+                                                                                                    <Binding Path="SelectedGame.Id"/>
+                                                                                                    <Binding Source="\logo.png" />
+                                                                                                </MultiBinding>
+                                                                                            </Setter.Value>
+                                                                                        </Setter>
                                                                                     </Style>
-                                                                                </StackPanel.Style>
-
-                                                                                <TextBlock Margin="0,0,0,0" Text="{DynamicResource LOCHowLongToBeatTitle}" 
-                                                                   Style="{DynamicResource TextBlockBaseStyle}"/>
-                                                                                <StackPanel Orientation="Vertical" Margin="0,10,20,0" VerticalAlignment="Top">
-                                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                                        <StackPanel Orientation="Horizontal">
-                                                                                            <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
-                                                                                            <TextBlock Text=":"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
-                                                                                           Margin="0,0,0,10"/>
-                                                                                        </StackPanel>
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
-                                                                       Margin="20,2,0,0" />
-                                                                                    </StackPanel>
-
-                                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                                        <StackPanel Orientation="Horizontal">
-                                                                                            <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
-                                                                                            <TextBlock Text=":"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
-                                                                                           Margin="0,0,0,10"/>
-                                                                                        </StackPanel>
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
-                                                                       Margin="20,2,0,0" />
-                                                                                    </StackPanel>
-
-                                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                                                                        <StackPanel Orientation="Horizontal">
-                                                                                            <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
-                                                                                            <TextBlock Text=":"
-                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
-                                                                                           Margin="0,0,0,10"/>
-                                                                                        </StackPanel>
-                                                                                        <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
-                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
-                                                                       Margin="20,2,0,0" />
-                                                                                    </StackPanel>
-                                                                                </StackPanel>
+                                                                                </TextBlock.Style>
+                                                                            </TextBlock>
+                                                                            <StackPanel HorizontalAlignment="Left">
+                                                                                <FadeImage Name="LogoImage1" Grid.ZIndex="1" Width="350" MaxHeight="140" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" 
+                                                                           VerticalAlignment="Top" HorizontalAlignment="Stretch" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+                                                                                    <FadeImage.Style>
+                                                                                        <Style TargetType="FadeImage">
+                                                                                            <Setter Property="Source" Value="{Binding ElementName=LogoPath1, Path=Text}"/>
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
+                                                                                                    <Setter Property="Source" Value="{Binding ElementName=LogoPath1, Path=Text, Converter={StaticResource ImageStringToImageConverter}}"/>
+                                                                                                </DataTrigger>
+                                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                                </DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </FadeImage.Style>
+                                                                                </FadeImage>
                                                                             </StackPanel>
                                                                         </StackPanel>
+                                                                    </StackPanel>
+                                                                </Grid>
 
-                                                                        <Grid HorizontalAlignment="Left" Width="350" MaxHeight="600" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
-                                                                            <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
-                                                                            <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource FontSizeSmall}"
+                                                                <Grid>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Grid Margin="0,0,0,0" Width="350">
+                                                                            <StackPanel>
+                                                                                <Line HorizontalAlignment="Center" Stroke="#FFEBEBEB" StrokeThickness="2" X1="350" Margin="0,10,0,5"/>
+
+                                                                                <Grid x:Name="GRIDSuccessStory" HorizontalAlignment="Left" VerticalAlignment="Top" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
+                                                                                    <Grid.Style>
+                                                                                        <Style>
+                                                                                            <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                                                                                                    <Setter Property="Control.Visibility" Value="Visible" />
+                                                                                                </DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </Grid.Style>
+                                                                                    <Grid Width="350">
+                                                                                        <StackPanel Margin="0,0,0,0">
+                                                                                            <TextBlock Style="{DynamicResource ProgressLabel}" Foreground="#FFEBEBEB">
+                                                                                            </TextBlock>
+                                                                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Percent}" >
+                                                                                                </TextBlock>
+
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="%" >
+                                                                                                </TextBlock>
+                                                                                            </StackPanel>
+
+                                                                                            <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                                                                                <Grid.RenderTransform>
+                                                                                                    <ScaleTransform ScaleX="1.5" ScaleY="2"/>
+                                                                                                </Grid.RenderTransform>
+                                                                                                <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
+                                                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                                                            </Grid>
+                                                                                        </StackPanel>
+
+                                                                                        <StackPanel Margin="0,0,10,0" HorizontalAlignment="Right">
+                                                                                            <TextBlock Style="{DynamicResource EarnedLabel}" Foreground="#FFEBEBEB" HorizontalAlignment="Right">
+                                                                                            </TextBlock>
+                                                                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked}" HorizontalAlignment="Right">
+                                                                                                </TextBlock>
+
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="/" HorizontalAlignment="Right">
+                                                                                                </TextBlock>
+
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}" Text="{PluginSettings Plugin=SuccessStory, Path=Total}" HorizontalAlignment="Right">
+                                                                                                </TextBlock>
+                                                                                            </StackPanel>
+
+                                                                                            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,50,0">
+                                                                                                <Grid.RenderTransform>
+                                                                                                    <ScaleTransform ScaleX="1.5" ScaleY="2"/>
+                                                                                                </Grid.RenderTransform>
+                                                                                                <Border Height="2.5" Width="100" Background="White" CornerRadius="2.5"/>
+                                                                                                <Border Height="2.5" Width="{PluginSettings Plugin=SuccessStory, Path=Percent}" Background="{DynamicResource UIBrush}" CornerRadius="2.5" Margin="0" HorizontalAlignment="Left"/>
+                                                                                            </Grid>
+                                                                                        </StackPanel>
+                                                                                    </Grid>
+                                                                                </Grid>
+
+
+                                                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0" >
+                                                                                    <StackPanel x:Name="SideBarHLTB" Margin="0,0,0,0" Tag="{PluginSettings Plugin=HowLongToBeat, Path=HasData}">
+                                                                                        <StackPanel.Style>
+                                                                                            <Style>
+                                                                                                <Setter Property="Control.Visibility" Value="Visible" />
+                                                                                                <Style.Triggers>
+                                                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Null}">
+                                                                                                        <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                                                                    </DataTrigger>
+                                                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                                                                                                        <Setter Property="Control.Visibility" Value="Collapsed" />
+                                                                                                    </DataTrigger>
+                                                                                                </Style.Triggers>
+                                                                                            </Style>
+                                                                                        </StackPanel.Style>
+
+                                                                                        <TextBlock Margin="0,0,0,0" Text="{DynamicResource LOCHowLongToBeatTitle}" 
+                                                                   Style="{DynamicResource TextBlockBaseStyle}"/>
+                                                                                        <StackPanel Orientation="Vertical" Margin="0,10,20,0" VerticalAlignment="Top">
+                                                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                                                <StackPanel Orientation="Horizontal">
+                                                                                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
+                                                                                                    <TextBlock Text=":"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
+                                                                                           Margin="0,0,0,10"/>
+                                                                                                </StackPanel>
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}"
+                                                                       Margin="20,2,0,0" />
+                                                                                            </StackPanel>
+
+                                                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                                                <StackPanel Orientation="Horizontal">
+                                                                                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
+                                                                                                    <TextBlock Text=":"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
+                                                                                           Margin="0,0,0,10"/>
+                                                                                                </StackPanel>
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}"
+                                                                       Margin="20,2,0,0" />
+                                                                                            </StackPanel>
+
+                                                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                                                                                <StackPanel Orientation="Horizontal">
+                                                                                                    <TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}" />
+                                                                                                    <TextBlock Text=":"
+                                                                                           Style="{DynamicResource TextBlockBaseStyle}"
+                                                                                           Margin="0,0,0,10"/>
+                                                                                                </StackPanel>
+                                                                                                <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
+                                                                       Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}"
+                                                                       Margin="20,2,0,0" />
+                                                                                            </StackPanel>
+                                                                                        </StackPanel>
+                                                                                    </StackPanel>
+                                                                                </StackPanel>
+
+                                                                                <Grid HorizontalAlignment="Left" Width="350" MaxHeight="600" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
+                                                                                    <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
+                                                                                    <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource FontSizeSmall}"
                                                   HtmlForeground="{DynamicResource TextColor}"/>
+                                                                                </Grid>
+                                                                            </StackPanel>
                                                                         </Grid>
                                                                     </StackPanel>
                                                                 </Grid>
                                                             </StackPanel>
                                                         </Grid>
-                                                    </StackPanel>
-                                                </Grid>
-                                            </Grid>
+                                                    </Grid>
 
-                                            <ListBoxEx x:Name="PART_ListGameItems"
+                                                    <ListBoxEx x:Name="PART_ListGameItems"
                                                    Background="Transparent" BorderThickness="0" FocusVisualStyle="{x:Null}"
                                                    KeyboardNavigation.DirectionalNavigation="Once"
                                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                                    ScrollViewer.VerticalScrollBarVisibility="Disabled" Tag="{DynamicResource FilterPresetVertical}">
-                                                <ListBox.Style>
-                                                    <Style TargetType="ListBoxEx">                                                        
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
-                                                                <Setter Property="Margin" Value="5,0,0,0"/>
-                                                                <Setter Property="Height" Value="{DynamicResource ListGamesHeight}"/>
-                                                                <Setter Property="VerticalAlignment" Value="Bottom"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
-                                                                <Setter Property="Margin" Value="10,0,0,0"/>
-                                                                <Setter Property="MaxHeight" Value="960"/>
-                                                                <Setter Property="VerticalAlignment" Value="Top"/>
-                                                            </DataTrigger>
-                                                            <MultiDataTrigger>
-                                                                <MultiDataTrigger.Conditions>
-                                                                    <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                    <Condition Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True"/>
-                                                                </MultiDataTrigger.Conditions>
-                                                                <MultiDataTrigger.EnterActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="10,0,0,0" To="10,0,-300,0"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </MultiDataTrigger.EnterActions>
-                                                                <MultiDataTrigger.ExitActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" BeginTime="0:0:0.1" Duration="0:0:0.1" From="10,0,-300,0" To="10,0,0,0"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </MultiDataTrigger.ExitActions>
-                                                            </MultiDataTrigger>
-                                                            <MultiDataTrigger>
-                                                                <MultiDataTrigger.Conditions>
-                                                                    <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                    <Condition Binding="{Binding ElementName=SideBar, Path=IsKeyboardFocusWithin}" Value="True"/>
-                                                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False"/>
-                                                                </MultiDataTrigger.Conditions>
-                                                                <MultiDataTrigger.EnterActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="85,0,0,0" To="85,0,-300,0"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </MultiDataTrigger.EnterActions>
-                                                                <MultiDataTrigger.ExitActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" BeginTime="0:0:0.1" Duration="0:0:0.1" From="85,0,-300,0" To="85,0,0,0"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </MultiDataTrigger.ExitActions>
-                                                            </MultiDataTrigger>
+                                                        <ListBox.Style>
+                                                            <Style TargetType="ListBoxEx">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
+                                                                        <Setter Property="Margin" Value="0,0,0,0"/>
+                                                                        <Setter Property="Height" Value="{DynamicResource ListGamesHeight}"/>
+                                                                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
+                                                                        <Setter Property="Margin" Value="10,0,0,0"/>
+                                                                        <Setter Property="MaxHeight" Value="960"/>
+                                                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                                                    </DataTrigger>
 
-                                                            <!--MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="1"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="650"/>
-                                                        </>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="2"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="650"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="3"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="650"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="4"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="600"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="5"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="550"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="6"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="475"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="7"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="425"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="8"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="375"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="9"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="350"/>
-                                                        </MultiDataTrigger>
-                                                        <MultiDataTrigger>
-                                                            <MultiDataTrigger.Conditions>
-                                                                <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
-                                                                <Condition Binding="{Settings Fullscreen.Columns}" Value="10"/>
-                                                            </MultiDataTrigger.Conditions>
-                                                            <Setter Property="MaxHeight" Value="325"/>
-                                                        </MultiDataTrigger-->
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </ListBox.Style>
-                                            </ListBoxEx>
+                                                                    <!--Columns 3-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="3"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_3_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="-20,0,20,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="3"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_3_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="-20,0,20,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 4-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="4"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_4_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="10,0,-10,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="4"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_4_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="10,0,-10,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 5-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="5"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_5_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="25,0,-25,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="5"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_5_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="25,0,-25,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 6-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="6"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_6_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="40,0,-40,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="6"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_6_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="40,0,-40,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 7-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="7"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_7_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="50,0,-50,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="7"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_7_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="50,0,-50,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 8-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="8"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_8_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="60,0,-60,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="8"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_8_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="60,0,-60,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 9-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="9"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_9_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="65,0,-65,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="9"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_9_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="65,0,-65,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <!--Columns 10-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="10"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="0"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_10_SelectedIndex0Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="70,0,-70,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Settings Fullscreen.Columns}" Value="10"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="1"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex0Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex0Anim"/>
+                                                                            <BeginStoryboard x:Name="Columns_10_SelectedIndex1Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="70,0,-70,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                    
+                                                                    <!--SELECTEDINDEX2-->
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True"/>
+                                                                            <Condition Binding="{Binding ElementName=PART_ListGameItems, Path=SelectedIndex}" Value="2"/>
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <MultiDataTrigger.EnterActions>
+                                                                            <BeginStoryboard x:Name="SelectedIndex2Anim">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="0,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </MultiDataTrigger.EnterActions>
+                                                                    </MultiDataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </ListBox.Style>
+                                                    </ListBoxEx>
+                                                </DockPanel>
+                                            </Grid>
+
                                         </DockPanel>
                                     </Grid>
-                                    
-                                </DockPanel>
-                            </Grid>
+
+
+                                </Grid>
+                            </DockPanel>
 
                             <TextBlock Grid.Row="1" FontSize="40"
                                        Text="{DynamicResource LOCNoGamesFound}"
@@ -970,14 +1227,14 @@
                             <Grid Grid.Row="2" Background="{DynamicResource TopBarBackgroundBrush}"
                               Height="35">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0" />
+                                    <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="20" />
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Tag="{DynamicResource DropShadows}">
+                                <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Top" Tag="{DynamicResource DropShadows}">
                                     <StackPanel.Style>
                                         <Style TargetType="StackPanel">
                                             <Style.Triggers>
@@ -1017,7 +1274,7 @@
                                               Content="{DynamicResource LOCFilter}" />
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="2" x:Name="PART_ElemSearchActive"
+                                <StackPanel Grid.Column="1" x:Name="PART_ElemSearchActive"
                                             VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                             Margin="0,15,0,0">
                                     <TextBlock  FontSize="18"                                                
@@ -1030,7 +1287,7 @@
                                                 Text="{Binding AppSettings.Fullscreen.FilterSettings.Name}"/>
                                 </StackPanel>
 
-                                <TextBlock Grid.Column="2" x:Name="PART_ElemExtraFilterActive"
+                                <TextBlock Grid.Column="1" x:Name="PART_ElemExtraFilterActive"
                                        FontSize="20"
                                        VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                        TextAlignment="Center"
@@ -1038,9 +1295,9 @@
                                        Text="{DynamicResource LOCGameListExtraFiltered}"/>
 
                                 <StackPanel x:Name="PART_ElemProgressIndicator" Orientation="Horizontal"
-                                        Grid.Column="3" VerticalAlignment="Center">
+                                        Grid.Column="2" VerticalAlignment="Center">
                                     <TextBlock x:Name="PART_TextProgressTooltip" 
-                                           Margin="0,0,15,0" FontSize="20" VerticalAlignment="Center"
+                                           Margin="15,0,0,0" FontSize="20" VerticalAlignment="Center"
                                            Style="{DynamicResource TextBlockBaseStyle}"/>
                                     <ContentControl Style="{DynamicResource ProgressIndicator}" Focusable="False"
                                                 Height="25" Width="25" VerticalAlignment="Center" />

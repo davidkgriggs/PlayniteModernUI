@@ -62,18 +62,22 @@
 
     <sys:Boolean x:Key="DropShadows">false</sys:Boolean>
 
-    <!--LGH--><sys:Double x:Key="ListGamesHeight">600</sys:Double><!--LGH-->
+    <!--LGH--><sys:Double x:Key="ListGamesHeight">630</sys:Double><!--LGH-->
 
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
-    <Color x:Key="GlyphColor">#00887F</Color>
-    <Color x:Key="GlyphLightColor">#00BAAF</Color>
-    <Color x:Key="SelectionLightColor">#FF8D919D</Color>
-    <Color x:Key="OverlayColor">#BB000000</Color>
-    <Color x:Key="UIColour">#00BAAF</Color>
 
-    <Color x:Key="ControlBackgroundColor">#303030</Color>
-    <Color x:Key="ControlBackgroundColorDark">#202020</Color>
+    <!--C1--><Color x:Key="ControlBackgroundColor">#303030</Color><!--C1-->
+    <!--C2--><Color x:Key="ControlBackgroundColorDark">#202020</Color><!--C2-->
+    <!--C3--><Color x:Key="UIColour">#00BAAF</Color><!--C3-->
+    <!--C4--><Color x:Key="UIColourDark">#2795AE</Color><!--C4-->
+    <!--C5--><Color x:Key="GlyphColor">#00BAAF</Color><!--C5-->
+    <!--C6--><Color x:Key="GlyphLightColor">#83F9F2</Color><!--C6-->
+    <!--C7--><Color x:Key="SelectionLightColor">#7A7D84</Color><!--C7-->
+    <!--C8--><Color x:Key="UIColourDarker">#298984</Color><!--C8-->
+
+    <Color x:Key="OverlayColor">#BB000000</Color>
+
     <Color x:Key="ControlButton">#404040</Color>
 
     <Color x:Key="TextColor">#FFEBEBEB</Color>
@@ -90,6 +94,7 @@
     <SolidColorBrush x:Key="OverlayBrush" Color="{DynamicResource OverlayColor}" />
     <SolidColorBrush x:Key="CheckBoxCheckMarkBkBrush" Color="{DynamicResource ControlBackgroundColorDark}" />
     <!--UIB--><SolidColorBrush x:Key="UIBrush" Color="{DynamicResource UIColour}" /><!--UIB-->
+    <SolidColorBrush x:Key="UIBrushDark" Color="{DynamicResource UIColourDark}" />
 
     <sys:Double x:Key="FontSizeSmall">20</sys:Double>
     <sys:Double x:Key="FontSize">22</sys:Double>
@@ -112,8 +117,8 @@
     </Style>
 
     <LinearGradientBrush x:Key="MainBackgourndBrush" StartPoint="0,0" EndPoint="1,1" >
-        <GradientStop Color="#C104AC" Offset="0"/>
-        <GradientStop Color="#00BAAF" Offset="1.0"/>
+        <GradientStop Color="{DynamicResource UIColourDarker}" Offset="0"/>
+        <GradientStop Color="{DynamicResource UIColourDark}" Offset="1.0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="TopBarBackgroundBrush" StartPoint="-0.5,0.5" EndPoint="1,0.5" >
@@ -185,7 +190,7 @@
     </Style>
     <!--CornerRadiusSmall-->
     <Style x:Key="CornerRadiusSmall" TargetType="Border">
-        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="CornerRadius" Value="0"/>
     </Style>
 
     <!--DscriptionOnOff-->

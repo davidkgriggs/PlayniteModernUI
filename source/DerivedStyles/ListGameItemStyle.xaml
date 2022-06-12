@@ -36,7 +36,7 @@
                             <DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="Title" From="0" To="120" Duration="0:0:0.2" FillBehavior="Stop"/>
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid Margin="{Settings FullscreenItemSpacingMargin}"
+                    <Grid Margin="0,0,10,10"
                           RenderTransformOrigin="0.5,1"
                           d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
                         <Grid.RenderTransform>
@@ -80,8 +80,8 @@
                             </Grid>
                         </StackPanel>
 
-                        <Border x:Name="WhiteOutline" BorderThickness="2" BorderBrush="White" Opacity="0.75" Style="{DynamicResource CornerRadiusSmall}"
-                                Margin="-1"/>
+                        <Border x:Name="WhiteOutline" BorderThickness="3" BorderBrush="White" Opacity="0.75" Style="{DynamicResource CornerRadiusSmall}"
+                                Margin="-2"/>
                         <Border x:Name="MainBorder" BorderThickness="4" BorderBrush="{DynamicResource UIBrush}"
                                 Margin="-3" Visibility="Collapsed" Style="{DynamicResource CornerRadiusSmall}">
                             <Border.Effect>

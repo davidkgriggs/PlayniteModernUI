@@ -145,3 +145,12 @@ Packages:
       - Bug fix for media controls showing when trailer is de-activated
       - Bug fix for Description font size
       - You can now set the List Games height for the horizontal layout in the DKG Theme Modifier, this lets you set it to single row if you want
+  - Version: 1.4.0
+    RequiredApiVersion: 2.0.0
+    ReleaseDate: 2022-06-12
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.4.0/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_4_0.pthm
+    Changelog:
+      - IF YOU ARE NOT USING THE DKG THEME MODIFIER TO STORE FILTER ICONS PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - Loads of UI fixes and changes
+      - New background colours
+      - Support for Fullscreen Tools added
