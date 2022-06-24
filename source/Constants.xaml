@@ -64,6 +64,8 @@
 
     <!--LGH--><sys:Double x:Key="ListGamesHeight">630</sys:Double><!--LGH-->
 
+    <!--CIM--><Thickness x:Key="CoverItemMargin" Left="0" Top="0" Right="10" Bottom="10"/><!--CIM-->
+    
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
 

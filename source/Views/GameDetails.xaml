@@ -9,7 +9,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GameDetails}">
                     <Grid>
-                        <FadeImage Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top"                                  
+                        <Border Background="{DynamicResource GameDetailsGreyOverlay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <FadeImage Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Top"                                  
                                    x:Name="PART_ImageBackground"/>
                         <Border Background="Black" Opacity="0.1">
                             <Border.Style>
@@ -35,7 +36,7 @@
                         </Border>
 
 
-                        <Grid>
+                        <!--Grid>
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Visibility" Value="Visible"/>
@@ -46,15 +47,19 @@
                                     </Style.Triggers>
                                 </Style>
                             </Grid.Style>
-                            <Image x:Name="SteamBanner" Source="{Binding BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Image x:Name="SteamBanner" RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top">
                                 <Image.Style>
                                     <Style TargetType="Image">
+                                        <Setter Property="Source" Value="{Binding BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"/>
                                         <Setter Property="Opacity" Value="0"/>
                                         <Setter Property="Width" Value="{StaticResource DesignWidth}"/>
                                         <Setter Property="Height" Value="{StaticResource DesignHeight}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding ElementName=SteamBanner, Path=ActualHeight}" Value="620">
                                                 <Setter Property="Opacity" Value="1"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ListGameItems, Path=Visibility}" Value="Visible">
+                                                <Setter Property="Source" Value="../Blank.png"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -73,7 +78,7 @@
                                     </Style>
                                 </Border.Style>
                             </Border>
-                        </Grid>
+                        </Grid-->
                         
                         
 
