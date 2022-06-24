@@ -154,7 +154,7 @@ Packages:
       - Loads of UI fixes and changes
       - New background colours
       - Support for Fullscreen Tools added
-- Version: 1.4.1
+  - Version: 1.4.1
     RequiredApiVersion: 2.0.0
     ReleaseDate: 2022-06-24
     PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.4.1/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_4_1.pthm
