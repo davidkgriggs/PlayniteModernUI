@@ -1,8 +1,21 @@
-# PlayniteModernUI
-A modern styled full screen theme for Playnite
+### If you enjoy my themes and extensions and want to support me you can at: https://www.paypal.me/davidkgriggs
 
-See the Playnite Forum thread for more information: https://playnite.link/forum/thread-791-post-5809.html
+# Playnite Modern UI
+A modern styled fullscreen theme for Playnite.
 
-Please support the Main Playnite Project: https://www.patreon.com/playnite 
+### YouTube Showcase, click to view:
+[![YouTube Showcase](https://img.youtube.com/vi/DFMn2Fxm9Aw/hqdefault.jpg)](https://www.youtube.com/watch?v=DFMn2Fxm9Aw)
 
-If you enjoy my theme and want to support me you can at: https://www.paypal.me/davidkgriggs
+### Screenshots:
+![](https://i.imgur.com/Sokaagn.jpeg)
+![](https://i.imgur.com/4yOKKVp.jpeg)
+![](https://i.imgur.com/OAWLY14.jpeg)
+![](https://i.imgur.com/MJBbx7L.jpeg)
+![](https://i.imgur.com/AzcqnAx.jpeg)
+
+### Playnite Fullscreen Settings:
+![](https://i.imgur.com/WoQULLp.png)
+
+See the Playnite Forum thread at: https://playnite.link/forum/thread-791.html
+
+Please support the Main Playnite Project: https://www.patreon.com/playnite
