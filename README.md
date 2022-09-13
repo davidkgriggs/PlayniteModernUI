@@ -3,6 +3,8 @@
 # Playnite Modern UI
 A modern styled fullscreen theme for Playnite.
 
+# Please go to the Wiki for guides: [Wiki](https://github.com/davidkgriggs/PlayniteModernUI/wiki)
+
 ### YouTube Showcase, click to view:
 [![YouTube Showcase](https://img.youtube.com/vi/DFMn2Fxm9Aw/hqdefault.jpg)](https://www.youtube.com/watch?v=DFMn2Fxm9Aw)
 
