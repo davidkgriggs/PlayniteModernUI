@@ -19,7 +19,11 @@
                                    x:Name="TextContent">
                             <Grid>
                                 <Border Background="{DynamicResource UIBrush}" x:Name="BorderIsChecked" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed" Opacity="0.5"/>
-                                <Border Background="{DynamicResource ControlButtonBrush}" x:Name="BorderFocus" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed" Opacity="0.75"/>                                <StackPanel Orientation="Horizontal" Height="40">
+                                <Border Background="{DynamicResource ControlButtonBrush}" x:Name="BorderFocus" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Margin="-10,-10,0,-10" Visibility="Collapsed" Opacity="0.75"/>
+                                <Grid Margin="-10,-5,0,-5">
+                                    <Border x:Name="BorderFocusAnim" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Opacity="1" BorderThickness="4" Style="{DynamicResource AnimatedCoverBrush}" Visibility="Hidden" Tag="False"/>
+                                </Grid>
+                                <StackPanel Orientation="Horizontal" Height="40">
                                     <Grid>
                                         <Grid Tag="{DynamicResource DKGThemeModifierPath}">
                                             <Grid.Style>
@@ -174,6 +178,8 @@
                             <Setter Property="Visibility" TargetName="BorderFocus" Value="Visible"/>
                             <Setter Property="Opacity" Value="1"/>
                             <Setter Property="Visibility" TargetName="BorderIsChecked" Value="Collapsed"/>
+                            <Setter Property="Tag" Value="True" TargetName="BorderFocusAnim" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="BorderFocusAnim" />
                         </Trigger>
 
                         <DataTrigger Binding="{Binding ElementName=FilterPresetsSideBar, Path=IsKeyboardFocusWithin}" Value="True">
@@ -182,6 +188,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="60" To="280"/>
                                         <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderIsChecked" Duration="0:0:0.3" From="60" To="280"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocusAnim" Duration="0:0:0.3" From="60" To="280"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -190,6 +197,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocus" Duration="0:0:0.3" From="280" To="60"/>
                                         <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderIsChecked" Duration="0:0:0.3" From="280" To="60"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderFocusAnim" Duration="0:0:0.3" From="280" To="60"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>

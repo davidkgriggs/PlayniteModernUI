@@ -65,7 +65,43 @@
     <!--LGH--><sys:Double x:Key="ListGamesHeight">630</sys:Double><!--LGH-->
 
     <!--CIM--><Thickness x:Key="CoverItemMargin" Left="0" Top="0" Right="10" Bottom="10"/><!--CIM-->
-    
+
+    <sys:Boolean x:Key="BackgroundStretchNew">true</sys:Boolean>
+    <sys:Boolean x:Key="BackgroundBlur">false</sys:Boolean>
+
+    <!--GameDetailsStack-->
+    <sys:Boolean x:Key="GameDetails_TimePlayed">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_LastPlayed">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_CompletionSatus">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_ReleaseDate">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Library">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_CriticScore">true</sys:Boolean>
+
+    <sys:Boolean x:Key="GameDetails_SortingName">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Platform">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Genres">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Developers">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Publishers">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Categories">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Features">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Tags">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Series">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_AgeRatings">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Regions">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Source">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Version">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_UserScore">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_CommunityScore">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_PlayCount">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Manual">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Added">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Modified">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Notes">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_GameID">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_DatabaseID">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Hidden">true</sys:Boolean>
+    <sys:Boolean x:Key="GameDetails_Favourite">true</sys:Boolean>
+
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
 
@@ -167,12 +203,29 @@
         <GradientStop Color="#00000000" Offset="0.5"/>
         <GradientStop Color="#BF000000" Offset="1"/>
     </LinearGradientBrush>
-    
-    <LinearGradientBrush x:Key="GameDetailsGreyOverlay" StartPoint="0.5,0" EndPoint="0.5,1" >
-        <GradientStop Color="#00000000" Offset="0"/>
-        <GradientStop Color="#202020" Offset="0.2"/>
+
+    <LinearGradientBrush x:Key="BackgroundVerticalFade" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#000000" Offset="0.9"/>
+        <GradientStop Color="#00000000" Offset="1"/>
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="BackgroundHorizontalFade" StartPoint="0,0.5" EndPoint="1,0.5" >
+        <GradientStop Color="#00000000" Offset="0"/>
+        <GradientStop Color="#000000" Offset="0.02"/>
+        <GradientStop Color="#000000" Offset="0.98"/>
+        <GradientStop Color="#00000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TrailerVerticalFade" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#000000" Offset="0.5"/>
+        <GradientStop Color="#00000000" Offset="0.6"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GameDetailsVerticalFade" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#00000000" Offset="0.5"/>
+        <GradientStop Color="#80000000" Offset="0.6"/>
+    </LinearGradientBrush>
+    
     <RadialGradientBrush x:Key="MainBackgroundOverlay" GradientOrigin="0.9,0.3" Center="0.5,0.5"
                         RadiusX="0.6" RadiusY="0.6">
         <RadialGradientBrush.GradientStops>
@@ -246,6 +299,16 @@
         </Style.Triggers>
     </Style>
 
+    <!--GameDetailsStackStyle-->
+    <Style x:Key="GameDetailsStackStyle" TargetType="StackPanel">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <!--SideBarTransparent-->
     <Style x:Key="SideBarTransparentStyle" TargetType="Border">
         <Setter Property="Visibility" Value="Visible"/>
@@ -265,6 +328,9 @@
                 <Setter Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=SideBarButton, Path=IsChecked}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
         </Style.Triggers>
@@ -364,5 +430,145 @@
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <!--EL--><Setter Property="Text" Value="{DynamicResource LOCSuccessStoryEarned}" /><!--EL-->
+    </Style>
+
+
+
+    <!-- CoverBorder -->
+    <Style x:Key="AnimatedCoverBrush" TargetType="Border">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{DynamicResource UIColourDarker}" Offset="0"/>
+                    <GradientStop Color="{DynamicResource UIColourDarker}" Offset="0.80"/>
+                    <GradientStop Color="{DynamicResource UIColour}" Offset="1"/>
+                    <LinearGradientBrush.RelativeTransform>
+                        <RotateTransform CenterX="0.5" CenterY="0.5" />
+                    </LinearGradientBrush.RelativeTransform>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=WhiteOutline, Path=Tag}" Value="true">
+                <!--CR--><Setter Property="CornerRadius" Value="15"/><!--CR-->
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Name="StartCoverBrush">
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:00.3" Value="-6" />
+                            </ThicknessAnimationUsingKeyFrames>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetProperty="(Border.BorderBrush).(Brush.RelativeTransform).(RotateTransform.Angle)" 
+											 From="0" To="359" Duration="00:00:4" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <StopStoryboard BeginStoryboardName="StartCoverBrush" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AnimatedBorderBrush" TargetType="Border">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{DynamicResource BorderDark}" Offset="0"/>
+                    <GradientStop Color="{DynamicResource BorderLight}" Offset="1"/>
+                    <LinearGradientBrush.RelativeTransform>
+                        <RotateTransform CenterX="0.5" CenterY="0.5" x:Name="RotateBrush" />
+                    </LinearGradientBrush.RelativeTransform>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Name="StartBorderBrush">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetProperty="(Border.BorderBrush).(Brush.RelativeTransform).(RotateTransform.Angle)" 
+											 From="0" To="359" Duration="00:00:4" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <StopStoryboard BeginStoryboardName="StartBorderBrush" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AnimatedFlashCover" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="#00000000 " Offset="0"/>
+                    <GradientStop Color="#40ffffff" Offset="0.01"/>
+                    <GradientStop Color="#40ffffff" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=WhiteOutline, Path=Tag}" Value="true">
+                    <!--CR--><Setter Property="CornerRadius" Value="15"/><!--CR-->
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Name="StartCoverFlash">
+                        <Storyboard RepeatBehavior="Forever" Duration="0:0:4.5">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.0" />
+                            <DoubleAnimation
+							Storyboard.TargetProperty="Background.(GradientBrush.GradientStops)[1].(GradientStop.Offset)"
+							From="0" To="1" BeginTime="0:0:0" Duration="0:0:0.6" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:0.6" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="StartCoverFlash" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AnimatedFlashMenu" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="#00000000 " Offset="0"/>
+                    <GradientStop Color="#40ffffff" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Name="StartFlashMenu">
+                        <Storyboard RepeatBehavior="1x">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:0.1" Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="StartFlashMenu" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

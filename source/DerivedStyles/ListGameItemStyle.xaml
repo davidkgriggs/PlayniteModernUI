@@ -36,7 +36,7 @@
                             <DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="Title" From="0" To="120" Duration="0:0:0.2" FillBehavior="Stop"/>
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid Margin="{DynamicResource CoverItemMargin}"
+                    <Grid Margin="{Settings FullscreenItemSpacingMargin}"
                           RenderTransformOrigin="0.5,1"
                           d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
                         <Grid.RenderTransform>
@@ -57,12 +57,12 @@
                                 </Style>
                             </Border.Style>
                         </Border>
-                        
+
                         <ContentPresenter />
 
                         <StackPanel Visibility="{Settings Fullscreen.ShowGameTitles}" VerticalAlignment="Bottom">
                             <Grid x:Name="Title" Visibility="Collapsed" Height="120" HorizontalAlignment="Stretch">
-                                <Border Background="{DynamicResource OverlayTitle}" CornerRadius="5"/>
+                                <Border x:Name="TextOverlay" Background="{DynamicResource OverlayTitle}" Style="{DynamicResource CornerRadiusSmall}"/>
                                 <StackPanel VerticalAlignment="Bottom">
                                     <StackPanel Margin="20,0,0,0">
                                         <Image VerticalAlignment="Bottom"
@@ -81,21 +81,37 @@
                         </StackPanel>
 
                         <Border x:Name="WhiteOutline" BorderThickness="3" BorderBrush="White" Opacity="0.75" Style="{DynamicResource CornerRadiusSmall}"
-                                Margin="-2"/>
-                        <Border x:Name="MainBorder" BorderThickness="4" BorderBrush="{DynamicResource UIBrush}"
-                                Margin="-3" Visibility="Collapsed" Style="{DynamicResource CornerRadiusSmall}">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" Opacity="1"
-                                                  Color="{DynamicResource UIColour}"                                                  
-                                                  RenderingBias="Quality" BlurRadius="20"/>
-                            </Border.Effect>
-                        </Border>
+                                Margin="-2" Tag="False"/>
+                        <Grid x:Name="IsFocused" Opacity="0" Margin="3">
+                            <Border x:Name="MainBorder" Opacity="1" BorderThickness="4" Style="{DynamicResource AnimatedCoverBrush}" Visibility="Hidden" Tag="False">
+                                <Border.CacheMode>
+                                    <BitmapCache EnableClearType="False" 
+                                                 RenderAtScale="1" 
+                                                 SnapsToDevicePixels="False"/>
+                                </Border.CacheMode>
+                            </Border>
+
+                            <Border x:Name="FlashBorder" Opacity="1" Style="{DynamicResource AnimatedFlashCover}"  Visibility="Hidden" Tag="False">
+                                <Border.CacheMode>
+                                    <BitmapCache EnableClearType="False" 
+                                                 RenderAtScale="1" 
+                                                 SnapsToDevicePixels="False"/>
+                                </Border.CacheMode>
+                            </Border>
+                        </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PART_ListGameItems, Path=IsKeyboardFocusWithin}" Value="True">
+                            <Setter Property="Opacity" Value="1" TargetName="IsFocused" />
+                        </DataTrigger>
+
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
                             <Setter Property="Visibility" Value="Visible" TargetName="Title"/>
                             <Setter Property="Canvas.ZIndex" Value="90" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Tag" Value="True" TargetName="FlashBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="FlashBorder" />
                             <Trigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
                             </Trigger.ExitActions>
@@ -105,9 +121,12 @@
                             </Trigger.EnterActions>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
                             <Setter Property="Visibility" Value="Visible" TargetName="Title"/>
                             <Setter Property="Canvas.ZIndex" Value="90" />
+                            <Setter Property="Tag" Value="True" TargetName="MainBorder" />
+                            <Setter Property="Tag" Value="True" TargetName="FlashBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="FlashBorder" />
                             <Trigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource FocusedOff}" />
                             </Trigger.ExitActions>
@@ -118,8 +137,27 @@
                         </Trigger>
 
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                            <Setter Property="Style" Value="{DynamicResource CornerRadiusLarge}" TargetName="TextOverlay"/>
                             <Setter Property="Style" Value="{DynamicResource CornerRadiusLarge}" TargetName="WhiteOutline"/>
-                            <Setter Property="Style" Value="{DynamicResource CornerRadiusLarge}" TargetName="MainBorder"/>
+                            <Setter Property="Tag" Value="true" TargetName="WhiteOutline"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBoxTemplate" TargetType="{x:Type ListBox}">
+        <Setter Property="ItemsControl.ItemsSource" Value="{Binding ElementName=PART_ListGameItems, Path=ItemsSource}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled">
+                        <VirtualizingStackPanel x:Name="StackPanel1" IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Left"/>
+                    </ScrollViewer>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PART_ElemGameStatus, Path=Visibility}" Value="Visible">
+                            <Setter Property="ItemsControl.ItemsSource" Value="{Binding ElementName=BlankList, Path=ItemsSource}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

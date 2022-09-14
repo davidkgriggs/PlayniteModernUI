@@ -19,8 +19,129 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <FadeImage x:Name="PART_ImageBackground" Grid.RowSpan="3"
-                                       HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Border x:Name="MaskVerticalFade" Background="{DynamicResource BackgroundVerticalFade}" Grid.RowSpan="3">
+                                <Border.CacheMode>
+                                    <BitmapCache RenderAtScale="0.75"/>
+                                </Border.CacheMode>
+                            </Border>
+                            <Border x:Name="MaskHorizontalFade" Background="{DynamicResource BackgroundHorizontalFade}" Grid.RowSpan="3">
+                                <Border.CacheMode>
+                                    <BitmapCache RenderAtScale="0.75"/>
+                                </Border.CacheMode>
+                            </Border>
+                            <Border x:Name="MaskSolid" Background="Black" Grid.RowSpan="3">
+                                <Border.CacheMode>
+                                    <BitmapCache RenderAtScale="1"/>
+                                </Border.CacheMode>
+                            </Border>
+                            <Border Background="{DynamicResource MainBackgourndBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
+                                <Border.CacheMode>
+                                    <BitmapCache RenderAtScale="1"/>
+                                </Border.CacheMode>
+                            </Border>
+                            <Border Background="Black" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
+                                <Border.CacheMode>
+                                    <BitmapCache RenderAtScale="0.01"/>
+                                </Border.CacheMode>
+                            </Border>
+                            <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="3"
+                                   Tag="{DynamicResource BackgroundBlur}"
+                                   RenderOptions.BitmapScalingMode="LowQuality">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="Blank.png"/>
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                <Setter Property="Source" Value="{Binding SelectedGame.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"/>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                                <Image.CacheMode>
+                                    <BitmapCache RenderAtScale="0.1"/>
+                                </Image.CacheMode>
+                                <Image.Effect>
+                                    <BlurEffect Radius="20" RenderingBias="Performance"/>
+                                </Image.Effect>
+                            </Image>
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="3" Tag="{DynamicResource BackgroundStretchNew}">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="OpacityMask">
+                                            <Setter.Value>
+                                                <VisualBrush Visual="{Binding ElementName=MaskHorizontalFade}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualWidth}" Value="1920">
+                                                <Setter Property="OpacityMask">
+                                                    <Setter.Value>
+                                                        <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                <Setter Property="OpacityMask">
+                                                    <Setter.Value>
+                                                        <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid Tag="{DynamicResource BackgroundStretchNew}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Visual="{Binding ElementName=MaskVerticalFade}"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Value="1080">
+                                                    <Setter Property="OpacityMask">
+                                                        <Setter.Value>
+                                                            <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                    <Setter Property="OpacityMask">
+                                                        <Setter.Value>
+                                                            <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <FadeImage HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="3"                                 
+                                   x:Name="PART_ImageBackground" Tag="{DynamicResource BackgroundStretchNew}">
+                                        <FadeImage.Style>
+                                            <Style TargetType="FadeImage">
+                                                <Setter Property="Stretch" Value="Uniform"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                        <Setter Property="Stretch" Value="UniformToFill"/>
+                                                    </DataTrigger>                                                    
+                                                </Style.Triggers>
+                                            </Style>
+                                        </FadeImage.Style>
+                                    </FadeImage>
+                                </Grid>
+                            </Grid>
+
+                            <StackPanel Opacity="0">
+                                <TextBlock Text="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="32"/>
+                                <TextBlock Text="{Binding ElementName=PART_ImageBackground, Path=ActualWidth}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="32"/>
+                            </StackPanel>
+                            
+
+                            <!--FadeImage x:Name="PART_ImageBackground" Grid.RowSpan="3"
+                                       HorizontalAlignment="Center" VerticalAlignment="Top"/-->
 
                             <!--VIDEO BACKGROUND-->
                             <Grid Grid.Row="0" Grid.RowSpan="4" Opacity="1" Tag="{DynamicResource VideoBackgrounds}">
@@ -88,7 +209,11 @@
                                         </Style.Triggers>
                                     </Style>
                                 </StackPanel.Style>
-                                <Border Background="{DynamicResource MainBackgroundOverlay}" Opacity="1" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}"/>
+                                <Border Background="{DynamicResource MainBackgroundOverlay}" Opacity="1" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}">
+                                    <Border.CacheMode>
+                                        <BitmapCache RenderAtScale="0.1"/>
+                                    </Border.CacheMode>
+                                </Border>
                             </StackPanel>
 
                             <!--Overlay2-->
@@ -109,14 +234,29 @@
                                         </Style.Triggers>
                                     </Style>
                                 </StackPanel.Style>
-                                <Border Background="#000000" Opacity="0.4" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}"/>
+                                <Border Background="#000000" Opacity="0.4" HorizontalAlignment="Stretch" Height="{StaticResource DesignHeight}">
+                                    <Border.CacheMode>
+                                        <BitmapCache RenderAtScale="0.01"/>
+                                    </Border.CacheMode>
+                                </Border>
                             </StackPanel>
 
                             <Grid Grid.Row="0" Background="{DynamicResource TopBarBackgroundBrush}"
                                   Height="90">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
@@ -197,13 +337,26 @@
                                     </Button.Style>
                                 </ButtonEx>
 
-                                <CheckBoxEx x:Name="ChangeViewButton" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}" Grid.Column="7" Margin="10,0,10,0"
+                                <Grid Grid.Column="7" Margin="10,0,10,0">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <CheckBoxEx x:Name="SideBarButton" Style="{DynamicResource SideBarButton}"/>
+                                </Grid>
+                                
+                                <CheckBoxEx x:Name="ChangeViewButton" IsChecked="{Settings Fullscreen.HorizontalLayout, Mode=TwoWay}" Grid.Column="8" Margin="10,0,10,0"
                                             Style="{DynamicResource ChangeViewButton}"/>
 
                                 <ButtonEx x:Name="PART_ButtonMainMenu" VerticalAlignment="Center" HorizontalAlignment="Left"
                                           Style="{DynamicResource ButtonMainMenu}"
                                           Margin="10,0,10,0" 
-                                          Grid.Column="8">
+                                          Grid.Column="9">
                                     <Button.Content>
                                         <Image RenderOptions.BitmapScalingMode="Fant" Margin="2" Height="38" Width="38"
                                            Source="{ThemeFile 'Images/applogo_clean.png'}" />
@@ -212,6 +365,16 @@
                             </Grid>
 
                             <DockPanel Grid.Row="1">
+                                <DockPanel.Style>
+                                    <Style TargetType="DockPanel">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DockPanel.Style>
                                 <!--FullscreenTools-->
                                 <Grid HorizontalAlignment="Left"
                                       Visibility="{markup:PluginStatus Plugin=Fullscreen_Tools_9780e87c-9a3c-4169-bed6-cfb60978ea87, Status=Installed}">
@@ -293,7 +456,11 @@
                                         <Grid.Style>
                                             <Style TargetType="Grid">
                                                 <Setter Property="Margin" Value="0,0,0,0"/>
+                                                <Setter Property="VerticalAlignment" Value="Stretch"/>
                                                 <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="False">
+                                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                                    </DataTrigger>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
                                                             <Condition Binding="{Binding ElementName=PART_ElemFilters, Path=Visibility}" Value="Collapsed"/>
@@ -320,8 +487,8 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </Grid.Style>
-                                        <Grid x:Name="FilterPresets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,-80,10,0" Background="Transparent">
-                                            <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" VerticalAlignment="Top" />
+                                        <Grid x:Name="FilterPresets" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,-80,10,0" Background="Transparent">
+                                            <FilterPresetSelector x:Name="PART_FilterPresetSelector" Margin="-10,0,0,15" VerticalAlignment="Stretch" />
                                         </Grid>
                                     </Grid>
 
@@ -433,25 +600,37 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </Grid.Style>
-                                            <StackPanel Orientation="Horizontal">
-                                                <StackPanel Tag="{DynamicResource DropShadows}">
-                                                    <StackPanel.Style>
-                                                        <Style TargetType="StackPanel">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                                                    <Setter Property="Effect">
-                                                                        <Setter.Value>
-                                                                            <DropShadowEffect BlurRadius="5" />
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </StackPanel.Style>
-                                                    <TextBlock Text="{Binding ActiveFilterPreset.Name}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="32"/>
-                                                    <Border BorderBrush="{DynamicResource UIBrush}" BorderThickness="1" HorizontalAlignment="Stretch" />
+                                            <Grid Tag="{DynamicResource FilterPresetVertical}">
+                                                <Grid.Style>
+                                                    <Style TargetType="Grid">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Grid.Style>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Tag="{DynamicResource DropShadows}">
+                                                        <StackPanel.Style>
+                                                            <Style TargetType="StackPanel">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                                                        <Setter Property="Effect">
+                                                                            <Setter.Value>
+                                                                                <DropShadowEffect BlurRadius="5" />
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </StackPanel.Style>
+                                                        <TextBlock Text="{Binding ActiveFilterPreset.Name}" Style="{DynamicResource TextBlockBaseStyle}" FontSize="32"/>
+                                                        <Border BorderBrush="{DynamicResource UIBrush}" BorderThickness="1" HorizontalAlignment="Stretch" />
+                                                    </StackPanel>
                                                 </StackPanel>
-                                            </StackPanel>
+                                            </Grid>                                            
                                         </Grid>
 
                                         <!--MAIN DOCK-->
@@ -497,13 +676,13 @@
                                                     </Grid.Style>
                                                     <StackPanel>
                                                         <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenTitleStyle}" Height="120">
-                                                            <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}" VerticalAlignment="Bottom"
-                                                           Text="{Binding SelectedGame.DisplayName}"
-                                                           FontWeight="Bold"
-                                                           TextWrapping="WrapWithOverflow" 
-                                                           FontSize="42" Margin="0,0,0,10">
-                                                            </TextBlock>
-                                                        </Grid>
+                                                                <TextBlock HorizontalAlignment="Left" Style="{DynamicResource TextBlockBaseStyle}" VerticalAlignment="Bottom"
+                                                                           Text="{Binding SelectedGame.DisplayName}"
+                                                                           FontWeight="Bold"
+                                                                           TextWrapping="WrapWithOverflow" 
+                                                                           FontSize="42" Margin="0,0,0,10">
+                                                                </TextBlock>
+                                                        </Grid>                                                        
 
                                                         <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="120">
@@ -549,6 +728,19 @@
 
                                                         <Grid  Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
                                                             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,10,0,15">
+                                                                <StackPanel Orientation="Horizontal" Margin="0,1,20,0" Tag="{Binding SelectedGame.Favorite}" >
+                                                                    <StackPanel.Style>
+                                                                        <Style TargetType="StackPanel">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+                                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </StackPanel.Style>
+                                                                    <TextBlock FontFamily="{DynamicResource FontIcoFont}" Text="&#xef25;" FontSize="25" Foreground="White"/>
+                                                                </StackPanel>
                                                                 <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                Text="{Binding SelectedGame.Platforms[0]}" Margin="0,0,20,0"/>
                                                                 <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
@@ -556,7 +748,7 @@
                                                             </StackPanel>
                                                         </Grid>
 
-                                                        <Grid HorizontalAlignment="Left" Width="800" MaxHeight="100" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
+                                                        <Grid HorizontalAlignment="Left" Width="800" MaxHeight="105" Tag="{DynamicResource DescriptionOnOff}" Style="{DynamicResource DscriptionOnOffStyle}">
                                                             <!--TextBlock Text="{Binding SelectedGame.Description}" Style="{DynamicResource TextBlockBaseStyle}" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/-->
                                                             <HtmlTextView Focusable="False" HtmlText="{Binding SelectedGame.Description}" HtmlFontSize="{DynamicResource FontSizeSmall}" HtmlForeground="{DynamicResource TextColor}"/>
                                                         </Grid>
@@ -807,9 +999,28 @@
                                                                         <Setter Property="VerticalAlignment" Value="Bottom"/>
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
-                                                                        <Setter Property="Margin" Value="10,0,0,0"/>
+                                                                        <Setter Property="Margin" Value="0,0,0,0"/>
                                                                         <Setter Property="MaxHeight" Value="960"/>
                                                                         <Setter Property="VerticalAlignment" Value="Top"/>
+                                                                        <DataTrigger.EnterActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_3_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_4_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_5_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_6_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_7_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_8_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_9_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="Columns_10_SelectedIndex1Anim"/>
+                                                                            <RemoveStoryboard BeginStoryboardName="SelectedIndex2Anim"/>
+                                                                            <BeginStoryboard x:Name="VerticalMode">
+                                                                                <Storyboard>
+                                                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.05" From="0,0,0,0" To="50,0,0,0"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </DataTrigger.EnterActions>
+                                                                        <DataTrigger.ExitActions>
+                                                                            <RemoveStoryboard BeginStoryboardName="VerticalMode"/>
+                                                                        </DataTrigger.ExitActions>
                                                                     </DataTrigger>
 
                                                                     <!--Columns 3-->
@@ -1219,6 +1430,9 @@
                                             <DataTrigger Binding="{Binding Items.Count, ElementName=PART_ListGameItems}" Value="0">
                                                 <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
@@ -1226,6 +1440,16 @@
 
                             <Grid Grid.Row="2" Background="{DynamicResource TopBarBackgroundBrush}"
                               Height="35">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="Auto" />
