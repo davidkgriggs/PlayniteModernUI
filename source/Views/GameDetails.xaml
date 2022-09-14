@@ -503,7 +503,7 @@
 
                                                         <StackPanel Orientation="Horizontal" Width="420">
                                                             <StackPanel>
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Series}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Platform}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCPlatformsTitle}"
                                                                                Margin="0,0,0,1" />
@@ -512,7 +512,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_AgeRatings}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Genres}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCGenresLabel}"
                                                                                Margin="0,0,0,1" />
@@ -521,7 +521,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Publishers}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Developers}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCDevelopersLabel}"
                                                                                Margin="0,0,0,1" />
@@ -530,7 +530,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Developers}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Publishers}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCPublishersLabel}"
                                                                                Margin="0,0,0,1" />
@@ -539,7 +539,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Genres}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Categories}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCCategoriesLabel}"
                                                                                Margin="0,0,0,1" />
@@ -566,7 +566,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Tags}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Series}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCSeriesLabel}"
                                                                                Margin="0,0,0,1" />
@@ -575,7 +575,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Tags}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_AgeRatings}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCAgeRatingsLabel}"
                                                                                Margin="0,0,0,1" />
@@ -584,7 +584,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Tags}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Regions}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCRegionsLabel}"
                                                                                Margin="0,0,0,1" />
@@ -602,7 +602,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Regions}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Version}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCVersionLabel}"
                                                                                Margin="0,0,0,1" />
@@ -611,7 +611,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Notes}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_UserScore}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCUserScore}"
                                                                                Margin="0,0,0,1" />
@@ -620,7 +620,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Notes}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_CommunityScore}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCCommunityScore}"
                                                                                Margin="0,0,0,1" />
@@ -629,7 +629,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Notes}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_PlayCount}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCPlayCountLabel}"
                                                                                Margin="0,0,0,1" />
@@ -638,7 +638,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Notes}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Added}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCAddedLabel}"
                                                                                Margin="0,0,0,1" />
@@ -647,7 +647,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Notes}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Modified}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCModifiedLabel}"
                                                                                Margin="0,0,0,1" />
@@ -665,7 +665,7 @@
                                                                                TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Width="420" />
                                                                 </StackPanel>
 
-                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_Notes}">
+                                                                <StackPanel Margin="0,0,0,10" Style="{DynamicResource GameDetailsStackStyle}" Tag="{DynamicResource GameDetails_GameID}">
                                                                     <TextBlock Style="{DynamicResource TextBlockBaseStyle}"
                                                                                Text="{DynamicResource LOCGameId}"
                                                                                Margin="0,0,0,1" />
@@ -743,7 +743,7 @@
                                                 <Style TargetType="Grid">
                                                     <Setter Property="Visibility" Value="Collapsed"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=LogoImage, Path=ActualHeight}" Value="0">
+                                                        <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_LogoLoaderControl, Path=ActualHeight}" Value="0">
                                                             <Setter Property="Visibility" Value="Visible"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
