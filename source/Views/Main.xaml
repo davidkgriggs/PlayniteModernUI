@@ -685,7 +685,17 @@
                                                         </Grid>                                                        
 
                                                         <Grid Tag="{DynamicResource MainScreenLogo}" Style="{DynamicResource MainScreenLogoStyle}" Margin="0,0,0,0" DockPanel.Dock="Top">
-                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="120">
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                                <StackPanel.Style>
+                                                                    <Style TargetType="StackPanel">
+                                                                        <Setter Property="MaxHeight" Value="120"/>
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsLogoAvailable, FallbackValue=True}" Value="False">
+                                                                                <Setter Property="MaxHeight" Value="120" />
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </StackPanel.Style>
                                                                 <!--Extra Metadata Tools Logo-->
                                                                 <StackPanel Name="Icon" Orientation="Vertical">
                                                                     <TextBlock Name="LogoPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">

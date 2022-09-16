@@ -741,11 +741,15 @@
                                         <Grid Tag="{DynamicResource MainScreenLogo}" DockPanel.Dock="Top">
                                             <Grid.Style>
                                                 <Style TargetType="Grid">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_LogoLoaderControl, Path=ActualHeight}" Value="0">
-                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                        </DataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true"/>
+                                                                <Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsLogoAvailable, FallbackValue=False}" Value="True"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </MultiDataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </Grid.Style>
