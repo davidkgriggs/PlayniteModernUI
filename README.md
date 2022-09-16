@@ -10,9 +10,10 @@ A modern styled fullscreen theme for Playnite.
 
 ### Screenshots:
 ![](https://i.imgur.com/Sokaagn.jpeg)
-![](https://i.imgur.com/4yOKKVp.jpeg)
-![](https://i.imgur.com/OAWLY14.jpeg)
-![](https://i.imgur.com/MJBbx7L.jpeg)
+![](https://raw.githubusercontent.com/davidkgriggs/PlayniteModernUI/main/Media/screenshot_01.jpg)
+![](https://raw.githubusercontent.com/davidkgriggs/PlayniteModernUI/main/Media/screenshot_02.jpg)
+![](https://raw.githubusercontent.com/davidkgriggs/PlayniteModernUI/main/Media/screenshot_03.jpg)
+![](https://raw.githubusercontent.com/davidkgriggs/PlayniteModernUI/main/Media/screenshot_04.jpg)
 ![](https://i.imgur.com/AzcqnAx.jpeg)
 
 ### Playnite Fullscreen Settings:
