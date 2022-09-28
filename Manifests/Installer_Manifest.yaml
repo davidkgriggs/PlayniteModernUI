@@ -188,3 +188,11 @@ Packages:
     Changelog:
       - IF YOU ARE NOT USING THE DKG THEME MODIFIER TO STORE FILTER ICONS PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
       - Fixes a few bugs with Logos and Titles
+  - Version: 1.6.0
+    RequiredApiVersion: 2.3.0
+    ReleaseDate: 2022-09-28
+    PackageUrl: https://github.com/davidkgriggs/PlayniteModernUI/releases/download/v1.6.0/PlayniteModernUI_b600472c-c10c-4136-86d0-82bf0e576200_1_6_0.pthm
+    Changelog:
+      - IF YOU ARE NOT USING THE DKG THEME MODIFIER TO STORE FILTER ICONS PLEASE REMEMBER TO BACKUP ANY CUSTOM FILTER ICONS YOU HAVE MADE THAT YOU HAVE NOT SENT TO ME. THEY WILL BE DELETED UPON UPDATING THE THEME 
+      - New media control buttons, you can now mute the trailer
+      - Some performance bugs fixed

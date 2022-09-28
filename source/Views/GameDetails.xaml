@@ -50,6 +50,121 @@
                             </Border.CacheMode>
                         </Border>
 
+                        <Border x:Name="MaskVerticalFade" Background="{DynamicResource BackgroundVerticalFade}" Grid.RowSpan="3">
+                            <Border.CacheMode>
+                                <BitmapCache RenderAtScale="0.75"/>
+                            </Border.CacheMode>
+                        </Border>
+                        <Border x:Name="MaskHorizontalFade" Background="{DynamicResource BackgroundHorizontalFade}" Grid.RowSpan="3">
+                            <Border.CacheMode>
+                                <BitmapCache RenderAtScale="0.75"/>
+                            </Border.CacheMode>
+                        </Border>
+                        <Border x:Name="MaskSolid" Background="Black" Grid.RowSpan="3">
+                            <Border.CacheMode>
+                                <BitmapCache RenderAtScale="1"/>
+                            </Border.CacheMode>
+                        </Border>
+                        <Border Background="{DynamicResource MainBackgourndBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
+                            <Border.CacheMode>
+                                <BitmapCache RenderAtScale="1"/>
+                            </Border.CacheMode>
+                        </Border>
+                        <Border Background="Black" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3">
+                            <Border.CacheMode>
+                                <BitmapCache RenderAtScale="0.01"/>
+                            </Border.CacheMode>
+                        </Border>
+                        <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="3"
+                                   Tag="{DynamicResource BackgroundBlur}"
+                                   RenderOptions.BitmapScalingMode="LowQuality">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="Blank.png"/>
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
+                                            <Setter Property="Source" Value="{Binding SelectedGame.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"/>
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                            <Image.CacheMode>
+                                <BitmapCache RenderAtScale="0.1"/>
+                            </Image.CacheMode>
+                            <Image.Effect>
+                                <BlurEffect Radius="20" RenderingBias="Performance"/>
+                            </Image.Effect>
+                        </Image>
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="3" Tag="{DynamicResource BackgroundStretchNew}">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="OpacityMask">
+                                        <Setter.Value>
+                                            <VisualBrush Visual="{Binding ElementName=MaskHorizontalFade}"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualWidth}" Value="1920">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                            <Setter Property="OpacityMask">
+                                                <Setter.Value>
+                                                    <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Grid Tag="{DynamicResource BackgroundStretchNew}">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="OpacityMask">
+                                            <Setter.Value>
+                                                <VisualBrush Visual="{Binding ElementName=MaskVerticalFade}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_ImageBackground, Path=ActualHeight}" Value="1080">
+                                                <Setter Property="OpacityMask">
+                                                    <Setter.Value>
+                                                        <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                <Setter Property="OpacityMask">
+                                                    <Setter.Value>
+                                                        <VisualBrush Visual="{Binding ElementName=MaskSolid}"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <FadeImage HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="3"                                 
+                                   x:Name="PART_ImageBackground" Tag="{DynamicResource BackgroundStretchNew}">
+                                    <FadeImage.Style>
+                                        <Style TargetType="FadeImage">
+                                            <Setter Property="Stretch" Value="Uniform"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+                                                    <Setter Property="Stretch" Value="UniformToFill"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </FadeImage.Style>
+                                </FadeImage>
+                            </Grid>
+                        </Grid>
+
                         <Border Background="{DynamicResource GameDetailsVerticalFade}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
                         <!--TRAILER-->
@@ -201,7 +316,7 @@
                                                     <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
                                                         <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=IsKeyboardFocusWithin}" Value="True">
+                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=IsKeyboardFocusWithin}" Value="True">
                                                         <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -713,11 +828,18 @@
                                                     <CheckBoxEx x:Name="StopPlayButton" Style="{DynamicResource StopPlayButton}"/>
                                                 </StackPanel>
                                                 <StackPanel Margin="0,0,10,0">
-                                                    <CheckBoxEx x:Name="MuteButton" Style="{DynamicResource MuteButton}"/>
-                                                </StackPanel>
-                                                <StackPanel Margin="0,0,10,0">
                                                     <CheckBoxEx x:Name="ZoomButton" Style="{DynamicResource ZoomButton}"/>
                                                 </StackPanel>
+                                                <StackPanel Margin="0,0,10,0">
+                                                    <CheckBoxEx x:Name="MuteButton" Style="{DynamicResource MuteButton}" IsChecked="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.IsPlayerMuted, Mode=TwoWay, FallbackValue={StaticResource True}}"/>
+                                                </StackPanel>
+                                                <!--SliderEx x:Name="VolumeSlider"
+                                                        Margin="0,0,10,0" VerticalAlignment="Center" Width="100" HorizontalAlignment="Center"
+                                                IsMoveToPointEnabled="True" 
+                                                IsSnapToTickEnabled="False" 
+                                                Minimum="0.0" Maximum="1.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="0.2"
+                                                Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayerVolumeLinear, Mode=TwoWay, FallbackValue={StaticResource Zero}}">
+                                                </SliderEx-->                                                
                                             </StackPanel>
                                         </StackPanel>
                                     </Grid>
@@ -730,7 +852,7 @@
                                                     <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
                                                         <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=IsKeyboardFocusWithin}" Value="True">
+                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=IsKeyboardFocusWithin}" Value="True">
                                                         <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -808,7 +930,7 @@
                                                     <DataTrigger Binding="{Binding ElementName=ZoomButton, Path=IsChecked}" Value="True">
                                                         <Setter Property="Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl, Path=IsKeyboardFocusWithin}" Value="True">
+                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=IsKeyboardFocusWithin}" Value="True">
                                                         <Setter Property="ItemsControl.Visibility" Value="Collapsed"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">

@@ -66,7 +66,7 @@
 
     <!--CIM--><Thickness x:Key="CoverItemMargin" Left="0" Top="0" Right="10" Bottom="10"/><!--CIM-->
 
-    <sys:Boolean x:Key="BackgroundStretchNew">true</sys:Boolean>
+    <sys:Boolean x:Key="BackgroundStretchNew">false</sys:Boolean>
     <sys:Boolean x:Key="BackgroundBlur">false</sys:Boolean>
 
     <!--GameDetailsStack-->
@@ -101,6 +101,8 @@
     <sys:Boolean x:Key="GameDetails_DatabaseID">true</sys:Boolean>
     <sys:Boolean x:Key="GameDetails_Hidden">true</sys:Boolean>
     <sys:Boolean x:Key="GameDetails_Favourite">true</sys:Boolean>
+
+    <sys:Double x:Key="Zero">0</sys:Double>
 
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
@@ -222,7 +224,7 @@
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="GameDetailsVerticalFade" StartPoint="0.5,0" EndPoint="0.5,1" >
-        <GradientStop Color="#00000000" Offset="0.5"/>
+        <GradientStop Color="#40000000" Offset="0.5"/>
         <GradientStop Color="#80000000" Offset="0.6"/>
     </LinearGradientBrush>
     
