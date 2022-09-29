@@ -24,8 +24,9 @@
                                     <Border x:Name="BorderFocusAnim" Width="60" CornerRadius="10" HorizontalAlignment="Stretch" Opacity="1" BorderThickness="4" Style="{DynamicResource AnimatedCoverBrush}" Visibility="Hidden" Tag="False"/>
                                 </Grid>
                                 <StackPanel Orientation="Horizontal" Height="40">
-                                    <Grid>
-                                        <Image x:Name="FilterIcon" RenderOptions.BitmapScalingMode="Fant" Margin="0" Height="30" MaxWidth="30"
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Image x:Name="FilterIcon" RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0" 
+                                               Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center"
 						                       Source="{ThemeFileBinding Name, PathFormat='FilterIcons/{0}.png'}"/>
                                                                                                             
                                         <Grid>
