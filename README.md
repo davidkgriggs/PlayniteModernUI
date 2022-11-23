@@ -19,6 +19,12 @@ A modern styled fullscreen theme for Playnite.
 ### Playnite Fullscreen Settings:
 ![](https://i.imgur.com/WoQULLp.png)
 
+### Plugins Supported:
+* DKG Theme Modifier
+* Extra Metadata Loader
+* Extra Metadata Fullscreen Mode Helper
+* SuccessStory
+
 See the Playnite Forum thread at: https://playnite.link/forum/thread-791.html
 
 Please support the Main Playnite Project: https://www.patreon.com/playnite
