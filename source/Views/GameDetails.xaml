@@ -91,7 +91,7 @@
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="true">
-                                            <Setter Property="Source" Value="{Binding SelectedGame.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"/>
+                                            <Setter Property="Source" Value="{Binding BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"/>
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
